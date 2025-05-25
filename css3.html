@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         
+         p::first-letter{
+            color: pink ;
+        }
+         p::first-line{
+            color: red;
+        }
+        /* id specificity (1,0,0) */
+        #s{
+            color: darkblue;
+        }
+        /* class specificity (0,1,0) */
+        .pr{
+            color: yellow;
+        }
+        /* element specificity (0,0,1) */
+        p{
+            color : blue;
+        }
+        /* universal specificity (0,0,0) */
+        *{
+            color: red;
+        }
+        .tr{
+            border: 2px solid red;
+        }
+        #o{
+            color: green;
+        }
+        /* group specificity (0,0,1) */
+        h1,h2,p{
+            color: black;
+        }
+        h1{
+            color: red;
+        }
+       
+        
+        
+    </style>
+</head>
+
+<body>
+    <!-- selectors type
+    id  #   
+    class   .
+    element hq,p
+    universal   *
+    group   ,  
+    psudo element selector  ::   -->
+    
+    <h1>Hello Guy's</h1>
+    <h2>How Are You ?</h2>
+    <p id="o"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla velit cumque hic, quisquam labore accusamus
+        voluptate consectetur, consequatur neque ipsa voluptates ducimus? Cum impedit dignissimos autem, possimus eius
+        incidunt eum asperiores aliquid? Magnam quod ipsum accusamus numquam ex fugit necessitatibus at nemo saepe unde
+        velit tempora, dolor in rem, porro laboriosam tenetur possimus quia nobis quis quasi similique voluptatem id!
+        Voluptatum, asperiores doloremque fuga vitae, quo ab sint error odit ullam accusantium animi maxime nemo nihil
+        perspiciatis quos ducimus reiciendis libero impedit doloribus! Voluptates qui ea voluptate. Quisquam magni
+        voluptatum laudantium repellendus dolores, ullam, optio eaque, quibusdam officiis impedit adipisci.</p>
+
+    <p class="pr" id="s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim quaerat culpa quia necessitatibus eveniet ipsam
+        aliquid dolore fuga soluta, officiis provident laboriosam nisi ratione veniam laudantium? Repudiandae ipsum
+        magnam qui veniam aperiam impedit dolor eius et earum commodi. Ratione, magni asperiores. Voluptatem sint cumque
+        maxime enim et eligendi qui consequuntur?</p>
+
+    <p class="pr tr">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum, tempora ipsum totam, quidem dolore harum
+        aperiam, laudantium dicta aliquid perferendis possimus! Quidem aperiam repellendus ipsa ullam tempore earum
+        natus quibusdam.</p>
+</body>
+
+</html>
