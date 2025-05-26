@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1{
+            height: 200px;
+            width: 200px;
+            background-color: bisque;
+            border: 2px dotted red;
+
+        }
+    
+    .div2{
+            height: 400px;
+            width: 400px;
+            background: linear-gradient(to right,orange,pink);
+            color: red;
+        }
+        .div3{
+            height:200;
+            width: 200;
+            background-image: url("");
+        }
+    </style>
+</head>
+<body>
+    <div class="div1"></div>
+    <div class="div2">
+        <h1>my multi level table</h1>
+        <table border="">
+           <tr>
+            <th rowspan="2" colspan="2">column 0</th>
+            <th rowspan="2">column 1</th>
+            <th colspan="2">column 2</th>
+           </tr> 
+           <tr>
+            <th>column 2a</th>
+            <th>column 2b</th>
+           </tr>
+           <tr>
+            <td rowspan="2">Row 1</td>
+            <th>Row 1a</th>
+            <td>123</td>
+            <td>456</td>
+            <td>789</td>
+           </tr>
+           <tr>
+            <th>Row 1b</th>
+            <td>123</td>
+            <td>456</td>
+            <td>789</td>
+           </tr>
+               <tr>
+                <td colspan="2">Row 2</td>
+                <td>123</td>
+                <td>456</td>
+                <td>789</td> 
+        </table>
+        <div class="div3"></div>
+            
+        
+
+
+
+    </div>
+    
+    </body>
+</html>
