@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .div1 {
+            display: flex;
+            gap: 30PX;
+            justify-content: center;
+        }
+
+        .fa {
+            font-size: 40px;
+            color: blue;
+        }
+
+        .main {
+            height: 500px;
+            width: 800px;
+            border: 2px solid black;
+            padding: 20px;
+            margin-top: 150px;
+            margin-left: 400px;
+        }
+
+        .line {
+            display: flex;
+            margin: 20px;
+        }
+
+        .name {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 20px;
+        }
+
+        .text {
+            margin-top: 20px;
+            margin-left: 20px;
+
+
+        }
+        .but{
+            margin-left: 300px;
+            margin-top: 20px;
+        }
+        button{
+            background-color: blue;
+            color: white;
+            height: 40px;
+            width: 90px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="div1">
+            <div class="div"><i class="fa-regular fa-envelope fa"></i></div>
+            <h1>Let's Talk</h1>
+        </div>
+        <div class="line">
+            <div class="line1">
+                <label for="">Name:</label>
+                <input type="text">
+            </div>
+            <div class="line2">
+                <label for="">Email:</label>
+                <input type="text">
+            </div>
+            <div class="line3">
+                <label for="">Massage:</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="name">
+            <div class="name1">
+                <input type="text" placeholder="Name" style="width: 340px; height: 30px;">
+            </div>
+            <div class="mail">
+                <input type="text" placeholder="Email" style="width: 304px; height: 30px;">
+            </div>
+        </div>
+        <div class="name">
+            <div class="name1">
+                <input type="text" placeholder="Phone" style="width: 340px; height: 30px;">
+            </div>
+            <div class="mail">
+                <input type="text" placeholder="Standard" style="width: 304px; height: 30px;">
+            </div>
+        </div>
+        <div class="text">
+            <textarea name="" id="" placeholder="Massage"></textarea>
+        </div>
+        <div class="but">
+            <button>Submit</button>
+        </div>
+
+    </div>
+</body>
+
+</html>

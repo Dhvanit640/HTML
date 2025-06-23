@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1{
+            height: 200px;
+            width: 200px;
+            background-color: aqua;
+            border-radius: 100px;
+            margin-top: 200px;
+            margin-left: 200px;
+            position: relative;
+            }
+            .div2{
+                height: 200px;
+                width: 200px;
+                background-color: aqua;
+                border-radius: 100px;
+                opacity: 1;
+                position: absolute;
+                }
+            .div1:hover .div2{
+                transform: scale(1.5);
+                opacity: 0;
+                transition: 2s;
+            }
+            img{
+                height: 100px;
+                width: 100px;
+                /* margin-bottom: 400px; */
+                /* margin-left: 200px; */
+                position: absolute;
+                margin: 50px;
+                margin-left: 50px;
+            }
+            
+        </style>
+</head>
+<body>
+       <div class="div1">
+            <div class="div2">
+                
+            </div>
+            <img src="https://cdn-icons-png.freepik.com/512/10181/10181264.png" alt="" width="100%">
+
+       </div> 
+</body>
+</html>

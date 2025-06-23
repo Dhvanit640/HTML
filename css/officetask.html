@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Only Hover All Boxes</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }   
+        .main{
+            display: flex;
+            margin: 100px 100px;
+            gap: 40px;
+        }
+        .box{
+            height: 300px;
+            width: 200px;
+            border: 4px solid black;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+        .box {
+            border-color:rrgb(51, 20, 222)
+        }
+        .main:hover .box {
+            border-color: green;
+        }
+
+        .main:has(.women-category:hover) .box {
+            border-color: red;
+        }
+
+        .main:has(.kids-category:hover) .box {
+            border-color: rgb(84, 26, 219);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="category kids-category">
+            <p>Kids</p>
+            <div class="box"></div>
+        </div>
+
+        <div class="category women-category">
+            <p>Women</p>
+            <div class="box"></div>
+        </div>
+
+        <div class="category men-category">
+            <p>Men</p>
+            <div class="box"></div>
+        </div>
+    </div>
+</body>
+
+</html>
