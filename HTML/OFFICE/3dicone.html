@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        a{
+            height: 100px;
+            width: 100px;
+            /* background-color: aqua; */
+            display: block;
+            margin: 100px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: 0.2s;
+        }
+        .front{
+            height: inherit;
+            width: inherit;
+            position: absolute;
+            font-size: 50px;
+            background-color: pink;
+            color: black;
+            transform: rotateX(90deg) translateZ(50px);
+
+
+        }
+        .back{
+            height: inherit;
+            width: inherit;
+            position: absolute;
+            background-color: blue;
+            color: white;
+            transform: translateZ(20px);
+            font-size: 60px;
+
+        }
+        a:hover{
+            transform: rotateX(-90deg);
+        }
+    </style>
+</head>
+<body>
+    <a href="">
+        <div class="front">
+            <i class="fa-brands fa-facebook-f"></i>
+        </div>
+        <div class="back">
+           <i class="fa-brands fa-facebook-f"></i>
+        </div>
+    </a>
+</body>
+</html>

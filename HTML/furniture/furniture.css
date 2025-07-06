@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header{
+    /* position: fixed; */
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    justify-content: space-between;
+    background-color: rgb(51, 50, 50);
+}
+.he2{
+    height: 40px;
+    width: 90px;
+    margin-top: 9px;
+    margin-right: 20px;
+    /* padding: 10px; */
+    border-radius: 5px;
+    background-color: greenyellow;
+    color: rgb(171, 162, 162);
+}
