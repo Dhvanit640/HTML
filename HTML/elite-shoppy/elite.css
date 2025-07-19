@@ -29,6 +29,9 @@
     /* text-align: center; */
     /* align-items: center; */
 }
+.d0{
+    display: flex;
+}
 
 .fd123{
     width: 400px;
@@ -379,8 +382,11 @@ li:hover .line {
     margin-top: 100px;
     background-color: aqua;
     /* margin-left: 100px; */
-    position: relative;
-    scale: 50px;
+    /* position: relative; */
+    /* scale: 50px; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
 }
 
 .row {
@@ -393,97 +399,38 @@ li:hover .line {
     height: 300px;
     width: 600px;
     background-color: #ffffff;
-    position: absolute;
-    top: 55px;
-    scale: 20px;
+    /* position: absolute; */
+    /* top: 55px; */
+    /* scale: 20px; */
+    /* padding-top: 20px; */
 
 }
-
-.dh1 {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+.dhvn{
+    text-align: center;
+    padding-top: 20px;
 }
-
-.dh2 {
-    position: absolute;
-    top: 55px;
-    left: 20px;
-    /* font-size: 2px; */
-}
-
-.dh3 {
-    position: absolute;
-    top: 120px;
-    left: 100px;
-    font-size: 30px;
-}
-
-.dh4 {
-    position: absolute;
-    top: 120px;
-    left: 280px;
-    font-size: 30px;
-}
-
-.dh5 {
-    position: absolute;
-    top: 120px;
-    left: 450px;
-    font-size: 30px;
-
-}
-
-.dh6 {
-    position: absolute;
-    top: 160px;
-    left: 70px;
+.dhv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
     font-size: 20px;
-
+    margin-top: 80px;
+}
+.dhv1,.dhv2,.dhv3{
+text-align: center;
 }
 
-.dh7 {
-    position: absolute;
-    top: 160px;
-    left: 270px;
-    font-size: 20px;
-
-}
-
-.dh8 {
-    position: absolute;
-    top: 160px;
-    left: 430px;
-    font-size: 20px;
-}
-
-.dh9 {
-    position: absolute;
-    top: 190px;
-    left: 90px;
-    font-size: 30px;
-}
-
-.dh10 {
-    position: absolute;
-    top: 190px;
-    left: 275px;
-    font-size: 30px;
-}
-
-.dh11 {
-    position: absolute;
-    top: 190px;
-    left: 445px;
-    font-size: 30px;
-}
 
 .nnd1 {
     text-align: center;
     font-size: 40px;
     margin-top: 100px;
-    display: inline;
-    margin-left: 550px;
+    /* display: inline; */
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+    /* margin-left: 550px; */
 }
 
 .nnd2 {
@@ -515,14 +462,13 @@ li:hover .line {
     background-size: 100% 100%;
     position: relative;
     background-position: -20px 0;
-    /* transition: 0.55; */
     top: 50px;
     transition: 0.8s;
     /* left: 10px; */
 }
 
 .nd2::first-letter {
-    /* position: absolute; */
+    
     color: yellow;
 
 }
@@ -869,7 +815,7 @@ li:hover .line {
     text-align: center;
     font-size: 100px;
     color: white;
-    padding-top: 230px;
+    padding-top: 100px;
 }
 
 /* ....................gift............... */
@@ -907,6 +853,7 @@ li:hover .line {
              }
         .rhd1{
                 display: flex;
+                flex-wrap: wrap;
                 margin-top:50px ;
                 margin-left: 20px;
                 margin-bottom: 100px;
@@ -971,7 +918,7 @@ li:hover .line {
                 gap: 50px;
              }
              .fd22{
-                width: 400px;
+                width:400px;
                 height: 60px;
                 background-color: rgb(0, 0, 0, 0.30);
                 /* border-bottom: inherit; */
@@ -980,4 +927,186 @@ li:hover .line {
                 margin-top: 20px;
              }
             
-             
+             @media (max-width:576px){
+                .coll{
+                    width: 540px;
+                }
+                .ba{
+                    width: 540px;
+                }
+                .h{
+                    font-size: 15px;
+                    width: 500px;
+                }
+                .fd22{
+                    width: 280px;
+                }
+                .main1,.main{
+                    font-size: 15px;
+                }
+                .h7{
+                    width: 80px;
+                    height: 80px;
+                }
+                .rhd1{
+                    width: 200px;
+                    /* font-size: 15px; */
+                    text-align: left;
+                }
+                .imglast1{
+                    font-size: 30px;
+                }
+             }
+             @media (max-width:360px){
+                .coll{
+                    width: 360px;
+                }
+                .ba{
+                    width: 360px;
+                }
+                .h{
+                    font-size: 15px;
+                    width: 260px;
+                }
+                
+                .main1{
+                    font-size: 5px;
+                }
+                .main{
+                    font-size: 10px;
+                }
+                .h7{
+                    width: 80px;
+                    height: 80px;
+                }
+                .rhd1{
+                    width: 100px;
+                    /* font-size: 15px; */
+                    text-align: left;
+                }
+                .dh3,.dh4,.dh5,.dh6,.dh7,.dh8,.dh9,.dh10,.dh11{
+                    /* font-size: 10px; */
+                    /* text-align: left; */
+                    /* width: 200px; */
+                    /* left: -90px; */
+                    /* gap: 200px; */
+                    /* right: -10px; */
+                    text-align: center;
+                }
+                .nd2{
+                    font-size: 20px;
+                    left: 250px;
+                }
+                .boxn3{
+                    width: 260px;
+                }
+                .boxn4{
+                    left: 100px;
+                }
+                .ndd2{
+                    height: 300px;
+                    width: 375px;
+                }
+                .ndd3{
+                    left: 250px;
+                }
+                .ndd4{
+                    height: 200px;
+                    width: 250px;
+                }
+                .ndd5{
+                    left: 40px;
+                }
+                .ds1{
+                     height: 300px;
+                    width: 375px;
+
+                }
+                .ds4{
+                    left: 150px;
+                }
+                .ds3{
+                    height: 200px;
+                    width: 300px;
+                }
+                .ds2{
+                    left: 250px;
+                }
+                .dns1 {
+                    background: url("https://p.w3layouts.com/demos_new/template_demo/20-06-2017/elite_shoppy-demo_Free/1660570665/web/images/bot_2.jpg");
+                    height: 300px;
+                    width: 500px;
+                    background-size: 100% 100%;
+                    /* height: 100%; */
+                }
+                .dhv{
+                    /* width: 200px; */
+                    font-size: 10px;
+                    gap: 30px;
+
+                }
+                .fd222{
+                    
+                    margin-left: -14px;
+                }
+                .d0{
+                    margin-top: -80px;
+                    margin-left: 172px;
+                }
+                .sarch{
+                    gap: 10px;
+                    margin-top: 10px;
+                }
+                .dh1{
+                    width: 100px;
+                }
+                .fd22{
+                    width: 10px;
+                }
+                .row{
+                    width: 20px;
+                }
+            }
+            @media (max-width:500px){
+                
+                .ba{
+                    /* width: 100px; */
+                }
+                .dhvn{
+                    font-size: 10px;
+                }
+                .fd1{
+                    font-size: 10px;
+                }
+                .fd22{
+                    width: 100px;
+                }
+                .coll{
+                    width: 500px;
+                }
+                .col{
+                    width: 400px;
+                }
+                .dh3,.dh4,.dh5,.dh6,.dh7,.dh8,.dh9,.dh10,.dh11,.dh1,.dh2{
+                    font-size: 10px;
+                }
+                .fd{
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+                .ba{
+                    width: 500px;
+                }
+            }
+             @media (max-width:500px){
+                .ba{
+                    width: 400px;
+                }
+                .h{
+                    width: 350px;
+                }
+                .coll{
+                    width: 400px;
+                }
+
+             }
