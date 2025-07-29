@@ -3,242 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-.futter{
-   /* width: 1550px\; */
-height: 80px;
-background-color: #daac00;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-/* position: fixed; */
-}
-.logo{
-    /* margin-left: 20px; */
-    /* margin-top: 10px; */
-    font-size: 50px;
-    
-    
-}
-ul{
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 20px;
-    color: #ffffff;
-    padding: 15px;
-    margin-left: 400px;
-    font-weight: 500;
-    list-style: none;
-    gap: 40px;
-}
-.ft2{
-    /* box-shadow: 3px 3px 10px yellow; */
-    background-color: #fcc302;
-    height: 30px;
-    border: none;
-}
-.futter2{
-    display: flex;
-    flex-wrap: wrap;
-    padding: 12px;
-    margin-left: 200px;
-    /* justify-content: */
-    /* width: 00px; */
-}
-.bt1{
-    width: 30px;
-    background-color: #00bec9;
-    height: 30px;
- 
-    border: none;
-}
-.part2{
-    /* width: 1440px; */
-    height: 800px;
-    background-color: #fcc302;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-}
-.part212{
-    display: flex;
-    flex-wrap: wrap;
-}
-.bt3{
-    border-radius: 5px 5px 5px 5px;
-    height: 30px;
-    margin-left: 40px;
-    margin-top: 60px;
-    width: 80px;
-    width: 182px;
-    height: 69px;
-    border-radius: 7px;
-    letter-spacing: 2px;
-    color: #ffffff;
-    font-weight: 600;
-    background-color: #fcc302;
 
-}
-.bt2{
-    border-radius: 5px 5px 5px 5px;
-    height: 30px;
-    margin-left: 40px;
-    margin-top: 60px;
-    font-size: 21px;
-    letter-spacing: 0px;
-    color: #ffffff;
-    font-weight: 600;
-    font-family: "Poppins";
-    width: 182px;
-    height: 69px;
-    border-radius: 7px;
-    background-color: #00bec9;
-}
-.part3{
-    display: flex;
-    flex-wrap: wrap;
-    /* justify-content: center; */
-    /* gap: 100px; */
-    justify-content: space-around;
-    padding: 150px;
-       
-}
-.part3123{
-    font-size: 40px;
-    
-}
-.part31234{
-    margin-top: 50px;
-}
-.bt4{
-    /* height: 100px; */
-    /* width: 100px; */
-    padding: 20px;
-    font-size: 20px;
-    margin-top: 40px;
-    border-radius: 10px;
-    background-color: #fcc302;
-    color: white;
-}
-.part4{
-    height: 700px;
-    background-color:#fcc302;
-
-}
-.part41{
-    font-size: 75px;
-color: #ffffff;
-font-weight: 700;
-font-family: "Poppins";
-text-align: center;
-}
-.part412{
-    font-size: 33px;
-color: #ffffff;
-font-weight: 400;
-font-family: "Poppins";
-text-align: center;
-}
-.part4123{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 60px;
-    margin-top: 100px;
-    justify-content: center;
-}
-.part5{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 100px;
-}
-.part51{
-    padding: 80px;
-}
-.part6{
-    /* width: 1440px; */
-height: 717px;
-background-color: #fcc302;
-}
-.part61{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 60px;
-    margin-top: 100px;
-    justify-content: center;
-}
-.part7{
-    margin-top: 100px;
-}
-.part71{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 60px;
-    margin-top: 100px;
-    justify-content: center;
-}
-.ft{
-    font-size: 20px;
-    background-color: #daac00;
-    border-radius: 50%;
-    padding: 3px;
-}
-.td{
-    text-align: center;
-    align-items: center;
-    /* border: 2px solid black; */
-    width: 200px;
-    margin-bottom: 10px;
-    gap: 20px;
-    padding: 20px;
-}
-.tr{
-    display: flex;
-    flex-wrap: wrap;
-    gap:180px;
-}
-.img1{
-    padding: 10px;
-    text-align: center;
-}
-.h21{
-    font-size: 20px;
-    padding: 10px;
-}
-.part8{
-    height: 1000px;
-    /* background-color: #fcc302; */
-    background: url("https://png.pngtree.com/background/20230307/original/pngtree-doctor-examining-golden-retriever-dog-in-vet-clinic-vector-picture-image_2100073.jpg");
-    background-size: cover;
-    
-  /* background-image: linear-gradient(to right, red , blue); */
-
-    /* background:linear-gradient(rgba(252,195,2,0.8392156862745098);) ; */
-    /* linear-gradient(rgba(252,195,2,0.8392156862745098);); */
-}
-.ft12{
-    font-size: 50px;
-}
-.t{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    text-align: center;
-    
-}
-.d{
-    padding-top: 600px;
-    
-}
-h3{
-    font-size: 30px;
-}
-.t1{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding-bottom: 50px;
-}
 .d1{
     /* height: ; */
     width: 400px;
@@ -252,19 +17,8 @@ h3{
     
     
 }
-.li1{
-    list-style: none;
-    font-size: 20px;
-}
-.ft1{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    /* gap: 350px; */
-    color: white;
-    padding-top: 150px;
-}
+
+
 .div{
     width: 250px;
 height: 60px;
@@ -288,9 +42,26 @@ background-color: #00bec9;
     font-size: 40px;
     /* margin-left: 100px;    */
 }
-@media (max-width:360px){
-    .li123{
-        font-size: 2px;
+@media (max-width:390px){
+    .hh1{
+        font-size: 15px;
+    }
+    .pp1{
+        font-size: 10px;
+    }
+    .part21{
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+    }
+    .img3{
+        margin-right: 100px;
+    }
+    .part312{
+        margin-left: 100px;
+    }
+    .part6{
+        height: 200px;
     }
 }
 

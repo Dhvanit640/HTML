@@ -1,0 +1,237 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.nav{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            /* height: 100px; */
+           
+        }
+        .col, .col1{
+            display: flex;
+             align-items: center;
+          
+        }
+        ul{
+            display: flex;
+            gap: 20px;
+        }
+        li{
+            list-style: none;
+        }
+        .col1{
+             display: flex;
+             gap: 50px;
+           
+        }
+        .img1{
+            height: 60px;
+            width: 60px;
+        }
+        @media(max-width:600px){
+            .nav{
+                
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+              
+            }
+            .row71{
+                font-size: 10px;
+                flex-wrap: wrap;
+            }
+        }
+/* ...................navbar............................. */
+.row1{
+    width: 100%;
+    height: 60px;
+    box-shadow: 3px 3px 10px black;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    justify-content: space-between;
+}
+ .col21{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    gap: 30px;
+
+}
+
+.col2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    gap: 190px;
+
+}
+.col1{ display: flex;
+    text-align: center;
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+    
+    /* align-items: center; */
+
+}
+.col11{
+    padding: 10px;
+}
+.col111{
+    
+    padding: 100px;
+}
+
+li{
+    list-style: none;
+    color: #2CB5B4;
+}
+.bt1{
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #2CB5B4;
+    color: white;
+    border: none;
+    /* box-shadow: 3px 3px 10px black, -3px -3px 10px black; */
+}
+.row2{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* padding: 100px; */
+}
+.part2{
+    /* height: 700px; */
+    background-color: #CFF3F3;
+}
+.part22{
+
+    /* padding: 200px; */
+    
+}
+.part31{
+    text-align: center;
+    gap: 10px;
+    padding: 40px;
+}
+.row3{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;   
+    padding: 40px; 
+}
+.td1{
+    text-align: center;
+    color: #2CB5B4;
+}
+.td{
+    box-shadow: 3px 3px 10px black;
+    /* padding: 10px; */
+}
+.row41{
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    flex-wrap: wrap;
+}
+.part5{
+    height: 200px;
+    background-color: #CFF3F3;
+    margin-bottom: 40px;
+}
+.row5{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 10px;
+}
+.td2{
+    font-size: 30px;
+}
+.td5{
+    /* height: 300px; */
+    width: 450px;
+    background:#CFF3F3;
+    border: 2px solid black;
+    padding: 40px;
+}
+.td51{
+    display: flex;
+    /* text-align: center; */
+    align-items: center;
+    flex-wrap: wrap;
+    /* padding: 50px; */
+}
+.p1{
+    font-size: 20px;
+}
+.tr5{
+    padding: 50px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.col7{
+    display: flex;
+    flex-wrap: wrap;
+}
+.row7{
+    display: flex;
+    justify-content: space-around;
+    padding: 100px;
+    flex-wrap: wrap;
+}
+.td81{
+    height: 100px;
+    width: 200px;
+    border: 2px solid white;
+}
+.row8{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+.part8{
+    background-color: rgba(61, 93, 121, 1);
+    /* height: 200px; */
+
+}
+ @media(min-width:600px){
+    .lastimg{
+        width: 500px;
+
+    }
+    .img2{
+        
+    }
+
+
+ }
+@media(min-width:360px){
+    .img2{
+        /* height: 100px; */
+        width: 360px;
+    }
+    .lastimg{
+        width: 255px;
+
+    }
+    .img3{
+        width: 200px;
+    }
+    .phone1{
+        width: 200px;
+    }
+}
