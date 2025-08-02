@@ -79,15 +79,15 @@ ul{
     width: 100%;
 }
 
-.box1{
+/* .box1{
     position: absolute;
     opacity: 0;
     transition: 0.25s;
-}
+} */
 
-.li1:hover .box1 {
+/* .li1:hover .box1 {
     opacity: 1;
-}
+} */
 
 .box{
     height: 50px;
@@ -375,9 +375,39 @@ ul{
         }
 
         .div1 {
-            height: 170px;
+            height: 200px;
             width: 200px;
             background-image: url("https://static.vecteezy.com/system/resources/thumbnails/002/073/893/small_2x/interior-of-a-modern-living-room-with-an-armchair-and-furniture-in-3d-rendering-free-photo.jpg");
+            border-radius: 50%;
+            background-size: 100% 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .div2 {
+            height: 200px;
+            width: 200px;
+            background-image: url("https://tse2.mm.bing.net/th/id/OIP.HrrQz2hSNxzblK2BwC6ygQHaEK?pid=Api&P=0&h=180");
+            border-radius: 50%;
+            background-size: 100% 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .div3 {
+            height: 200px;
+            width: 200px;
+            background-image: url("https://static.vecteezy.com/system/resources/previews/027/564/740/non_2x/genuine-leather-office-chair-for-executive-officer-on-red-background-with-clipping-path-generative-ai-free-photo.jpg");
+            border-radius: 50%;
+            background-size: 100% 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .div4 {
+            height: 200px;
+            width: 200px;
+            background-image: url("https://static.vecteezy.com/system/resources/thumbnails/022/800/193/small_2x/ai-generated-colorful-contemporary-room-with-modern-furniture-photo.jpg");
             border-radius: 50%;
             background-size: 100% 100%;
             display: flex;
@@ -404,10 +434,64 @@ ul{
                     opacity: 1;
                 }
         }
+        .div2:hover{
+                background: linear-gradient(rgba(0,0,0,0.50),rgba(0,0,0,0.50)),url("https://tse2.mm.bing.net/th/id/OIP.HrrQz2hSNxzblK2BwC6ygQHaEK?pid=Api&P=0&h=180");
+                background-size: 100% 100%;
+                .arr{
+                    opacity: 1;
+                }
+        }
+        .div3:hover{
+                background: linear-gradient(rgba(0,0,0,0.50),rgba(0,0,0,0.50)),url("https://static.vecteezy.com/system/resources/previews/027/564/740/non_2x/genuine-leather-office-chair-for-executive-officer-on-red-background-with-clipping-path-generative-ai-free-photo.jpg");
+                background-size: 100% 100%;
+                .arr{
+                    opacity: 1;
+                }
+        }
+        .div4:hover{
+                background: linear-gradient(rgba(0,0,0,0.50),rgba(0,0,0,0.50)),url("https://static.vecteezy.com/system/resources/thumbnails/022/800/193/small_2x/ai-generated-colorful-contemporary-room-with-modern-furniture-photo.jpg");
+                background-size: 100% 100%;
+                .arr{
+                    opacity: 1;
+                }
+        }
         .arr:hover{
             background-color: black;
             .leftarr{
                 transform: rotate(360deg);
             }
         }
+        .se41{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+    .se422{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 30px;
+        justify-content: end;
+
+    }
     
+    .se4{
+        height: 500px;
+
+    }
+    .li2:hover .line1 {
+    width: 100%;
+    
+    }
+    .li2:hover{
+        color: brown;
+    }
+    .line1{
+    height: 3px;
+    width: 0;
+    background-color: brown;
+    /* transition: 0.5s; */
+    }
+    .li1{
+        font-style: ;
+    }

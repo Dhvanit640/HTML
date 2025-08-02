@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dhvanit{
+            color: red;
+            background-color: yellow;
+            border-radius: 3px 3px 10px black;
+            font-style: italic;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            /* font-display: none; */
+            
+        }
+        #manis{
+              color: red;
+            background-color: yellow;
+            border-radius: 3px 3px 10px black;
+            font-style: italic;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            
+        }
+        marquee{
+            height: 200px; 
+            width: 200px;
+            left: 10px;
+            font-size: 30px;
+            font-variant: small-caps;
+            font-feature-settings: "blwf";
+            font-language-override: inherit;
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>i am dhvanit</h1>
+    <p><b>hello kem chho</b></p>
+    <marquee behavior="alternate" direction="top">
+      <marquee behavior="alternate" direction="down">Dhavnit</marquee>
+    </marquee>
+
+    <script>
+        document.querySelector('h1').className="dhvanit"
+        document.querySelector('p').id="manis"
+        document.querySelector('marquee').className='dhvanit'
+        document.querySelector('marquee').style.border="20px groove pink"
+
+
+    </script>
+</body>
+</html>
