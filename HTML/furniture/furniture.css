@@ -126,9 +126,21 @@ ul{
 .dh12{
     font-size: 90px;
 }
-@media (max-width:376px){
+@media (min-width:400px){
     .dh12{
-        font-size: 10px;
+        font-size: 30px;
+    }
+
+}
+@media (min-width:600px){
+    .dh12{
+        font-size: 90px;
+    }
+
+}
+@media (min-width:1200px){
+    .dh12{
+        font-size: 90px;
     }
 
 }
@@ -495,3 +507,229 @@ ul{
     .li1{
         font-style: ;
     }
+
+
+
+
+
+
+
+
+
+    .se442{
+            /* height: 300px; */
+            width: 300px;
+            /* background-image: url('https://demo2.pavothemes.com/aunuca/wp-content/uploads/2025/02/product-24-1.jpg'); */
+            background: url('https://demo2.pavothemes.com/aunuca/wp-content/uploads/2025/02/product-1-2.jpg');
+            background-size: 100% 100%;
+            /* border: 2px solid black; */
+            position: relative; 
+            border-radius: 20px;
+        }
+    .se4421{
+            /* height: 300px; */
+            width: 300px;
+            /* background-image: url('https://demo2.pavothemes.com/aunuca/wp-content/uploads/2025/02/product-24-1.jpg'); */
+            background: url('https://demo2.pavothemes.com/aunuca/wp-content/uploads/2025/02/product-13-1.jpg');
+            background-size: 100% 100%;
+            /* border: 2px solid black; */
+            position: relative; 
+            border-radius: 20px;
+        }
+        .se44221{
+            /* height: 300px; */
+            width: 300px;
+            /* background-image: url('https://demo2.pavothemes.com/aunuca/wp-content/uploads/2025/02/product-24-1.jpg'); */
+            background: url('https://demo2.pavothemes.com/aunuca/wp-content/uploads/2025/02/product-24-1.jpg');
+            background-size: 100% 100%;
+            /* border: 2px solid black; */
+            position: relative; 
+            border-radius: 20px;
+        }
+        .se4423{
+            /* height: 300px; */
+            width: 300px;
+            /* background-image: url('https://demo2.pavothemes.com/aunuca/wp-content/uploads/2025/02/product-24-1.jpg'); */
+            background: url('https://demo2.pavothemes.com/aunuca/wp-content/uploads/2025/02/product-17-1.jpg');
+            background-size: 100% 100%;
+            /* border: 2px solid black; */
+            position: relative; 
+            border-radius: 20px;
+        }
+
+         .img1,.img2,.img3,.img4{
+            border-radius: 40px;
+            transition: 0.8s;
+            opacity: 0;
+         }
+         .se442:hover .img1{
+            opacity: 1;
+         }
+         .se4421:hover .img2{
+            opacity: 1;
+         }
+         .se44221:hover .img3{
+            opacity: 1;
+         }
+         .se4423:hover .img4{
+            opacity: 1;
+         }
+        .se444{
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            top: 60px;
+            left: 250px;
+            gap: 30px;
+            opacity: 0;
+            
+            
+        }
+        .if{
+            font-size: 20px;
+            transition: 0.30s;
+        }
+        .se441{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 100px;
+            gap: 15px;
+            /* transition: 0.20s; */   
+        }
+        
+        .se442:hover .se444, .se4421:hover .se444,.se4422:hover .se444,.se4423:hover .se444{
+            opacity: 1;
+
+            .sep:hover{
+                background-color: brown;
+                height: 35px;
+                width: 35px;
+                color: white;
+                
+            }
+        }
+
+        .sep{
+            background-color: wheat;
+            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        p{
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            opacity: 0;
+            transition: 0.1s;
+        }
+        .p1{
+            position: absolute;
+            top: 40px;
+            left: -15px;
+            opacity: 0;
+            transition: 0.1s;
+        }
+        .p2{
+            position: absolute;
+            top: 100px;
+            left: -3px;
+            opacity: 0;
+            transition: 0.1s;
+        }
+        .p3{
+            position: absolute;
+            top: 160px;
+            left: -3px;
+            opacity: 0;
+            transition: 0.1s;
+        }
+        .se445:hover p{
+            opacity: 1;
+        }
+        
+        .se447{
+            position: absolute;
+            top: 20px;
+            height: 25px;
+            width: 60px;
+            background-color: brown;
+            font-size: 20px;
+            color: wheat;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .h40:hover{
+            color: brown;
+        }
+        .maja{
+            gap: 15px;
+        }
+        .tr5{
+            height: 600px;
+            background-image: url('https://www.pixelstalk.net/wp-content/uploads/images1/Living-room-comfort-curtains-family-fashion-furniture-garden-happiness-home-interior-landscape.jpg');
+            background-size: 100% 100%;
+        }
+        .td5{
+            display: flex;
+            flex-direction: column;
+            /* text-align: center; */
+            align-items: center;
+            margin-top: 200px;
+
+        }
+        .se52{
+            font-size: 100px;
+            /* color:aqua; */
+            letter-spacing: 10px;
+
+        }
+        .tr62{
+            height: 300px;
+            background-color: brown;
+            
+        }
+        .td63{
+            display: flex;
+            flex-direction: column;
+            color: wheat;
+            align-items: center;
+            padding-top: 100px;
+        }
+        .td64{
+            font-size: 50px;
+            font-style: oblique;
+            letter-spacing: 5px;
+        }
+        
+        video{
+            height: 500px;
+            width: 400px;
+            border-radius: 20px;
+            background-size: 100% 100%;
+        }
+        .p2,.p1,.se446{ 
+            font-size: 20px;
+        }
+        .tr7{
+            padding: 80px;
+            font-size: 30px;
+        }
+        .td71{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .td712{
+            height: 400px;
+        }
+        video{
+            object-fit: cover;
+            
+        }
