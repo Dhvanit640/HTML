@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+        .main{
+            height: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .img1{
+            height: inherit;
+            width: inherit;
+            background: url('https://tse2.mm.bing.net/th/id/OIP.KeRduNXcbnI6lIpUsQzq3gHaFj?pid=Api&P=0&h=180') ;
+            background-size: 100% 100%;
+            position: absolute;
+            left: 0;
+            animation: slider 10s infinite;
+            background-repeat: no-repeat;
+        }
+        .img2{
+            height: inherit;
+            width: inherit;
+            background: url('https://tse2.mm.bing.net/th/id/OIP.QaIE6Q78P63J0fKl5uyPJwHaEK?pid=Api&P=0&h=180') ;
+            position: absolute;
+            left: 100%;
+            animation: slider 10s infinite;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        .img3{
+            height: inherit;
+            width: inherit;
+            background: url('https://tse2.mm.bing.net/th/id/OIP.KeRduNXcbnI6lIpUsQzq3gHaFj?pid=Api&P=0&h=180') ;
+            position: absolute;
+            left: 200%;
+            animation: slider 10s infinite;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        .img4{
+            height: inherit;
+            width: inherit;
+            background: url('https://tse4.mm.bing.net/th/id/OIP.m4FmOjk0Bx-N4JaBzsBoTgHaEP?pid=Api&P=0&h=180') ;
+            position: absolute;
+            left: 300%;
+            animation: slider 10s infinite;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        
+         @keyframes slider{
+            0%{
+                transform: translateX(0);
+            }
+            50%{
+                transform: translateX(-100%);
+            }
+            100%{
+                transform: translateX(-200%);
+            }
+            150%{
+                transform: translateX(-300%);
+            }
+         }
+    </style>
+</head>
+<body>
+    <div class="main">
+
+        <div class="img1"></div>
+        <div class="img2"></div>
+        <div class="img3"></div>
+        <div class="img4"></div>
+        

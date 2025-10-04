@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main {
+            height: 500px;
+            width: 800px;
+            border: 2px solid blue;
+            /* display: flex; */
+            margin-left: 380px;
+            margin-top: 100px;
+            /* justify-content: center; */
+            background-color: aqua;
+
+        }
+
+        .dive1 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+
+        }
+
+        .d1 {
+            font-size: 50px;
+            color: blue;
+        }
+
+        .div2 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        .td {
+            display: flex;
+            gap: 10px;
+        }
+
+        .div3 {
+            display: flex;
+            gap: 100px;
+            justify-content: center;
+        }
+
+        .td2 {
+            margin-top: 10px;
+        }
+
+        select {
+            width: 330px;
+            height: 40px;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="dada">
+            <div class="dive1">
+                <i class="fa-regular fa-envelope d1"></i>
+                <h2 style="font-size: 40px;">let's talk</h2>
+            </div>
+            <div class="div2">
+                <div class="td">
+                    <p>Name:</p>
+                    <!-- <label for=""></label> -->
+                    <input type="text">
+                </div>
+                <div class="td">
+                    <p>Email:</p>
+                    <!-- <label for=""></label> -->
+                    <input type="text">
+                </div>
+                <div class="td">
+                    <p>massage :</p>
+                    <!-- <label for="" style="width: 30px;"></label> -->
+                    <input type="text">
+                </div>
+            </div>
+            <div class="div3">
+                <div class="td2">
+                    <input type="text" placeholder="Name"
+                        style="color: rgba(0, 0, 0, 0.34); width: 330px; height: 40px; border: color( rgb(4, 0, 255) rgb(48, 32, 227) blue);">
+                </div>
+                <div class="td2">
+                    <input type="mail" placeholder="abcd123@gmail.com"
+                        style="color: rgba(0, 0, 0, 0.34); width: 330px; height: 40px;">
+                </div>
+            </div>
+            <div class="div3">
+                <div class="td2">
+                    <input type="text" placeholder="Phone"
+                        style="color: rgba(0, 0, 0, 0.34); width: 330px; height: 40px; border: color( rgb(4, 0, 255) rgb(48, 32, 227) blue);">
+                </div>
+                <div class="td2">
+                    <label for="cars">
+                        <!-- <input for="cars" type="text"> -->
+                        <select id="cars">
+                            <option value="volvo">Vivo</option>
+                            <option value="saab">oppo</option>
+                            <option value="opel">i phone</option>
+                            <option value="audi">dell</option>
+                        </select>
+                    </label>
+
+
+                </div>
+
+            </div>
+            <div class="td3">
+                <input type="text" placeholder="massage"
+                    style="height: 150px; width: 760px; margin-left: 18px; margin-top: 20px;">
+            </div>
+            <div class="dt4">
+                <input type="button" style="color: pink; height: 40px; width: 100px; color: black; margin-top: 20px; margin-left: 33 0px;" placeholder="button">
+            <!-- <button style="height: 40px; width: 100px; margin-left: 330px; margin-top: 40px; background-color: gold; color: black;">Submit</button>    -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
