@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <script>
+        // rock- pepar-scissors logic
+        function rpc(user, computer){
+            if (user === computer) return "draw";
+            if (user === "scissor" && computer === "paper") return "user";
+            if (user === " paper" && computer === "rock") return "user";
+            if (user === "rock" && computer === " scissor") return "user";
+            
+            return "computer";
+        }
+        console.log(rpc("scissor", "paper"));
+     </script>
+</body>
+</html>

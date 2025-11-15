@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li{
+    list-style: none;
+    font-size: 30px;
+    margin-top: 50px;
+    position: relative;
+    }
+    .line{
+        height: 3px;
+        width: 0%;
+        background-color: darkcyan;
+        transition: 0.5s;
+
+    }
+    .li1:hover .line{
+        width: 100%;
+    }
+    ul{
+        display: flex;
+        gap: 10px;
+    }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li class="li1" type="none">home
+                <div class="line"></div>
+                </li>
+                 <li class="li1" type="none">manish
+                <div class="line"></div>
+                </li>
+            
+        </ul>
+    </div>
+</body>
+</html>

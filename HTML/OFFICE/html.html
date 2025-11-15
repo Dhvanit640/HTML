@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dada{
+            height: 140px;
+            width: 140px;
+            /* border: 1px solid red; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 100px auto;
+            border-top: 10px solid red;
+            border-radius: 50%;
+            animation: fervo 1s  linear infinite;   
+        }
+        .papa{
+            height: 100px;
+            width: 100px;
+            /* border: 1px solid green; */
+             display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 10px solid green;
+              border-radius: 50%;
+              animation: m 1s  linear infinite;
+        }
+        .beta{
+            height: 60px;
+            width: 60px;
+            /* border: 1px solid palevioletred; */
+            border-top: 10px solid black;
+              border-radius: 50%;
+              animation: d 1s  linear infinite;
+        }
+         @keyframes fervo{
+            to{
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes m{
+            from{
+                transform: rotate(720deg);
+            }
+        }
+         @keyframes d{
+            to{
+                transform: rotate(-360deg);
+            }
+        }
+        /* @keyframes fervo{
+            to{
+                transform: rotate(360deg);
+            }
+        } */
+    </style>
+</head>
+<body>
+<div class="dada">
+    <div class="papa">
+        <div class="beta"></div>
+    </div>
+</div>
+</body>
+</html>
