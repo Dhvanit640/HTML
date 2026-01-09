@@ -42,6 +42,16 @@
             transform: rotateY(180deg);
             transition: 2s;
         }
+        .line{
+            height: 30px;
+            width: 0;
+
+            background-color: darkcyan;
+            transition: 0.5s;
+        }
+        .li1:hover .line {
+    width: 100%;
+}
     </style>
 </head>
 <body>
@@ -49,12 +59,18 @@
         <div class="tr">
             <div class="td">
                 <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSimUEnHgg4bg3uLG5k8A14MJfk4gxChwv62LcDEmMN5uO9W_dEHl2-OAaeMU-KQSGY0bcWLqp9JDv6dDLSpDENqKG6iEz0rwi8vXgrmDwQTGxW63zD38GugA" width="100%" alt="">
-                <h1>Red Tape Women's Chelsea Boots</h1>
+                <div class="li1"><h1 style="    display: flex;
+    flex-direction: column;
+    align-items: center;
+">Red Tape Women's Chelsea Boots
+                    <div class="line"></div>
+                </div>
+                </h1>
                 <p>Color: <b> Black</b> </p>
                 <p>$1999 &nbsp; &nbsp;<del>$1599</del></p>
                 <button>ADD TO CART</button>
             </div>
-            <div class="td">
+            <!-- <div class="td">
             <img src="boot.webp" alt="" width="100%">
                 <h1>Red Tape Women's Chelsea Boots</h1>
                 <p>Color: <b> Black</b> </p>
@@ -81,7 +97,7 @@
                 <p>Color: <b> Black</b> </p>
                 <p>$1999 &nbsp; &nbsp;<del>$1599</del></p>
                 <button>ADD TO CART</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SAMAY MOBILE — Phone Shop</title>
+  <style>
+    :root{--accent:#0b84ff;--bg:#f6f8fb;--card:#ffffff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:0;background:var(--bg);color:#0f172a;line-height:1.4}
+    a{color:inherit}
+    /* Accessibility focus */
+    :focus{outline:3px solid #ffd54f;outline-offset:2px}
+    header{background:linear-gradient(90deg,var(--accent),#6a8cff);color:white;padding:18px 20px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .search{display:flex;gap:8px;align-items:center}
+    .search input{padding:8px 12px;border-radius:10px;border:0;min-width:220px}
+    main{padding:20px;max-width:1100px;margin:18px auto}
+    .controls{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+    .btn{background:var(--accent);color:white;padding:8px 12px;border-radius:10px;border:0;cursor:pointer}
+    .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+    .card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(11,12,16,0.06);display:flex;flex-direction:column;gap:8px}
+    .thumb{height:160px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .thumb img{max-width:100%;max-height:100%;object-fit:contain}
+    .title{font-weight:600}
+    .price{color:var(--accent);font-weight:700}
+    .meta{font-size:13px;color:var(--muted)}
+    .product-actions{display:flex;gap:8px;margin-top:auto}
+    .outline{background:transparent;border:1px solid #e6e9ef;padding:8px 10px;border-radius:10px;cursor:pointer}
+    /* cart drawer */
+    .drawer{position:fixed;right:18px;top:80px;width:340px;background:var(--card);border-radius:12px;box-shadow:0 18px 40px rgba(2,6,23,0.18);overflow:hidden;transform:translateY(-10px);transition:all .22s ease;opacity:0;pointer-events:none}
+    .drawer.open{opacity:1;pointer-events:auto;transform:none}
+    .drawer .head{padding:14px;border-bottom:1px solid #eef2f7;display:flex;justify-content:space-between;align-items:center}
+    .drawer .items{max-height:360px;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+    .cart-item{display:flex;gap:10px;align-items:center}
+    .cart-item img{width:64px;height:64px;border-radius:8px;object-fit:cover}
+    .qty{display:flex;gap:6px;align-items:center}
+    .checkout{padding:12px;border-top:1px solid #eef2f7;display:flex;justify-content:space-between;align-items:center}
+    /* top nav for pages */
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{padding:8px 10px;border-radius:8px;text-decoration:none;color:rgba(255,255,255,0.95)}
+    nav a[aria-current="page"]{background:rgba(255,255,255,0.12)}
+    /* pages */
+    .page{display:none}
+    .page.active{display:block}
+    .page h2{margin-top:0}
+    /* responsive */
+    @media (max-width:640px){header{flex-direction:column;gap:12px;align-items:flex-start} .search input{min-width:140px} .drawer{right:10px;width:92vw;top:110px}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden" onfocus="this.style.left='10px';this.style.top='10px';this.style.width='auto';this.style.height='auto'">Skip to main content</a>
+  <header class="bg-red-600 text-white p-4 flex justify-between items-center">
+  <h1 class="text-3xl font-bold">📱 SAMAY MOBILE</h1>
+  <img src="" alt="Samay Mobile Logo" class="w-14 h-14 rounded-full bg-white">
+</header>
+
+  <main id="main">
+    <!-- HOME PAGE -->
+    <section id="homePage" class="page active" tabindex="0" aria-labelledby="homeTitle">
+      <h2 id="homeTitle">Shop Phones — SAMAY MOBILE</h2>
+      <div class="controls">
+        <label for="sort" class="sr-only">Sort products</label>
+        <select id="sort" aria-label="Sort products">
+          <option value="popular">Sort: Popular</option>
+          <option value="low">Price: Low → High</option>
+          <option value="high">Price: High → Low</option>
+        </select>
+        <button class="outline" id="clearFilter">Clear</button>
+        <div style="margin-left:auto;color:var(--muted);font-size:14px">Free local delivery on orders ₹10,000+</div>
+      </div>
+      <section class="products" id="productGrid" aria-live="polite"></section>
+    </section>
+
+    <!-- SHIPPING & PAYMENTS PAGE -->
+    <section id="shippingPage" class="page" tabindex="0" aria-labelledby="shipTitle">
+      <h2 id="shipTitle">Shipping & Payments — All India Coverage</h2>
+      <p style="color:var(--muted)">SAMAY MOBILE offers nationwide delivery and flexible payment options. Below is a summary of shipping, delivery, and money transfer/collection options across India.</p>
+
+      <h3>Delivery Coverage</h3>
+      <ul>
+        <li><strong>All India:</strong> We ship to every state and union territory across India, including remote locations via our courier partners.</li>
+        <li><strong>Estimated delivery time:</strong> Metro cities 2–4 business days, Tier-2 cities 3–6 business days, remote areas 5–10 business days (estimated).</li>
+        <li><strong>Shipping charges:</strong> Flat ₹99 for orders under ₹2,000; free above ₹10,000. Heavy or bulky items may have additional charges shown at checkout.</li>
+        <li><strong>Tracking:</strong> Every order includes a tracking number and courier partner details. Tracking updates are emailed/SMSed.</li>
+      </ul>
+
+      <h3>Cash & Money Transport Options</h3>
+      <p style="color:var(--muted)">We support safe collection and money transfer methods to suit customers nationwide.</p>
+      <ul>
+        <li><strong>Cash on Delivery (COD):</strong> Available in most pincodes. COD orders may have a nominal COD fee and a maximum limit—shown at checkout.</li>
+        <li><strong>Doorstep Cash Pickup:</strong> In selected cities we partner with secure cash-collection services to pick up cash from customer locations (requires prior scheduling and verification).</li>
+        <li><strong>Bank Transfers / NEFT / RTGS:</strong> For high-value orders, customers can pay by bank transfer. Bank details provided at checkout and orders are processed after confirmation of payment.</li>
+        <li><strong>UPI / BHIM / Wallets:</strong> Instant UPI payments (Google Pay/PhonePe/Paytm) and major wallets are supported during checkout.</li>
+        <li><strong>Card Payments / Netbanking:</strong> All major debit/credit cards and netbanking options supported via secure payment gateway.</li>
+      </ul>
+
+      <h3>Insurance & Safe Handling</h3>
+      <ul>
+        <li>Every shipment is handled with protective packaging. Optional transit insurance is available at checkout for accidental damage/loss cover during transit.</li>
+      </ul>
+
+      <h3>What we need from you</h3>
+      <ol>
+        <li>Correct delivery address and active phone number for delivery coordination.</li>
+        <li>For COD or cash pickups, a photo ID may be requested at delivery for verification.</li>
+      </ol>
+
+      <p>If you need a city-specific quote (faster shipping, bulk order, or cash pickup), use the Contact page or call our support number.</p>
+    </section>
+
+    <!-- CONTACT PAGE -->
+    <section id="contactPage" class="page" tabindex="0" aria-labelledby="contactTitle">
+      <h2 id="contactTitle">Contact & Support</h2>
+      <p>Phone: <a href="tel:+919428916932">+91 94289 16932</a> (Mon–Sat, 10:00–19:00 IST)</p>
+      <p>Email: <a href="mailto:pdhvanit81@gmail.com">pdhvanit81@gmail.com</a></p>
+      <p>Address: Rajkot — We support nationwide shipping and cash collection in many cities.</p>
+    </section>
+  </main>
+
+  <aside class="drawer" id="cartDrawer" aria-hidden="true">
+    <div class="head">
+      <div style="font-weight:700">Your Cart</div>
+      <button class="outline" id="closeCart">Close</button>
+    </div>
+    <div class="items" id="cartItems"></div>
+    <div class="checkout">
+      <div>
+        <div style="font-size:13px;color:var(--muted)">Total</div>
+        <div style="font-weight:700;font-size:18px" id="cartTotal">₹0</div>
+      </div>
+      <div>
+        <button class="btn" id="checkoutBtn">Checkout</button>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    // Sample product data (same as before)
+    const PRODUCTS = [
+      {id:1,name:'Galaxy A54',price:27999,desc:'6.4" AMOLED · 128GB · 8GB RAM',img:'https://images.unsplash.com/photo-1510557880182-3d4d3c3b66f1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=1'},
+      {id:2,name:'iPhone 13',price:54999,desc:'6.1" OLED · 128GB · Dual Camera',img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=2'},
+      {id:3,name:'Pixel 7a',price:34999,desc:'6.1" OLED · 128GB · Clean Android',img:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3'},
+      {id:4,name:'OnePlus Nord',price:23999,desc:'6.43" Fluid AMOLED · 128GB',img:'https://images.unsplash.com/photo-1517153293335-1b0b7f1d0b6f?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=4'},
+      {id:5,name:'Realme 11',price:13999,desc:'6.5" LCD · 64GB',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=5'},
+      {id:6,name:'Moto G Stylus',price:11999,desc:'6.5" · Stylus included',img:'https://images.unsplash.com/photo-1481277542470-605612bd2d61?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6'}
+    ];
+
+    // Accessibility helpers
+    function setActivePage(page){
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+      document.getElementById(page+'Page').classList.add('active');
+      document.querySelectorAll('nav a').forEach(a=>a.removeAttribute('aria-current'));
+      document.querySelector(`#nav${page.charAt(0).toUpperCase()+page.slice(1)}`).setAttribute('aria-current','page');
+      // focus first heading for screen readers
+      setTimeout(()=>document.getElementById(page+'Page').focus(),50);
+    }
+
+    // Navigation
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault(); const page = a.dataset.page; setActivePage(page);
+      });
+    });
+
+    // Utilities
+    const $ = sel => document.querySelector(sel);
+
+    // Cart stored in localStorage
+    let cart = JSON.parse(localStorage.getItem('samay_cart')||'{}');
+    function saveCart(){localStorage.setItem('samay_cart',JSON.stringify(cart));renderCart();}
+
+    // Render products
+    function renderProducts(list){
+      const grid = $('#productGrid');
+      grid.innerHTML = '';
+      list.forEach(p => {
+        const card = document.createElement('article');card.className='card';
+        card.setAttribute('role','article');
+        card.innerHTML = `
+          <div class="thumb"><img src="${p.img}" alt="Photo of ${p.name}" loading="lazy"></div>
+          <div class="title">${p.name}</div>
+          <div class="meta">${p.desc}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div class="price">₹${p.price.toLocaleString()}</div>
+            <div class="product-actions">
+              <button class="outline" data-id="${p.id}" onclick="addToCompare(${p.id})">Compare</button>
+              <button class="btn" data-id="${p.id}" onclick="addToCart(${p.id})">Add</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Basic cart features
+    function addToCart(id){
+      const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+      cart[id] = cart[id]||{...p, qty:0}; cart[id].qty += 1; saveCart();
+      animateCart();
+    }
+    function removeFromCart(id){ delete cart[id]; saveCart(); }
+    function changeQty(id, delta){ if(!cart[id]) return; cart[id].qty += delta; if(cart[id].qty<=0) delete cart[id]; saveCart(); }
+
+    function renderCart(){
+      const itemsEl = $('#cartItems'); itemsEl.innerHTML = '';
+      const ids = Object.keys(cart).map(Number);
+      let total = 0; let count = 0;
+      if(ids.length===0){ itemsEl.innerHTML = '<div style="padding:18px;color:var(--muted)">Your cart is empty — add a phone to start.</div>'; }
+      ids.forEach(id => {
+        const it = cart[id]; total += it.price * it.qty; count += it.qty;
+        const node = document.createElement('div'); node.className='cart-item';
+        node.innerHTML = `
+          <img src="${it.img}" alt="${it.name}">
+          <div style="flex:1">
+            <div style="font-weight:600">${it.name}</div>
+            <div class="meta">₹${it.price.toLocaleString()} × ${it.qty} = <strong>₹${(it.price*it.qty).toLocaleString()}</strong></div>
+            <div class="qty" style="margin-top:8px">
+              <button class="outline" onclick="changeQty(${it.id}, -1)">-</button>
+              <div style="padding:6px 8px;border-radius:8px;background:#f3f4f6">${it.qty}</div>
+              <button class="outline" onclick="changeQty(${it.id}, 1)">+</button>
+              <button class="outline" style="margin-left:8px;color:#ef4444" onclick="removeFromCart(${it.id})">Remove</button>
+            </div>
+          </div>
+        `;
+        itemsEl.appendChild(node);
+      });
+      $('#cartTotal').textContent = `₹${total.toLocaleString()}`;
+      $('#cartCount').textContent = count;
+      // update aria-expanded
+      const expanded = count>0 ? 'true' : 'false';
+      $('#cartBtn').setAttribute('aria-expanded', expanded);
+    }
+
+    // Cart drawer controls
+    const drawer = $('#cartDrawer');
+    function openCart(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); }
+    function closeCart(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); }
+    $('#cartBtn').addEventListener('click',()=>openCart());
+    $('#closeCart').addEventListener('click',()=>closeCart());
+
+    // Sorting & searching
+    $('#search').addEventListener('input',e=>applyFilters());
+    $('#sort').addEventListener('change',e=>applyFilters());
+    $('#clearFilter').addEventListener('click',()=>{ $('#search').value=''; $('#sort').value='popular'; applyFilters(); });
+
+    function applyFilters(){
+      const q = $('#search').value.trim().toLowerCase();
+      let list = PRODUCTS.filter(p=> p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+      const sort = $('#sort').value;
+      if(sort==='low') list.sort((a,b)=>a.price-b.price);
+      else if(sort==='high') list.sort((a,b)=>b.price-a.price);
+      renderProducts(list);
+    }
+
+    // Simple visual feedback
+    function animateCart(){
+      const btn = $('#cartBtn'); btn.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:250});
+    }
+
+    window.addToCart = addToCart; window.removeFromCart = removeFromCart; window.changeQty = changeQty; window.addToCompare = (id)=>{ alert('Compare feature coming soon — product id: '+id) };
+
+    // Checkout
+    $('#checkoutBtn').addEventListener('click', ()=>{
+      const ids = Object.keys(cart); if(ids.length===0){ alert('Your cart is empty.'); return; }
+      const total = Object.values(cart).reduce((s,it)=>s+it.price*it.qty,0);
+      if(confirm(`Proceed to pay ₹${total.toLocaleString()} ?`)){
+        alert('Thanks for your order! (Demo)\nSAMAY MOBILE will contact you to confirm.');
+        cart = {}; saveCart(); closeCart();
+      }
+    });
+
+    // Init
+    renderProducts(PRODUCTS);
+    renderCart();
+
+    // Expose saveCart for debugging in console
+    window.saveCart = saveCart;
+  </script>
+  <!-- Marketplace style listing (modeled after the provided refurbed link) -->
+    <section id="marketplacePage" class="page" tabindex="0" aria-labelledby="marketTitle">
+      <h2 id="marketTitle">SAMAY MOBILE — Marketplace (Refurbished & New)</h2>
+      <p style="color:var(--muted)">Browse refurbished, used, and new phones. Filters, sort, and quick-buy actions included.</p>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:12px 0">
+        <select id="conditionFilter" aria-label="Filter by condition">
+          <option value="all">Condition: All</option>
+          <option value="new">New</option>
+          <option value="refurb">Refurbished</option>
+          <option value="used">Used</option>
+        </select>
+        <select id="brandFilter" aria-label="Filter by brand">
+          <option value="all">Brand: All</option>
+          <option value="Samsung">Samsung</option>
+          <option value="Apple">Apple</option>
+          <option value="OnePlus">OnePlus</option>
+          <option value="Xiaomi">Xiaomi</option>
+          <option value="Google">Google</option>
+        </select>
+        <label style="margin-left:auto;display:flex;gap:8px;align-items:center"><input type="checkbox" id="onlyWithWarranty"> Only with warranty</label>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+        <div style="font-size:14px;color:var(--muted)">Showing <span id="marketCount">6</span> results</div>
+        <select id="marketSort">
+          <option value="popular">Sort: Popular</option>
+          <option value="priceLow">Price: Low → High</option>
+          <option value="priceHigh">Price: High → Low</option>
+        </select>
+      </div>
+
+      <section id="marketGrid" class="products"></section>
+
+      <p style="font-size:13px;color:var(--muted);margin-top:10px">Note: This page is a demo to show how SAMAY MOBILE can list refurbished and new phones similar to refurbed.ie. For real refurbished inventory, replace the PRODUCTS_MARKET array with your inventory and add real images.</p>
+    </section>
+
+    <!-- Services & Price List Section -->
+  <section id="services" class="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow mb-10">
+    <h2 class="text-2xl font-bold text-center mb-4">WELL COME TO SAMAY MOBILE</h2>
+    <p class="text-center font-semibold">MILAN PATEL — Mo. 9725925500<br>Email: milansamaymobile@gmail.com</p>
+
+    <div class="mt-6">
+      <h3 class="text-xl font-bold mb-2">All Type Services</h3>
+      <ul class="list-disc ml-6">
+        <li>Mobile Cover</li>
+        <li>Repairing</li>
+        <li>Flashing</li>
+        <li>Printing</li>
+        <li>All Type Solutions</li>
+      </ul>
+    </div>
+
+    <div class="mt-6">
+      <h3 class="text-xl font-bold mb-2">Price List</h3>
+      <ul class="list-disc ml-6">
+        <li>Cover (Old Model): 120 Rs</li>
+        <li>Cover (New Model): 140 Rs</li>
+        <li>All Mobile Flashing: 100 Rs</li>
+        <li>Printed Simple Mug: 140 Rs</li>
+        <li>Printed Heart Handle Mug: 170 Rs</li>
+        <li>Printed Magic Mug: 220 Rs</li>
+        <li>Printed Cap: 80 Rs</li>
+        <li>Keychain Printed (2 Side): 70 Rs</li>
+        <li>T-Shirt Printing:</li>
+        <ul class="ml-10 list-[circle]">
+          <li>1–10: 200 Rs</li>
+          <li>11–25: 190 Rs</li>
+          <li>26–50: 180 Rs</li>
+          <li>51–100: 170 Rs</li>
+          <li>101–500: 160 Rs</li>
+          <li>501–1000: 150 Rs</li>
+        </ul>
+      </ul>
+    </div>
+
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="bg-gray-100 p-3 rounded-lg text-center">Photo Placeholder 1</div>
+      <div class="bg-gray-100 p-3 rounded-lg text-center">Photo Placeholder 2</div>
+      <div class="bg-gray-100 p-3 rounded-lg text-center">Photo Placeholder 3</div>
+    </div>
+
+    <p class="text-center mt-6 font-semibold">THANKS FOR VISIT</p>
+  </section>
+
+  
+  <!-- FULL FANCY ACCESSORIES & PARTS SECTION -->
+  <section id="fancyAll" class="max-w-5xl mx-auto p-6 bg-white rounded-2xl shadow mb-10">
+    <h2 class="text-3xl font-bold text-center mb-6">📱 SAMAY MOBILE – CARD STYLE SHOWCASE</h2>
+
+    <!-- CARD STYLE TEMPLATE FOR ALL ITEMS -->
+    <style>
+      .card-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;}
+      .card {background:#f8f8f8;border-radius:15px;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);text-align:center;}
+      .card img {width:100%;height:150px;object-fit:cover;border-radius:10px;}
+      .price {font-weight:bold;margin-top:6px;font-size:18px;}
+    </style>
+
+    <!-- Tempered Glass Cards -->
+    <h3 class="text-2xl font-semibold mt-6 mb-3">🔥 Tempered Glass (Android + iPhone)</h3>
+    <div class="card-grid">
+      <div class="card"><img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=800&auto=format&fit=crop" alt="Tempered glass sample 1"><div class="price">₹30–120</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop" alt="Tempered glass sample 2"><div class="price">₹30–120</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop" alt="Tempered glass sample 3"><div class="price">₹30–120</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1517153293335-1b0b7f1d0b6f?q=80&w=800&auto=format&fit=crop" alt="Tempered glass sample 4"><div class="price">₹30–120</div></div>
+    </div>
+
+    <!-- Covers Cards -->
+    <h3 class="text-2xl font-semibold mt-8 mb-3">🛡️ Mobile Covers</h3>
+    <div class="card-grid">
+      <div class="card"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop" alt="Phone cover sample 1"><div class="price">₹120 / ₹140</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop" alt="Phone cover sample 2"><div class="price">₹120 / ₹140</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1481277542470-605612bd2d61?q=80&w=800&auto=format&fit=crop" alt="Phone cover sample 3"><div class="price">₹120 / ₹140</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1510557880182-3d4d3c3b66f1?q=80&w=800&auto=format&fit=crop" alt="Phone cover sample 4"><div class="price">₹120 / ₹140</div></div>
+    </div>
+
+    <!-- Phones Cards -->
+    <h3 class="text-2xl font-semibold mt-8 mb-3">📸 All Android & iPhone Models</h3>
+    <div class="card-grid">
+      <div class="card"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop" alt="Android model sample 1"><div class="price">Samsung Galaxy A54</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1517153293335-1b0b7f1d0b6f?q=80&w=800&auto=format&fit=crop" alt="Android model sample 2"><div class="price">OnePlus Nord</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop" alt="iPhone sample 1"><div class="price">iPhone 13</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop" alt="iPhone sample 2"><div class="price">iPhone 12</div></div>
+    </div>
+
+    <!-- Parts Cards -->
+    <h3 class="text-2xl font-semibold mt-8 mb-3">⚙️ All Parts & Accessories</h3>
+    <div class="card-grid">
+      <div class="card"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop" alt="Charging jack"><div class="price">₹80–180</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1585386959984-a4155229a1c0?q=80&w=800&auto=format&fit=crop" alt="Speaker mic"><div class="price">₹100–250</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1559526324-593bc073d938?q=80&w=800&auto=format&fit=crop" alt="Back panel"><div class="price">₹180–450</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop" alt="Original charger"><div class="price">₹250–650</div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1545235617-9465d8d6b2d6?q=80&w=800&auto=format&fit=crop" alt="Earphones"><div class="price">₹100–300</div></div>
+    </div>
+
+    <h3 class="text-2xl font-semibold mt-8 mb-3">🚚 Money Transport – All India</h3>
+    <p class="font-medium text-center">Cash • Bank Transfer • UPI • Courier COD</p>
+
+  </section>
+
+  <footer class="bg-gray-900 text-white text-center p-6 mt-10">
+  <h2 class="text-xl font-bold">SAMAY MOBILE</h2>
+  <p>Milan Patel</p>
+  <p>📞 97259 25500</p>
+  <p>📧 milansamaymobile@gmail.com</p>
+  <p>📍 Rajkot, Gujarat</p>
+  <p class="mt-2">© 2025 Samay Mobile. All Rights Reserved.</p>
+</footer>
+</body>
+</html>

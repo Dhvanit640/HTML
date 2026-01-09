@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <p id="demo"></p>
+  <p id="demo1"></p>
+  <p id="demo3"></p>
+  <script>
+
+    // const passingScore = 40;
+    // let totalScore = 0;
+    // let scores = [35, 42, 50, 28, 60];
+    // for (let i = 0; i < scores.length; i++) {
+    //   totalScore += scores[i];
+    //   if (scores[i] >= passingScore) {
+    //     console.log(`Student ${i + 1} passed with score ${scores[i]}`);
+    //   } else {
+    //     console.log(`Student ${i + 1} failed with score ${scores[i]}`);
+    //   }
+    // }
+    // let averageScore = totalScore / scores.length;
+    // if (averageScore > 50) {
+    //   console.log("The class average is greater than 50");
+    // }
+    // else {
+    //   console.log("The class average is 50 or less");
+    // }
+
+    // console.log("Type of totalScore:", typeof totalScore);
+    // console.log("Type of scores:", typeof scores);
+
+
+
+    // function person(first, last, age, eye) {
+    //   this.firstName = first;
+    //   this.lastName = last;
+    //   this.age = age;
+    //   this.eyecolor = eye;
+    // }
+    // const myFather = new person("john", "doe", 50, "blue");
+    // console
+    // document.getElementById("demo1").innerHTML="my father is" + my.age + ".";
+    // document.getElementById("demo").innerHTML = "my age " + myFather.eye, +"";
+
+
+
+    // const fruits = [
+    //   ["apples", 300],
+    //   ["pears", 900],
+    //   ["bananas", 500],
+    // ];
+    // const myObj = Object.fromEntries(fruits);
+    // document.getElementById("demo").innerHTML = myObj.pears;
+
+//1). Object
+
+    document.getElementById("demo3").innerHTML =
+    "<p>The typeof new Object() is " + typeof new Object() + "</p>" 
+
+    const wi={
+    name: "Dhvanit",
+    age: 24,
+    city: "ahmedabad",
+
+    };
+    let data = wi.name + "," + wi.age + "," + wi.city;
+
+    document.getElementById("demo").innerHTML=data;
+
+    const Dhvanit = {
+    name: "John",
+    age: 30,
+    city: "New York"
+    };
+
+    // Display Properties
+    let text = Dhvanit.name + ", " + Dhvanit.age + ", " + Dhvanit.city;
+
+    document.getElementById("demo1").innerHTML = text;
+
+    function didi(first, second, age, eye){
+    this.firstName= first;
+    this.secondName= second;
+    this.age=age;
+    this.eyecolor=eye;      
+    }
+    const myFather = new didi("johan","doe",50,"eye");
+    const myMother = new didi("Sally","Rally", 48, "green");
+    document.getElementById('demo').innerHTML=myFather.firstName+ "  "+myFather.age+"    "+myFather.secondName+"  "+myFather.eyecolor;
+    document.getElementById('demo1').innerHTML=myMother.firstName+ "  "+myMother.age+"    "+myMother.secondName+"  "+myMother.eyecolor;
+
+    // if(let w = 0; )
+
+</script>
+</body>
+
+</html>

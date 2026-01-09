@@ -274,7 +274,7 @@ summary::after{
     transition: 2s;
 }
 details[open] summary::after{
-    content: "X";
+    content: "^";
 }
 details p{
     margin-top: 10px;

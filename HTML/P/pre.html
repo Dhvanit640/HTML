@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+    list-style: none;
+    display: inline-block;
+
+}
+
+.line {
+    height: 5px;
+    width: 0;
+    background-color: darkcyan;
+    transition: 1s;
+}
+
+li:hover .line {
+    width: 100%;
+}
+.main1 {
+    height: 100px;
+    display: flex;
+    background-color: black;
+    color: white;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    gap: 20px;
+    font-size: 20px;
+    /* justify-content: space-around; */
+    /* justify-content: space-between;  */
+
+}
+.h7 {
+    width: 180px;
+    height: 100px;
+    margin-top: -0px;
+    background-color: aqua;
+    font-size: 30px;
+    color: white;
+}
+li {
+    list-style: none;
+    display: inline-block;
+
+}
+    </style>
+</head>
+<body>
+    <div class="main1">
+
+        <li>Home
+
+            <div class="line"></div>
+        </li>
+        <li>about
+            <div class="line"></div>
+        </li>
+        <li>men's wear
+            <div class="line"></div>
+        </li>
+        <li>women's wear
+            <div class="line"></div>
+        </li>
+        <li>short codes
+            <div class="line"></div>
+        </li>
+        <li>content
+            <div class="line"></div>
+        </li>
+
+
+        <div class="h7">
+            <button style="color: black; background-color: rgb(0, 0, 0, 0.15);">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+        </div>
+
+    </div>
+</body>
+</html>

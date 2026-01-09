@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="day1"></p>
+    <p id="day2"></p>
+
+    <p id="day3"></p>
+
+    <p id="day4"></p>
+    <script>
+    {
+        let day;
+        
+        let date = new Date().getDay();
+        switch(date){
+            case 0:
+                day = "sunday";
+                // date = "live"
+                break;
+            case 1:
+                day ="Monday";
+                break;
+            case 2:
+                day ="tuesday";
+                break;
+            case 3:
+                day ="wednesday";
+                // date = "live"
+                break;
+            case 4:
+                day ="thursday";
+                break;
+            case 5:
+                day = "friday";
+                break;
+            case 6:
+                day = "satyrday";
+        }
+        document.getElementById("day1").innerHTML="today is" +" "+ day;
+        document.getElementById("day2").innerHTML="today is" +" "+date;
+        }
+
+        {
+            let text;
+            switch(new date().getDay()){
+                case 6:
+                    text="today is saturday";
+                    break;
+                case 0:
+                    text="today is sunday";
+                    break;
+                default:
+                    text = "Looking forward to the Weekend";
+            }
+            document.getElementById("day3").innerHTML = text;
+        }
+        document.g
+    </script>
+</body>
+</html>

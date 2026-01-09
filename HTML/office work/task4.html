@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" id="photo" accept="image/*">
+    <p id="msg"></p>
+    <button onclick="print()">print</button>
+    <!-- <h1>name</h1>
+    <h1>no</h1>
+    <h1>gender</h1>
+    <h1>digree</h1>
+    <h1></h1> -->
+    <script>
+        // document.getElementById("photo").addEventListener("change", function () {
+        //     let file = this.files[0];   // user selected file
+        //     let msg = document.getElementById("msg");
+
+        //     if (!file) return;
+
+        //     let maxSize = 20 * 1024; // 20KB
+
+        //     if (file.size > maxSize) {
+        //         msg.innerHTML = "❌ Image size must be less than 20KB";
+        //         this.value = ""; // remove selected file
+        //     } else {
+        //         msg.innerHTML = "✅ Image accepted (size OK)";
+        //     }
+        // });
+        // if (file.size <= maxSize) {
+        //     let img = document.createElement("img");
+        //     img.src = URL.createObjectURL(file);
+        //     img.width = 100;
+        //     document.body.appendChild(img);
+        // // }
+        // let s = "*";
+        // for (let a = 1; a <= 4; a++) {
+        //     // console.log(a);
+        //     for (let b = 1; b <= a; b++) {
+        //         console.log("*");
+
+        //     }
+        //     console.log("<br>");
+        // }
+        // // let l = "";
+        // for (let i = 5; i >= 1; i--) {
+        //     for (let j = 1; j <= i; j++) {
+        //         document.write(i);
+
+        //     }
+        //     // document.write("*");
+        //     document.write("<br>");
+        // }
+        //  output (5 5 5 5 5
+        //          4 4 4 4
+        //          3 3 3 
+        //          2 2
+        //          1
+
+        // for (let i = 5; i >= 1; i--) {
+        //     for (let j = 1; j <= i; j++) {
+        //         document.write(j);
+
+        //     }
+        //     // document.write("*");
+        //     document.write("<br>");
+        // }
+
+        // output 1 2 3 4 5 
+        //        1 2 3 4
+        //        1 2 3
+        //        1 2
+        //        1
+
+        // for (let i = 5; i >= 1; i--) {
+        //     for (let j = i; j >= 1; j--) {
+        //         document.write(j);
+
+        //     }
+        //     // document.write("*");
+        //     document.write("<br>");
+        // }
+        // output 54321
+        //        4321
+        //        321
+        //        21
+        //        1
+        // let sum = 0;
+        // let m = prompt("enter the value")
+        // document.write("<ul>");
+        // let a = [10, 20, 30, 40, 50];
+        // for (let b = 0; b < 5; b++) {
+        //     document.write("<li>" + a[b] + "<br>" + "</li>");
+        //     sum = sum + a[b];
+        // }
+        // document.write("</ul>");
+        // document.write("total sum" + " " + " " + sum);
+        // document.write("<br>");
+        // document.write("<br>");
+
+        // var c = new Array();
+
+        // for (var g = 0; g <= 3; g++) {
+        //     c[g] = prompt("enter the value");
+        // }
+        // for (let d = 0; d <= 3; d++) {
+        //     document.write(c[d]);
+        //     // c[d]=prompt("enetr the value");
+        //     document.write("<br>");
+        // }
+
+
+
+        // TABALE ARRAY MULTIDIMENISONAL
+        var ram = [
+            ["ram", 1, "male", "b.com",],
+            ["dhvanit", 2, "male", "BCA"],
+            ["NIRALI", 3, "fimel", "BCA"],
+            ["yug", 4, "male", "b.com"],
+            ["prince", 5, "male", "b.com"],
+            ["yug", 6, "male", "b.com"]
+        ];
+        document.write("<table border='1px' cellspacing='0'>");
+        for (let a = 0; a < ram.length; a++) {
+            document.write("<tr>");
+
+            for (let b = 0; b < ram.length; b++) {
+                document.write("<td>" + ram[a][b] + "</td>");
+            }
+            // document.write(ram[a]);
+            document.write("</tr>");
+        }
+        document.write("</table>");
+        // document.createElement(ram)
+
+        var ram = ["ram", 10, "dhvanit"];
+        document.write(ram + "<br>");
+        ram[1] = 12;
+        document.write(ram + "<br>");
+        delete ram[2];
+        document.write(ram + "<br>")
+
+        var rama = ["hiten", "yash", "meet"];
+        document.write(rama + "<br>");
+        // sort() line ma gothave chhe 
+        rama.sort();
+        document.write(rama + "<br>");
+        // reverse array ne ulati kari nakhe chhe 
+        rama.reverse();
+        document.write(rama + "<br>");
+
+        // pop last ma je array hoy chhe tene hatavi nakhe chhe
+        rama.pop();
+        document.write(rama + "<br>");
+        // push("ram") last ma value add kare chhe  
+        rama.push("ram");
+        document.write(rama + "<br>");
+        rama.push("sita");
+        document.write(rama + "<br>");
+
+        // shift
+        // shift() agal thi value hatave chhe 
+        rama.shift();
+        document.write(rama + "<br>");
+        rama.shift();
+        document.write(rama + "<br>");
+
+        // unshift
+        // unshift("ram") agal value add kare chhe 
+        rama.unshift("dada");
+        document.write(rama + "<br>");
+
+        // CONCAT
+        // concat() badha veriabal ne joint kare chhe 
+        var b = ["yesh", "Dhvanit", "ram"];
+        var c = ["gami", "vansjaliya"];
+        var d = b.concat(c);
+        document.write(d + "<br>");
+
+        // JOIN
+        // join() no matalab e chhe ki array mathi streing ma badale and bane variyabal ne join kare 
+        var e = d.join(" / ");
+        document.write(e + "<br>");
+
+        // SLICE
+        var a = ["chintan", "uday", "meet", "aniket", "nayan"];
+        document.write(a + "<br>");
+        var b = a.slice(1);
+        document.write(b + "<br>");
+
+        // splice
+        var aa = ["a", "b", "c"];
+        document.write(aa + "<br>");
+        aa.splice(1, 0, "d");
+        document.write(aa + "<br>");
+
+        // ISARRAY
+        var cd = ["m", 'd'];
+        document.write(cd + "<br>");
+        var ba = Array.isArray(cd);
+        document.write(ba + "<br>");
+        if (Array.isArray(cd)) {
+            document.write("he is a array");
+        }
+        else {
+            document.write("hi is not arry");
+        }
+        document.write("<br>");
+
+        // indexOf
+        // INDEXOF MA EVU THAY CHHE KE JE NAME LAKHIYE CHHE TE BATAVIYE CHHE TO TEMA TENO INDEX NO BATAVE CHHE 
+        var ac = ["a", "b", "c", "ram", "dhvanit", "hiten"];
+        var af = ac.indexOf("ram");
+        document.write(af + "<br>");
+
+        // lastIndexOf
+        // LASTINDEXOF MA EVU HOY CHHE KE JE NAME LAKHIYU CHHE TENO INDEX NUMBER BATAVE CHHE TEMA TWO NAME SAME HOY CHHE TO LAST VADA NAME NO INDEX NUMBER LE CHHE 
+        var cc = ["a", "b", "dhvanit", "c", "ram", "dhvanit"];
+        var ff = cc.lastIndexOf("dhvanit", 5 + "<br>" + "<br>");
+        document.write(ff + "<br>");
+
+        // includes
+        // INDEX MA JE NAME HOY TE J CHEK KARAVO TO TRUE AAVE BAKI JO INDEX MA NAME NA HOY NE TAME CHEK KARAVO TO FALSE AAVE CHHE AND NAME PAN SAM TO SAM HOVU JOYE BAKI SAME NA HOY TO PAN FALSE AAVE CHHE  
+        var gd = ["ram", "Dhvanit", "data"];
+        document.write(gd + "<br>");
+        var ds = gd.includes("Ram");
+        document.write(ds + "<br>");
+
+        // SOME
+        // INDEX MA NANA NANI VALUE TAPASI SAKIYE CHI JO KOY PAN VALUE INDEX NI VALUE KARTA MOTI NAKHASU TO FALSE AVASE BAKI JO NANI NAKHASI TO TRUE AVASE
+        var dn = ["10", "18", "25", "21"];
+        var dr = dn.join(" / * / * / ");
+        document.write(dr + " <br>");
+        var ld = dn.some(functionname);
+        document.write(ld + "<br>");
+        function functionname(age) {
+            return age >= 21;
+        }
+
+        // every
+        // AMA EVU CHHE KE JO NANA MA NANI INDEX NAKHIYE CHHI TO J TRUE AAVE CHHE BAKI VACHE ATHAVA LAST VADI VALUE NAKKHIYE CHHI TO FLASE AVE CHHE
+        var dn = ["10", "18", "25", "21"];
+        var dr = dn.join(" / * / * / ");
+        document.write(dr + " <br>");
+        var ld = dn.every(functionname);
+        document.write(ld + "<br>");
+        function functionname(age) {
+            return age >= 15;
+        }
+
+        //  find no use evo thay ke jo koy
+        //  pan value pass karavi to je velue
+        //  nakhavi chhi tena karta moti value 
+        //  hase tiya find stop thay jase ne answer api dese 
+        var as = ["10", "12", "11", "15"]
+        document.write(as + "<br>");
+        var dk = as.find(man);
+        document.write(dk + "<br>");
+        function man(dd) {
+            return dd >= 1
+        }
+
+        var aso = ["10", "19", "14", "15"]
+        document.write(aso + "<br>");
+        var dr = aso.findIndex(man)
+        document.write(dr + "<br>");
+        function man(dl) {
+            return dl >= 12
+        }
+
+        // function print() {
+        window.print
+        // }
+
+
+        var ad = ["23", "10", "26", "20"];
+
+        document.write(ad + "<br>");
+
+        var ll = ad.filter(dhvan);
+        document.write(ll + "<br>");
+        function dhvan(age) {
+            return age < 20;
+        };
+
+        var rd = ["20", "30", "19", "33", "24"];
+        var dr = rd.join(" + ");
+        document.write(rd + "<br>");
+        var mm = rd.filter(raja);
+        document.write(mm +"<br>");
+        function raja(data) {
+            return data <= 20;
+        }
+
+        // let url = "https://jsonplaceholder.typicode.com/users";
+
+
+        // fetch(url)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data); // API data
+        //     })
+        //     .catch(error => console.error("Error:", error));
+
+        // fetch(url)
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             throw new Error("Network response was not OK");
+        //         }
+        //         return response.json();
+        //     })
+        //     .then(users => {
+        //         console.log("Users:", users);
+        //         users.forEach(user => {
+        //             document.body.innerHTML += `<p>${user.name} — ${user.email}</p>`;
+        //         });
+        //     })
+        //     .catch(error => {
+        //         console.error("Fetch Error:", error);
+        //     });
+
+            var a = ["Dhvanit","Ram","chintan","hiten"];
+            document.write(a +"<br>");
+            var sd = a.join("       <br>")
+            document.write(sd +"<br>") ;
+
+            a.toString();
+            document.write(a+"<br>");
+            
+            var asa = ["Dhvanit","Ram","chintan","hiten"];
+            // valueof(asa);
+
+    </script>
+</body>
+
+</html>

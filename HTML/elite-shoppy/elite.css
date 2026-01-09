@@ -215,12 +215,12 @@ li:hover .line {
     color: white;
 }
 
-.ab {
+.ab{
     text-align: center;
     margin-top: 250px;
 }
 
-.cd {
+.cd{
     text-align: center;
 }
 
@@ -269,7 +269,7 @@ li:hover .line {
     letter-spacing: 7px;
 }
 
-.p::first-letter {
+.p::first-letter{
     color: red;
 }
 
@@ -455,7 +455,7 @@ text-align: center;
     flex-wrap: wrap;
 }
 
-.nd1 {
+.nd1{
     background: url("https://p.w3layouts.com/demos_new/template_demo/20-06-2017/elite_shoppy-demo_Free/1660570665/web/images/bb1.jpg");
     height: 620px;
     width: 510px;
@@ -582,6 +582,7 @@ text-align: center;
     background-size: 100% 100%;
     gap: 10px;
     transition: 0.8s;
+    
 }
 
 .ds2::first-letter {

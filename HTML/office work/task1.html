@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <p id="m"></p> -->
+
+    <p id="d"></p>
+    <p id="d1"></p>
+    <p id="d2"></p>
+    <script>
+        // let a = prompt("enter the number");
+        // let b = prompt("enter the number");
+        // if(a<=b){
+        //     alert("manish");
+
+        // }
+        // else{
+        //     alert("dhvanit");
+
+        // }
+
+        let loging = false;
+        if (loging) {
+            let age = prompt("enter the age");
+            let role = prompt("enter the role");
+            if (age >= 18) {
+
+
+                switch (role) {
+                    case "admin":
+                        document.getElementById('d1').innerHTML = "Welcome Admin";
+                        break;
+
+                    case "user":
+                        document.getElementById('d').innerHTML = "Welcome User";
+                        break;
+
+                    default:
+                        document.getElementById('d').innerHTML = "Unknown role";
+                }
+
+            }
+            else {
+                document.getElementById('d').innerHTML = "You are under 18";
+            }
+        }
+        else{
+            document.getElementById('d').innerHTML = "Please log in";
+        }
+
+
+
+        let result = (age >= 18) ? "Adult" : "Minor";
+        document.getElementById('d1').innerHTML = result;
+
+
+    </script>
+</body>
+
+</html>

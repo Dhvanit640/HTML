@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dhvanit Vansjaliy</h1>
+    <p>Vansjaliya Dhvanit</p>
+    <input id="age" value="18">
+    <button onclick="manish()">try it</button>
+    <p id="d1"></p>
+    <p id="d2"></p>
+
+    <input type="text" id="input1">
+    <button onclick="mdhv()" >try it</button>
+    <p id="output"></p>
+    <p id="d3"></p>
+
+    <h2>javascript math.random()</h2>
+    <p id="d4"></p>
+    
+    <p id="demo"></p>
+    <script>
+            function manish(){
+            let voteable;
+            let age = Number(document.getElementById("age").value);
+            if (isNaN(age)) {
+                voteable = "Input is not a number";
+            } 
+            else {
+                voteable = (age < 18) ? "Too young" : "Old enough";
+            }
+                document.getElementById("d1").innerHTML = voteable + " to vote";
+            }
+            
+        
+            function mdhv(){
+                let hour = Number(document.getElementById("input1").value);
+                let message = "";
+                
+                if(hour>=7&&hour<=11){
+                    // console.log(i);
+                    message = "Good Morning";
+
+
+                }
+                else if (hour>=12&&hour<=17){
+                    message ="Good Afternoon";
+
+                }
+                else if(hour>=18&&hour<=19){
+                     message ="good Evening";
+                }
+                else if ((hour >= 19 && hour <= 23) || (hour >= 0 && hour < 7)) {
+                    message = "Good Night";
+                } 
+                else{
+                    document.getElementById('input1').innerHTML="good night"
+                }
+                 document.getElementById("output").innerHTML = message;
+            }
+            
+            let text;
+            if(Math.random()<0.5){
+                  text = "<a href='https://w3schools.com'>Visit W3Schools</a>";
+
+            }
+            else {
+                 text = "<a href='https://wwf.org'>Visit WWF</a>";
+                 }
+            document.getElementById("d4").innerHTML = text;
+
+            let price = 10;
+            let isMember = true;
+            let discount = isMember ? 0.2 : 0;
+            let total = 10 - (price * discount)
+
+            document.getElementById("demo").innerHTML = "The price is " + total;
+</script>
+    </script>
+</body>
+</html>
