@@ -16,6 +16,9 @@
     <h1>gender</h1>
     <h1>digree</h1>
     <h1></h1> -->
+    <button onclick="plus()">+</button>
+<button onclick="minus()">-</button>
+
     <script>
         // document.getElementById("photo").addEventListener("change", function () {
         //     let file = this.files[0];   // user selected file
@@ -132,12 +135,13 @@
             for (let b = 0; b < ram.length; b++) {
                 document.write("<td>" + ram[a][b] + "</td>");
             }
-            // document.write(ram[a]);
+            // docu ment.write(ram[a]);
             document.write("</tr>");
         }
         document.write("</table>");
         // document.createElement(ram)
 
+        // aya thi array na consept chalu thay chhe 
         var ram = ["ram", 10, "dhvanit"];
         document.write(ram + "<br>");
         ram[1] = 12;
@@ -238,8 +242,8 @@
         document.write(dr + " <br>");
         var ld = dn.some(functionname);
         document.write(ld + "<br>");
-        function functionname(age) {
-            return age >= 21;
+        function functionname(age){
+        return age >= 21;
         }
 
         // every
@@ -249,8 +253,8 @@
         document.write(dr + " <br>");
         var ld = dn.every(functionname);
         document.write(ld + "<br>");
-        function functionname(age) {
-            return age >= 15;
+        function functionname(age){
+        return age >= 15;
         }
 
         //  find no use evo thay ke jo koy
@@ -262,7 +266,7 @@
         var dk = as.find(man);
         document.write(dk + "<br>");
         function man(dd) {
-            return dd >= 1
+        return dd >= 1
         }
 
         var aso = ["10", "19", "14", "15"]
@@ -270,7 +274,7 @@
         var dr = aso.findIndex(man)
         document.write(dr + "<br>");
         function man(dl) {
-            return dl >= 12
+        return dl >= 12
         }
 
         // function print() {
@@ -285,7 +289,7 @@
         var ll = ad.filter(dhvan);
         document.write(ll + "<br>");
         function dhvan(age) {
-            return age < 20;
+        return age < 20;
         };
 
         var rd = ["20", "30", "19", "33", "24"];
@@ -296,45 +300,61 @@
         function raja(data) {
             return data <= 20;
         }
-
-        // let url = "https://jsonplaceholder.typicode.com/users";
-
-
-        // fetch(url)
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data); // API data
-        //     })
-        //     .catch(error => console.error("Error:", error));
-
-        // fetch(url)
-        //     .then(response => {
-        //         if (!response.ok) {
-        //             throw new Error("Network response was not OK");
-        //         }
-        //         return response.json();
-        //     })
-        //     .then(users => {
-        //         console.log("Users:", users);
-        //         users.forEach(user => {
-        //             document.body.innerHTML += `<p>${user.name} — ${user.email}</p>`;
-        //         });
-        //     })
-        //     .catch(error => {
-        //         console.error("Fetch Error:", error);
-        //     });
-
             var a = ["Dhvanit","Ram","chintan","hiten"];
             document.write(a +"<br>");
             var sd = a.join("       <br>")
             document.write(sd +"<br>") ;
 
-            a.toString();
-            document.write(a+"<br>");
-            
+            a.toString();               
+            document.write(a+"<br>");           
+
             var asa = ["Dhvanit","Ram","chintan","hiten"];
             // valueof(asa);
 
+            const add = (a, b) => a + b;
+            document.write(add +"<br>");
+
+            // forEach thi data kevi rite print karavu 
+
+            var a = ["ram","dada","papa","bhai","sister"];
+
+            a.forEach(function(datar){
+                document.write(datar +"<br>"+"<br>"+"<br>");
+            })
+            
+
+            
+
+            // aya thi object chalu thay chhe kevi rite object no use thay te badhu ani niche chhe 
+
+            var obje = {
+                name : 'dhvanit',
+                last : 'patel',
+                age  :  24,
+                email :'pdhvanit81@gmail.com',
+                // time : date.time(),
+                data : ["ram","dhvanit","hiten"],
+                data1 : {
+                    name : "hiten",
+                    last : 'patel',
+                    age : 25,
+                    email : "hiten81@gmail.com",
+                },
+                name1 : function(){
+                    return this.name + "" +" "+ this.last
+                },
+                data2 :  
+                        function(){
+                        return this.data1.name + " " + " " +this.data1.last 
+                    
+                },
+                
+            };
+            
+            document.write(obje.name1() +"<br>");
+            console.log(obje);
+            document.write(obje.data1.email +"<br>");
+            document.write(obje.data2());
     </script>
 </body>
 

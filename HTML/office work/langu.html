@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Language Change</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 80px;
+    }
+    button {
+      padding: 8px 15px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Welcome</h1>
+  <p id="desc">This is a demo text</p>
+
+  <button onclick="changeLang('en')">English</button>
+  <button onclick="changeLang('hi')">Hindi</button>
+  <button onclick="changeLang('gu')">Gujarati</button>
+
+  <script>
+    const language = {
+      en: {
+        title: "Welcome",
+        desc: "This is a demo text"
+      },
+      hi: {
+        title: "स्वागत है",
+        desc: "यह एक डेमो टेक्स्ट है"
+      },
+      gu: {
+        title: "સ્વાગત છે",
+        desc: "આ એક ડેમો લખાણ છે"
+      }
+    };
+
+    function changeLang(lang) {
+      document.getElementById("title").innerText = language[lang].title;
+      document.getElementById("desc").innerText = language[lang].desc;
+    }
+  </script>
+
+</body>
+</html>
