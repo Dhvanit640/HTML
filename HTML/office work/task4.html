@@ -328,33 +328,79 @@
             // aya thi object chalu thay chhe kevi rite object no use thay te badhu ani niche chhe 
 
             var obje = {
-                name : 'dhvanit',
-                last : 'patel',
-                age  :  24,
+                name  : 'dhvanit',
+                last  : 'patel',
+                age   :  24,
                 email :'pdhvanit81@gmail.com',
                 // time : date.time(),
-                data : ["ram","dhvanit","hiten"],
+                data  : ["ram","dhvanit","hiten"],
                 data1 : {
-                    name : "hiten",
-                    last : 'patel',
-                    age : 25,
+                    name  : "hiten",
+                    last  : 'patel',
+                    age   :  25,
                     email : "hiten81@gmail.com",
                 },
                 name1 : function(){
-                    return this.name + "" +" "+ this.last
+                    return this.name + " " + " " + this.last
                 },
                 data2 :  
                         function(){
-                        return this.data1.name + " " + " " +this.data1.last 
-                    
-                },
+                        return this.data1.name + " " + " " +this.data1.last    
+                },      
                 
             };
             
             document.write(obje.name1() +"<br>");
             console.log(obje);
             document.write(obje.data1.email +"<br>");
-            document.write(obje.data2());
+            document.write(obje.data2() +"<br>");
+
+
+            // object lakhava ni new rit aavi rite pan object lakhi sakiye chhi 
+            var ram = new Object();
+            ram.firstName = "chintan";
+            ram.lastName = "vansjaliya";
+            ram.age = "24";
+            ram.village = "dhrol";
+            console.log(ram);
+
+
+            // array of Object
+
+            var student = [
+                {Name : "ram" , age : 24},
+                {Name : "Karam" , age : 16},
+                {Name : "Rahul" , age : 14},
+            ];
+            console.log(student);
+            document.write(student +"<br>");
+            // array ne print karva mate for loop ni jarur pade chhe 
+            for(var a = 0; a<student.length; a++){
+                document.write(student[a].Name + " "  + student[a].age + " " +"<br>" );
+            };
+
+            // const ni andar kevi rite value asain kari sakiye dusari bar array ni madad thi thay chhe 
+
+            const aaa = [10,20,30];
+            console.log(aaa);
+            aaa[1] = 25;
+            aaa[2] = 35;
+            console.log(aaa);
+            // niche biji var difine kari sakiye chhie aavi rite 
+
+            // object thi pan value chek thay sake chhe 
+
+            const bbb = {
+                name : "Dhvanit",
+                age : "24",
+            }
+
+            bbb.name = "Ram"
+            bbb.age = 90
+            console.log(bbb);
+            bbb.name = "Hiten"
+            bbb.age = 80;
+            console.log(bbb);
     </script>
 </body>
 
