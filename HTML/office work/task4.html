@@ -141,6 +141,8 @@
         document.write("</table>");
         // document.createElement(ram)
 
+
+
         // aya thi array na consept chalu thay chhe 
         var ram = ["ram", 10, "dhvanit"];
         document.write(ram + "<br>");
@@ -151,16 +153,16 @@
 
         var rama = ["hiten", "yash", "meet"];
         document.write(rama + "<br>");
-        // sort() line ma gothave chhe 
+        // sort() line ma gothave chhe , abcd pramane line ma gothave chhe
         rama.sort();
         document.write(rama + "<br>");
-        // reverse array ne ulati kari nakhe chhe 
+        // reverse array ne ulati kari nakhe chhe , abcd pramane line ne ulati kari nakhe chhe 
         rama.reverse();
         document.write(rama + "<br>");
-
+        var mm = ["dd","hh","ss"]
         // pop last ma je array hoy chhe tene hatavi nakhe chhe
-        rama.pop();
-        document.write(rama + "<br>");
+        mm.pop();
+        document.write(mm + "<br>");
         // push("ram") last ma value add kare chhe  
         rama.push("ram");
         document.write(rama + "<br>");
@@ -182,29 +184,29 @@
         // CONCAT
         // concat() badha veriabal ne joint kare chhe 
         var b = ["yesh", "Dhvanit", "ram"];
-        var c = ["gami", "vansjaliya"];
+        var c = ["gami", "vansjaliyaaaa"];
         var d = b.concat(c);
         document.write(d + "<br>");
 
         // JOIN
-        // join() no matalab e chhe ki array mathi streing ma badale and bane variyabal ne join kare 
-        var e = d.join(" / ");
+        // join() no matalab e chhe ki array mathi streing mathe badale and bane variyabal ne join kare 
+        var e = d.join(" /// ");
         document.write(e + "<br>");
 
-        // SLICE
+        // SLICE no use e thay chhe ke je number thi start karvu hoy te number nakhiye to te index number thi start kare chhe 
         var a = ["chintan", "uday", "meet", "aniket", "nayan"];
         document.write(a + "<br>");
-        var b = a.slice(1);
+        var b = a.slice(3);
         document.write(b + "<br>");
 
-        // splice
+        // splice apane je index pase new index banavi hoy tiya index number lakhi ne new name lagavi sakiye chhiye vache hamesa index 0 lagavavi 
         var aa = ["a", "b", "c"];
         document.write(aa + "<br>");
-        aa.splice(1, 0, "d");
+        aa.splice(2, 0, "g");
         document.write(aa + "<br>");
 
-        // ISARRAY
-        var cd = ["m", 'd'];
+        // ISARRAY aaray chek kare chhe if else ni condistion thi 
+        var cd = ["ram", "dada"];
         document.write(cd + "<br>");
         var ba = Array.isArray(cd);
         document.write(ba + "<br>");
@@ -265,22 +267,21 @@
         document.write(as + "<br>");
         var dk = as.find(man);
         document.write(dk + "<br>");
-        function man(dd) {
+        function man(dd){
         return dd >= 1
         }
 
-        var aso = ["10", "19", "14", "15"]
+        // findIndex no use  tema evu batave chhe ke condition par element ni position shodhvi
+        // jo moti sankhiya hoy koy nani sakjiya pela to tiya j rokay jay chhhe te te index number pass kari aape chhe
+        var aso = ["10", "13", "14", "15"]
         document.write(aso + "<br>");
         var dr = aso.findIndex(man)
         document.write(dr + "<br>");
-        function man(dl) {
-        return dl >= 12
+        function man(dl){
+        return dl >= 14
         }
 
-        // function print() {
-        window.print
-        // }
-
+        
 
         var ad = ["23", "10", "26", "20"];
 
@@ -347,7 +348,7 @@
                         function(){
                         return this.data1.name + " " + " " +this.data1.last    
                 },      
-                
+                       
             };
             
             document.write(obje.name1() +"<br>");
@@ -388,20 +389,60 @@
             console.log(aaa);
             // niche biji var difine kari sakiye chhie aavi rite 
 
-            // object thi pan value chek thay sake chhe 
+            // object thi pan value cheng thay sake chhe  
 
             const bbb = {
                 name : "Dhvanit",
                 age : "24",
             }
 
-            bbb.name = "Ram"
-            bbb.age = 90
+            bbb.name = "Ram",
+            bbb.age = 90,
             console.log(bbb);
-            bbb.name = "Hiten"
+            bbb.name = "Hiten",
             bbb.age = 80;
             console.log(bbb);
+                                                                      
+            // for/in loop kai rite use thay js ma object ne pan ek var ma print kari sakiye chhi 
+            // jem ke exp 
+                // for/in loop thi singal var ma o  bject ne print kari sakiye chhi 
+                // ama variyabal ni kee value pan lai sakiye chhi
+            var obj = {
+                name : "manthan",       
+                lastname : "chhatrola", 
+                age : "24",                 
+                email : "pdhvanit81@gmail.com", 
+            }                               
+            for(var key in obj){
+                document.write(key+"  " + ":" + "  "+obj[key]+"<br>")
+            }                                 
+                
+            // array -map() function: kese use hota he 
+            // new array banavi sakay chhe map function thi
+
+            var asd = [10,20,30];
+
+            var dsa = asd.map(test1);
+            document.write(dsa +"<br>");
+
+            function test1(x){
+                return  x*10
+            };
+
+            var dd =[
+                {fname : "SHITA" , lname : "RAM"},
+                {fname : "DHVANIT" , lname : "HITEN"},
+                {fname : "CHINTAN" , lname : "SAVAN"},
+            ]
+            document.write(dd +"<br>");
+            var s_d = dd.map(task);
+            document.write(s_d);
+            function task(m){
+                return m.fname + " <br> " + m.lname
+            }
+
+
     </script>
 </body>
 
-</html>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
