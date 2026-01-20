@@ -281,16 +281,14 @@
         return dl >= 14
         }
 
-        
 
+        // filter nou use te thay chhe ke je tame sankhiya sarch karva magta hoy te athava tena karta nani sankhiya badhi avi jay chhe te sankhiya hoy to te and tena karta nani sankhiya hoy chhe te bane avi jay chhe 
         var ad = ["23", "10", "26", "20"];
-
         document.write(ad + "<br>");
-
         var ll = ad.filter(dhvan);
         document.write(ll + "<br>");
         function dhvan(age) {
-        return age < 20;
+        return age <= 23;
         };
 
         var rd = ["20", "30", "19", "33", "24"];
@@ -301,11 +299,12 @@
         function raja(data) {
             return data <= 20;
         }
+
+            // toString no use JavaScript ma toString() no use koi pan value ne string ma convert karva mate thay chhe.
             var a = ["Dhvanit","Ram","chintan","hiten"];
             document.write(a +"<br>");
-            var sd = a.join("       <br>")
-            document.write(sd +"<br>") ;
-
+            var sd = a.join()
+            document.write(sd +"<br>");
             a.toString();               
             document.write(a+"<br>");           
 
@@ -344,8 +343,7 @@
                 name1 : function(){
                     return this.name + " " + " " + this.last
                 },
-                data2 :  
-                        function(){
+                data2 : function(){
                         return this.data1.name + " " + " " +this.data1.last    
                 },      
                        
@@ -387,11 +385,14 @@
             aaa[1] = 25;
             aaa[2] = 35;
             console.log(aaa);
+            document.write(aaa +"<br>");
             // niche biji var difine kari sakiye chhie aavi rite 
 
             // object thi pan value cheng thay sake chhe  
 
-            const bbb = {
+            // object ne shwo karva mate for loop ni jarur pade chhe baki displey ma only [object object ] lakhay ne ave chhe 
+
+            const bbb =  {
                 name : "Dhvanit",
                 age : "24",
             }
@@ -399,8 +400,10 @@
             bbb.name = "Ram",
             bbb.age = 90,
             console.log(bbb);
+             document.write(bbb +"<br>");
             bbb.name = "Hiten",
             bbb.age = 80;
+             document.write(bbb +"<br>");
             console.log(bbb);
                                                                       
             // for/in loop kai rite use thay js ma object ne pan ek var ma print kari sakiye chhi 
@@ -421,7 +424,6 @@
             // new array banavi sakay chhe map function thi
 
             var asd = [10,20,30];
-
             var dsa = asd.map(test1);
             document.write(dsa +"<br>");
 
@@ -438,10 +440,10 @@
             var s_d = dd.map(task);
             document.write(s_d);
             function task(m){
-                return m.fname + " <br> " + m.lname
+            return m.fname + " <br> " + m.lname
             }
 
-
+            
     </script>
 </body>
 

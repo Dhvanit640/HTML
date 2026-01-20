@@ -12,11 +12,12 @@
     <!-- 1) length ano use proprty chek karva ma thay chhe ke ketalu lambo chhe array akho couver kare chhe 
     2) toLowerCase()==> ano use apane akhi line ne small word ma lakhi sakiye chhiye 
     3) toUpperCase()==> ano use apane akhi line capital word ma use kari sakiye chhi 
-    4) includes () ==> 
-    5) startsWith()
-    6) endWith()
-    7) search()
-    8) match()
+    4) includes () ==> ano use akha streing mathi koy pan word goti sakiye chhiye teno answer true / false ma aave chhe 
+    5) startsWith() ==> pela word thi start karo athava vachethi start karo to last ma index number lakhva jaruri chhe answer true and false ma avse
+                        string start kyathi thay chhe te check kare
+    6) endsWith() ==> no use evo chhe ke last ma koy word chek karva no hoy chhe jem ke (.com  .in  url file password) aavi jagiyaye use thay chhe 
+    7) search() ==> Aa method position (index) return kare chhe. koy pan name sarch kariye to index ma je no hoy te number aave chhe 
+    8) match() 
     9) indexOf()
     10) lastIndexOf()
     11) replace()
@@ -38,9 +39,11 @@
     // length in use 
     // aa total word no count kare chhe and vache gap aave teno pan count kare chhe total number api diye chhe 
     var str = "javascript HITEN DHVANIT";  
+
     // toLowerCase no use small word ma kari sakiye chhi 
     var a = str.toLowerCase();
-    document.write(a +"<br>") ;
+    document.write(a +"<br>");
+
     // toUpperCase no use apane capital word ma kari sakiye chhi 
     var a = str.toUpperCase();
     document.write(a +"<br>");
@@ -53,8 +56,33 @@
         var sed = "Vansjaliya Dhvanit is a Great";
         var wed = sed.includes("is");
         document.write(sed +"<br>");
-        document.write(wed +"<br>")
-    
+        document.write(wed +"<br>");
+                
+        // startsWith() no use evo chhe ke streing ma akhu sachu name lakhavanu hoy chhe and te first name thi j start thatu hoy to j true avase baki fulse 
+        //    jo last ma index number aapi day to te samji jay chhe ke tiya thi start karva nu hoy chhe tema spes ni pan ganatari kari leva ni 
+        var mm = "Dhvanit Vansjaliya";
+        var dd = mm.startsWith("Vansjaliya",8);
+        document.write(dd +"<br>");
+
+        // endWith() use pachal ni line chek karva mate thay chhe jem ke com in aavi badhi jagiyaye thay chhe jema mail file url password aavu badhu cek karva mate use thay chhe   
+        var mail = "pdhvanit81@.gmail.com";
+        var chek = mail.endsWith("com");
+        document.write(chek +"<br>");
+
+        // search() no use index number batave chhe je word sarch kariye teno agal no index batave chhe 
+        var name = "Dhvanit Vans jal iya";
+        var ch = name.search("iya");
+        document.write(ch +"<br>");
+
+        // match() no use koy pan word search karva mate thay chhe jo te word index ma hoy to j batave chhe baki null avi jase  
+        var fname = "Dhvanit Vansjaliya"
+        var last = fname.match("Vaaa");
+        document.write(last +"<br>");
+        let text = "I love JavaScript";
+        let result = text.match("love");
+        document.write(result);
+
+
 
     </script>
 
