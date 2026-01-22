@@ -17,21 +17,21 @@
                         string start kyathi thay chhe te check kare
     6) endsWith() ==> no use evo chhe ke last ma koy word chek karva no hoy chhe jem ke (.com  .in  url file password) aavi jagiyaye use thay chhe 
     7) search() ==> Aa method position (index) return kare chhe. koy pan name sarch kariye to index ma je no hoy te number aave chhe 
-    8) match() 
-    9) indexOf()
-    10) lastIndexOf()
-    11) replace()
-    12) trim()
-    13) charAt()
-    14) charcodeAt()
-    15) fromCharCode()
-    16) concat()
-    17) split()
-    18) repeat()
-    19) slice()
-    20) substr()
-    21) substring()
-    22) toString()
+    8) match() ==> index ni ander koy word hoy tene search karvo hoy to j karva mate thay chhe 
+    9) indexOf()==> no use JavaScript ma string ane array banne ma use thay chhe. koy pan word ya aksar no index number aapi diye chhe sem two word hoy chhe to first number no index batave chhe
+    10) lastIndexOf() ==> akha word no index nuber batave chhe 
+    11) replace()==> koy pan word ne cheng kari ne new word lakhi sakiye 
+    12) trim()==> aagal pachal ni spes hatave chhhe 
+    13) charAt()==> Us index number nakhi new word sodhi sakiye chhiye
+    14) charcodeAt()==> no use unic code finde karva mate thay chhe aano use ghani badhi jagiyaye thay chhe
+    15) fromCharCode() == > niche lakhelu chhe 
+    16) concat()==> no use bane variybal ne joint kare chhe aaray ma pan use thay chhe 
+    17) split()==>no use vache dot lagava ke alag alag sing karva mate use thay chhe split no 
+    18) repeat()==> koy pan word chhe ya koy pan loop ne repeat karva mate use thay chhe
+    19) slice()==> ano use evo thay chhe ke tame koy pan index number aapo chho to tiyathi start thay chhe name
+    20) substr()==> koy pan word ne kiya thi start karvo and kiya stop karvo tevo use thay chhe 
+    21) substring()==> in use ama two index no use kari sakiye chhiye peli index ma apane kiya thi start karvu and second index ma apane kiya lagi chalavi tevo use thay chhe
+    22) toString()==> toString() koi pan value ne string ma convert karva mate use thay chhe.
     23) valueOf() -->
     
     <script>
@@ -78,12 +78,97 @@
         var fname = "Dhvanit Vansjaliya"
         var last = fname.match("Vaaa");
         document.write(last +"<br>");
+
         let text = "I love JavaScript";
         let result = text.match("love");
-        document.write(result);
+        document.write(result +"<br>");
 
+        // indexOf() no use JavaScript ma string ane array banne ma use thay chhe. koy pan word ya aksar no index number aapi diye chhe sem two word hoy chhe to first number no index batave chhe
+         var dada = "Dhvanit Patel";
+         var pp = dada.indexOf("a");
+         document.write(pp +"<br>");
 
+         var name = ["Dhvanit","hiten","chintan","savan"];
+         var name2 = name.indexOf("");
+         document.write(name2 +"<br>");
 
+        //  lastIndexOf() akha word no index number batave chhe 
+         var abcd = ["dada","papa","beta","bhai","hiten"];
+         var out = abcd.lastIndexOf("hiten",);
+         document.write(out +"<br>");
+
+        //  replace() koy pan word cheng karvo hoy to replace thi thay chhe
+        var name = ["apple","mango","banna","Dhvanit"]
+        var cheng = name.replace("apple","hiten")
+        document.write(cheng +"<br>");
+
+        // trim() no use String ni aagal (start) ane pachaḷ (end) ni extra space (white space) door karva mate use thay chhe.
+        var spes = "   dhvanit hiten    "
+        document.write(spes +"<br>");
+        var dog = spes.trim("");
+        document.write(dog +"<br>");
+
+        // charAt() no Us index number nakhi new word sodhi sakiye chhiye 
+         var name = "Vansjaliya Dhvanit"
+         var lname = name.charAt("11");
+         document.write(lname +"<br>");
+
+        //  charcodeAt() no use unic code finde karva mate thay chhe aano use ghani badhi jagiyaye thay chhe
+        // A–Z → 65 to 90 and a–z → 97 to 122 and 0–9 → 48 to 57
+        let cha = "A";
+        let code = cha.charCodeAt(1);
+        if (code >= 48 && code <= 57){ 
+            document.write("Capital letter");
+        }
+        else{
+            document.write("small letter" +"<br>");
+        }
+
+        // concat() no use bane varaibal ne joint kare chhe
+        var fname = "Dhvanit";
+        var lname = "Vansjaliya"
+        var joint = fname.concat(lname);
+        document.write(joint +"<br>");
+
+        // split() no use vache dot lagava ke alag alag sing karva mate use thay chhe split no 
+        var l = "i love ram";
+        var a = l.split("");
+        document.write(a +"<br>");
+
+        // repeat() no use koy pan word ne repeat karva mate thay chhe 
+        var repeat = "ram";
+        var name = repeat.repeat(5);
+        document.write(" "+name +"<br>");
+        var l = "*";
+        for (let i = 1; i <= 5; i++){
+                document.write(l.repeat(i)+"<br>");   
+            }
+                        
+        // slice() no use tema evu chhe ke tame je index number nakhiye chhi to te number ni index number thi je word hoy chhe te word thi name batave chhe 
+        var first = "Dhvanit";
+        var last   = first.slice(2);
+        document.write(last +"<br>");
+        // output - vanit  
+
+        // substr()in use koy pan word ne kiya thi ketale lagi use karvo teno index number nakhi ne teno use kari sakiye chhi 
+        var name = "Vansjaliya";
+        var retu = name.substr(0,10);
+        document.write(retu +"<br>");
+
+        // substring() in use ama two index no use kari sakiye chhiye peli index ma apane kiya thi start karvu and second index ma apane kiya lagi chalavi tevo use thay chhe
+        var lname = "Vansjaliya Dhvanit";
+        var re = lname.substring(9);
+        document.write(re +"<br>");
+            
+        // toString() koi pan value ne string ma convert karva mate use thay chhe. ek JavaScript method chhe je koi pan value ne string (text) ma convert kare chh
+        var num = 123;
+        var str = num.toString();
+        document.write(str +"<br>");
+        console.log(num);
+        
+        
+
+            
     </script>
 
 </body>
