@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic API Integration</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            box-shadow: 0 0 5px gray;
+        }
+    </style>
+</head>
+<body>
+
+<h1>👨‍💻 User Data from API</h1>
+
+<div class="container" id="userData">
+    <!-- API data will come here -->
+</div>
+
+<script>
+    // STEP 1: API URL (string)
+    let apiUrl = "https://jsonplaceholder.typicode.com/users";
+
+    // STEP 2: fetch API
+    fetch(apiUrl)
+        .then(function(response) {
+            return response.json();   // convert to JSON
+        })
+        .then(function(data) {
+            // data = array of objects
+            showUsers(data);
+        });
+
+    // STEP 3: function to display data
+    function showUsers(users) {
+
+        let output = "";
+
+        // STEP 4: loop through array
+        users.forEach(function(user) {
+
+            output += `
+                <div class="card">
+                    <h3>${user.name}</h3>
+                    <p>Email: ${user.email}</p>
+                    <p>City: ${user.address.city}</p>
+                </div>
+            `;
+        });
+
+        // STEP 5: show on screen
+        document.getElementById("userData").innerHTML = output;
+    }
+</script>
+
+</body>
+</html>

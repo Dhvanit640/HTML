@@ -12,7 +12,7 @@
     <!-- 1) length ano use proprty chek karva ma thay chhe ke ketalu lambo chhe array akho couver kare chhe 
     2) toLowerCase()==> ano use apane akhi line ne small word ma lakhi sakiye chhiye 
     3) toUpperCase()==> ano use apane akhi line capital word ma use kari sakiye chhi 
-    4) includes () ==> ano use akha streing mathi koy pan word goti sakiye chhiye teno answer true / false ma aave chhe 
+    4) includes() ==> ano use akha streing mathi koy pan word goti sakiye chhiye teno answer true / false ma aave chhe 
     5) startsWith() ==> pela word thi start karo athava vachethi start karo to last ma index number lakhva jaruri chhe answer true and false ma avse
                         string start kyathi thay chhe te check kare
     6) endsWith() ==> no use evo chhe ke last ma koy word chek karva no hoy chhe jem ke (.com  .in  url file password) aavi jagiyaye use thay chhe 
@@ -32,7 +32,7 @@
     20) substr()==> koy pan word ne kiya thi start karvo and kiya stop karvo tevo use thay chhe 
     21) substring()==> in use ama two index no use kari sakiye chhiye peli index ma apane kiya thi start karvu and second index ma apane kiya lagi chalavi tevo use thay chhe
     22) toString()==> toString() koi pan value ne string ma convert karva mate use thay chhe.
-    23) valueOf() -->
+    23) valueOf() ==> --> 
     
     <script>
 
@@ -159,12 +159,19 @@
         var lname = "Vansjaliya Dhvanit";
         var re = lname.substring(9);
         document.write(re +"<br>");
-            
+
         // toString() koi pan value ne string ma convert karva mate use thay chhe. ek JavaScript method chhe je koi pan value ne string (text) ma convert kare chh
         var num = 123;
         var str = num.toString();
         document.write(str +"<br>");
         console.log(num);
+        
+
+        // valueOf() in use ama evu chhe ke je value hoy chhe te j return kare chhhe biju kai cheng nay thatu 
+        // Object mathi actual value medavva String, Number, Date, Boolean ni real value lavva Calculation ane comparison ma madad karva
+        var num = new Number(100);
+        document.write(num.valueOf());
+        
         
         
 
