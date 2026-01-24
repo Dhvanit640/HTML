@@ -1,75 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Basic API Integration</title>
+    <title>User Data Store API</title>
 
     <style>
         body {
             font-family: Arial;
-            background: #f2f2f2;
+            background: #f4f4f4;
         }
 
         h1 {
             text-align: center;
         }
 
-        .container {
-            width: 80%;
+        .box {
+            width: 400px;
             margin: auto;
-        }
-
-        .card {
             background: white;
             padding: 15px;
-            margin: 10px 0;
-            border-radius: 6px;
-            box-shadow: 0 0 5px gray;
+            border-radius: 5px;
+        }
+
+        input, button {
+            width: 350px;
+            padding: 8px;
+            margin: 8px 0;
+        }
+
+        .list {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .card{
+            background: white;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-<h1>👨‍💻 User Data from API</h1>
+<h1>👤 User Data Store (API)</h1>
 
-<div class="container" id="userData">
-    <!-- API data will come here -->
+<div class="box">
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="email" id="email" placeholder="Enter Email">
+    <button onclick="saveUser()">Save User</button>
 </div>
 
+<div class="list" id="userList"></div>
+
 <script>
-    // STEP 1: API URL (string)
     let apiUrl = "https://jsonplaceholder.typicode.com/users";
 
-    // STEP 2: fetch API
-    fetch(apiUrl)
-        .then(function(response) {
-            return response.json();   // convert to JSON
+    // POST DATA (Store)
+    function saveUser() {
+
+        let userData ={
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+        };
+
+        fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(userData)
         })
-        .then(function(data) {
-            // data = array of objects
+        console.log(apiUrl)
+        .then(res => res.json())
+        .then(data => {
+            alert("User Saved Successfully");
+            loadUsers();
+        });
+    }
+
+    // GET DATA (Show)
+    function loadUsers(){
+        fetch(apiUrl)
+        .then(res => res.json())
+        .then(data => {
             showUsers(data);
         });
+    }
 
-    // STEP 3: function to display data
     function showUsers(users) {
-
         let output = "";
 
-        // STEP 4: loop through array
-        users.forEach(function(user) {
-
+        users.forEach(user => {
             output += `
                 <div class="card">
-                    <h3>${user.name}</h3>
-                    <p>Email: ${user.email}</p>
-                    <p>City: ${user.address.city}</p>
+                    <b>Name:</b>  ${user.name}<br>
+                    <b>Email:</b> ${user.email}
                 </div>
             `;
         });
-
-        // STEP 5: show on screen
-        document.getElementById("userData").innerHTML = output;
+        document.getElementById("userList").innerHTML = output;
     }
+
+    loadUsers();
 </script>
 
 </body>
