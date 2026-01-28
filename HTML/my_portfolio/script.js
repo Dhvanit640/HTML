@@ -49,8 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const subject = document.getElementById('subject').value || 'Portfolio Contact';
             const message = document.getElementById('message').value;
             
-            const mailtoLink = `mailto:your.pdhvanit81@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-            
+            // const mailtoLink = `mailto:your.pdhvanit81@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            const mailtoLink = `mailto:pdhvanit81@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+
             window.location.href = mailtoLink;
             
             // Reset form   
