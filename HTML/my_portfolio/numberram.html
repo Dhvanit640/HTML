@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+     1) number()==> number ni method thi koy pan value ne string mathi number ma cheng kari sakiye chhi 
+     2) parseInt()==>fisrt values j return kare chhe biji koy pan value return karti nathi
+                    // and koy number sivay na word use thato nathi baki output NaN avi jase 
+     3) parseFloat() ama badhu retune kare chhe and point vada eliment retun kare chhe
+     4) isFinite() number j ave to j true ave chhe baki false ave chhe pachi game te number hoy - hoy ke point ma hoy to pan hale chhe and jo koy word lakhiye chhe to te retun false ape chhe 
+     5) islnteger() koy pan value number nakhi sakati nathi jem ke point vadi value false ave chhe and baki badhi value true ave chhe and string value pan nathi nakhi sakati 
+                    and ane lakhva ni trik  var d =Number.isInteger(a); avi rite batavi sakay chhe
+     6) toFixed(x)==>ano use evo thay chhe ke point pachi ni apane jetali value levi hoy tetali value j lai sakiye chhi 
+     7) toprecision(x)==> ama evu hoy chhe ke tame intger ma point pachi ketala number ketala leva mago chho te number nakhi sako chho jo tamare 2 number joye chhe to tamare 3 lakhavu pade che 
+                        baki jo tame 2 lakho chho to 1 j pass karse point pachi 
+     -->
+
+     <script>
+        // Number method koy pan number ne string mathi cheng kari sakiye chhiye 
+        var a = "99";
+        var b = Number(a);
+        document.write(b+10 + "<br>");
+
+        // parselnt() fisrt values j return kare chhe biji koy pan value return karti nathi
+        // and koy number sivay na word use thato nathi baki output NaN avi jase 
+        var s = "91 12";
+        var z = parseInt(s);
+        document.write(z +"<br>");
+
+        // parseFloat()
+        var aa = "23.13";
+        var zz = parseFloat(aa);
+        document.write(zz +"<br>");
+
+        // isFinite()
+        var a = 100;
+        document.write(a +"<br>");
+        var d = isFinite(a);
+        document.write(d +"<br>");
+
+        // islnteger()
+        var a = 200;
+        document.write(a +"<br>");
+        var d =Number.isInteger(a);
+        document.write(d +"<br>");
+
+        // toFixed(x)
+        var a = 4.561;
+        document.write(a + "<br>");
+        var d =a.toFixed(2);
+        document.write(d +"<br>");
+
+        // toprecision(x)
+        var a = 4.561;
+        document.write(a + "<br>");
+        var d =a.toPrecision(2);
+        document.write(d +"<br>");
+        
+     </script>
+</body>
+</html>
