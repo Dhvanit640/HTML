@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+    date methods
+    1) toDatestring() ==> ama only day month date and year j print thay chhe baki kasu avatu nathi
+    2) getDate() ==> ama only date show kare chhe baki kasu nai aave month ke year ke day ke kai j nai
+    3) getFullYear() ==> ama only year j show kare chhe 
+    4) getMonth()   ==> ama only month batave chhe and month 0 thi start thay chhe
+    5) getDay() ==> ama only day batave chhe and day ma pan 0 thi chalu thay chhe 
+    6) getHours() ==> ama only time batave chhe pan ama khali kalak batave chhe 
+    7) getMinutes() ==> ama only minutes batave chhe biju kasu j nai
+    8) getSeconds() ==> ama only Seconds batave chhe 
+    9) getMilliseconds() ==> ama only millseconds batave chhe te 0 thi 999 ni vache aave chhe
+    10)setDate() ==> onlay date silect kari sakiye and day and year pan avijay chhe 
+    11)setFullyear() ==> ama year cheng kari sakiye chhi 
+    12)setHours() ==> ama hours cheng kari sakiye chhi 
+    13)setMillseconds() ama apane past nu ya agal badhu joy sakiye chhi 
+    14)setMinutes() ama pan sem j chhe upar ni jem 
+    15)setMonth()   chalu monthi count kari sakiye chhi ama pan sem j chhe upar ni jem 
+    16)setSeconds() ama pan sem j chhe upar ni jem
+      -->
+    <script>
+        // todatestring()
+        var a = new Date();
+        document.write("DateString"+" - "+a.toDateString()+"<br>");
+        // output ==> thu jan 29 2026
+
+         // getDate()
+        var a = new Date();
+        document.write("Date"+"-   "+a.getDate() +"<br>");
+        // output ==> 29
+
+        // getFullYear()
+        var a = new Date();
+        document.write("year"+"-"+a.getFullYear()+"<br>");
+        //  output ==> 2026
+
+        // getMonth()
+         var a = new Date();
+        document.write("month"+"- "+a.getMonth()+"<br>");
+        // outpute = 0 je mahino chalu hoy te aave start 0 thi thay chhe
+
+        // getDay()
+        var a = new Date()
+        document.write("Day"+"- "+a.getDay()+"<br>")
+        // outpute = 4
+
+        // getHours()
+        var a = new Date()
+        document.write("Hours"+"- "+a.getHours()+"<br>")
+        // outpute = 16
+
+        
+        // getMinutes()
+        var a = new Date()
+        document.write("Minutes"+"- "+a.getMinutes()+"<br>")
+        // outpute = 27
+
+        // getSeconds()
+        var a = new Date()
+        document.write("Seconds"+"- "+a.getSeconds()+"<br>")
+        // outpute = 27
+
+        // getMilliseconds()
+        var a = new Date();
+        document.write("month"+"- "+a.getMilliseconds() + "<br>");
+        // outpute = 0 thi 999 ni vache ave chhe 
+
+        // setDate()
+        var a = new Date();
+         a.setDate(30);
+        document.write(a +"<br>");
+        
+
+        // setMonth()
+        var a = new Date();
+         a.setMonth(1);
+        document.write(a +"<br>");
+
+        // setFullyear()
+        var aa = new Date();
+         aa.setFullYear(2019);
+        document.write(aa +"<br>");
+
+        // setHours()
+        let d = new Date();
+        d.setHours(1.00);
+        document.write(d + "<br>");
+
+    </script>
+</body>
+</html>
