@@ -69,4 +69,18 @@ var n;
        document.getElementById("dhva").removeAttribute("class");
      
 
+    //    id        document.getElementById()
+    //   class name document.getElementsByClassName()
+    //  tag name    document.getElementsByTagName()
+
+        // querySelector document.querySelector(CSS Selector) aa pela eliment ne j target kare chhe 
+        // querySelectorAll document.querySelectorAll() aa badha eliment ne target kare chhe
+    
+        var d;
+        d=document.querySelector("#dada");
+        console.log(d);
+        d=document.getElementById("dada");
+        console.log(d);
+
+          
 //  document.getElementByI
