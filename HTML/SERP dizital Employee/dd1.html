@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Employees Stats</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:system-ui, Arial, sans-serif;
+}
+
+.zone{
+    background:#f9fcff;
+    padding:70px 20px;
+}
+
+.wrap{
+    max-width:1200px;
+    margin:auto;
+}
+
+.title{
+    text-align:center;
+    font-size:26px;
+    font-weight:600;
+    margin-bottom:50px;
+    color:#111;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+}
+
+/* ===== CARD ===== */
+.box{
+    background:#fff;
+    border-radius:14px;
+    padding:26px 20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.box:hover{
+    transform:translateY(-6px);
+}
+
+/* icon */
+.icon{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 18px;
+    font-size:22px;
+}
+
+/* color variations */
+.pink{ background:#f6eaff; color:#a855f7; }
+.orange{ background:#fff1e9; color:#ff7849; }
+.blue{ background:#eefdff; color:#0ea5e9; }
+.yellow{ background:#fff7df; color:#f59e0b; }
+
+.value{
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:6px;
+    color:#111;
+}
+
+.desc{
+    font-size:14px;
+    color:#555;
+    line-height:1.4;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1000px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:520px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+    .title{
+        font-size:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="zone">
+    <div class="wrap">
+
+        <h2 class="title">
+            Digital Employees help companies operate faster,<br>
+            smarter, and more profitably.
+        </h2>
+
+        <div class="grid">
+
+            <div class="box">
+                <div class="icon pink">👥</div>
+                <div class="value">25–30%</div>
+                <div class="desc">Cost Savings in Procurement Processing</div>
+            </div>
+
+            <div class="box">
+                <div class="icon orange">📅</div>
+                <div class="value">50–80%</div>
+                <div class="desc">Faster Procurement Cycle Times</div>
+            </div>
+
+            <div class="box">
+                <div class="icon blue">📉</div>
+                <div class="value">Up to 23%</div>
+                <div class="desc">Operational & Admin Cost Reduction</div>
+            </div>
+
+            <div class="box">
+                <div class="icon yellow">📄</div>
+                <div class="value">43%</div>
+                <div class="desc">CPOs Backing E-Procurement Automation</div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Feature Cards</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <style>
+        .feature-card {
+            height: 100%;
+            border-radius: 16px;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .feature-img {
+            margin-top: auto;
+            /* PUSH IMAGE TO BOTTOM */
+        }
+
+        .feature-img img {
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-5">
+        <div class="row">
+
+            <!-- CARD 1 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div>
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="56" height="56" rx="16" fill="#3B82F6" fill-opacity="0.1" />
+                            <path
+                                d="M14.5 17.125C14.5 16.5016 15.0016 16 15.625 16H17.7578C18.7891 16 19.7031 16.6 20.1297 17.5H39.3953C40.6281 17.5 41.5281 18.6719 41.2047 19.8625L39.2828 27.0016C38.8844 28.4734 37.5484 29.5 36.025 29.5H22.5016L22.7547 30.8359C22.8578 31.3656 23.3219 31.75 23.8609 31.75H37.375C37.9984 31.75 38.5 32.2516 38.5 32.875C38.5 33.4984 37.9984 34 37.375 34H23.8609C22.2391 34 20.8469 32.8469 20.5469 31.2578L18.1281 18.5547C18.0953 18.3766 17.9406 18.25 17.7578 18.25H15.625C15.0016 18.25 14.5 17.7484 14.5 17.125ZM20.5 37.75C20.5 36.5082 21.5082 35.5 22.75 35.5C23.9918 35.5 25 36.5082 25 37.75C25 38.9918 23.9918 40 22.75 40C21.5082 40 20.5 38.9918 20.5 37.75ZM36.25 35.5C37.4918 35.5 38.5 36.5082 38.5 37.75C38.5 38.9918 37.4918 40 36.25 40C35.0082 40 34 38.9918 34 37.75C34 36.5082 35.0082 35.5 36.25 35.5Z"
+                                fill="#3B82F6" />
+                        </svg>
+
+                    </div>
+                    <h5>Purchase & Procurement</h5>
+                    <p>
+                        Autonomous vendor selection, PO generation,
+                        and bid comparison with zero manual intervention.
+                    </p>
+
+                    <div class="feature-img">
+                        <img src="Purchase & Procurement img.svg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div >
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="56" height="56" rx="16" fill="#A855F7" fill-opacity="0.1"/>
+<path d="M26.125 16H24.25C23.0078 16 22 17.0078 22 18.25V23.5C22 25.1547 23.3453 26.5 25 26.5H31C32.6547 26.5 34 25.1547 34 23.5V18.25C34 17.0078 32.9922 16 31.75 16H29.875V19.75C29.875 20.1625 29.5375 20.5 29.125 20.5H26.875C26.4625 20.5 26.125 20.1625 26.125 19.75V16ZM17.5 28C15.8453 28 14.5 29.3453 14.5 31V37C14.5 38.6547 15.8453 40 17.5 40H25C26.6547 40 28 38.6547 28 37V31C28 29.3453 26.6547 28 25 28H23.125V31.75C23.125 32.1625 22.7875 32.5 22.375 32.5H20.125C19.7125 32.5 19.375 32.1625 19.375 31.75V28H17.5ZM31 40H38.5C40.1547 40 41.5 38.6547 41.5 37V31C41.5 29.3453 40.1547 28 38.5 28H36.625V31.75C36.625 32.1625 36.2875 32.5 35.875 32.5H33.625C33.2125 32.5 32.875 32.1625 32.875 31.75V28H31C30.2969 28 29.65 28.2391 29.1391 28.6469C29.3688 29.1344 29.5 29.6781 29.5 30.25V37.75C29.5 38.3219 29.3688 38.8656 29.1391 39.3531C29.65 39.7609 30.2969 40 31 40Z" fill="#A855F7"/>
+</svg>
+
+                    </div>
+                    <h5>Material Reconciliation</h5>
+                    <p>
+                        Real-time tracking of site consumption vs.
+                        theoretical usage to eliminate wastage.
+                        Extra text here to test height consistency.
+                    </p>
+
+                    <div class="feature-img">
+                        <img src="Material Reconciliation img.svg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div >
+                       <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="56" height="56" rx="16" fill="#10B981" fill-opacity="0.1"/>
+<path d="M17.5 22C17.5 18.6885 20.1885 16 23.5 16C26.8115 16 29.5 18.6885 29.5 22C29.5 25.3115 26.8115 28 23.5 28C20.1885 28 17.5 25.3115 17.5 22ZM13 38.6078C13 33.9906 16.7406 30.25 21.3578 30.25H25.6422C30.2594 30.25 34 33.9906 34 38.6078C34 39.3766 33.3766 40 32.6078 40H14.3922C13.6234 40 13 39.3766 13 38.6078ZM42.2969 24.2969L36.2969 30.2969C35.8563 30.7375 35.1438 30.7375 34.7078 30.2969L31.7078 27.2969C31.2672 26.8562 31.2672 26.1438 31.7078 25.7078Cnan nan 32.8609 25.2672 33.2969 25.7078L35.5 27.9109L40.7031 22.7031C41.1437 22.2625 41.8562 22.2625 42.2922 22.7031Cnan nan 42.7328 23.8563 42.2922 24.2922L42.2969 24.2969Z" fill="#10B981"/>
+</svg>
+
+
+                    </div>
+                    <h5>HR & Payroll</h5>
+                    <p>
+                        Automated facial attendance logs,
+                        compliance checks, and error-free payroll processing.
+                    </p>
+
+                    <div class="feature-img">
+                        <img src="HR & Payroll img.svg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div>
+   <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="56" height="56" rx="16" fill="#F97316" fill-opacity="0.1"/>
+<path d="M22 16C20.3453 16 19 17.3453 19 19V37C19 38.6547 20.3453 40 22 40H34C35.6547 40 37 38.6547 37 37V23.5H31C30.1703 23.5 29.5 22.8297 29.5 22V16H22ZM31 16V22H37L31 16ZM22 19.75C22 19.3375 22.3375 19 22.75 19H25.75C26.1625 19 26.5 19.3375 26.5 19.75Cnan nan 26.1625 20.5 25.75 20.5H22.75C22.3375 20.5 22 20.1625 22 19.75ZM22 22.75C22 22.3375 22.3375 22 22.75 22H25.75C26.1625 22 26.5 22.3375 26.5 22.75Cnan nan 26.1625 23.5 25.75 23.5H22.75C22.3375 23.5 22 23.1625 22 22.75ZM28 26.125C28.4125 26.125 28.75 26.4625 28.75 26.875V27.6859C29.1484 27.7422 29.5328 27.8313 29.8797 27.925C30.2781 28.0328 30.5172 28.4406 30.4094 28.8438Cnan nan 29.8938 29.4813 29.4906 29.3734C28.9703 29.2328 28.4594 29.1297 27.9859 29.125C27.5922 29.1203 27.1703 29.2094 26.8797 29.3828C26.6125 29.5422 26.5 29.725 26.5 29.9828C26.5 30.1562 26.5609 30.2875 26.8422 30.4563C27.1656 30.6484 27.6203 30.7891 28.2109 30.9672L28.2344 30.9719C28.7641 31.1313 29.4203 31.3281 29.9359 31.6562C30.5031 32.0125 30.9859 32.5797 31 33.4469C31.0141 34.3516 30.55 35.0078 29.9266 35.3969C29.5656 35.6219 29.1578 35.7531 28.75 35.8234V36.625C28.75 37.0375 28.4125 37.375 28 37.375Cnan nan 27.25 37.0375 27.25 36.625V35.7906C26.725 35.6922 26.2328 35.5234 25.8016 35.3734C25.7031 35.3406 25.6047 35.3078 25.5109 35.275C25.1172 35.1437 24.9062 34.7172 25.0375 34.3281Cnan nan 25.5953 33.7234 25.9844 33.8547C26.1016 33.8922 26.2094 33.9297 26.3172 33.9672C26.9547 34.1828 27.4703 34.3609 28.0188 34.375C28.4453 34.3891 28.8578 34.2953 29.1297 34.1266C29.3687 33.9766 29.5 33.7844 29.4953 33.4703C29.4906 33.2547 29.4109 33.1047 29.1344 32.9266C28.8156 32.725 28.3609 32.5797 27.775 32.4016L27.7 32.3781C27.1844 32.2234 26.5609 32.0359 26.0687 31.7359C25.5062 31.3984 25.0094 30.85 25.0047 29.9875C25 29.0781 25.5109 28.45 26.1203 28.0891C26.4719 27.8828 26.8609 27.7516 27.25 27.6812V26.875C27.25 26.4625 27.5875 26.125 28 26.125Z" fill="#F97316"/>
+</svg>
+
+
+                    </div>
+                    <h5>Finance & Payments</h5>
+                    <p>
+                        Intelligent vendor payment reconciliation
+                        and automated tax compliance workflows.
+                    </p>
+
+                    <div class="feature-img">
+                        <img src="Finance & Payments img.svg" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

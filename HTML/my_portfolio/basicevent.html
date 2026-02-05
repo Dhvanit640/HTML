@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<style>
+    <style>
     nav {
         height: 50px;
         background-color: red;
@@ -52,12 +50,13 @@
     }
 </style>
 
+</head>
 <body>
-    <nav class="d111">
-        <h1  id="dhva" class="dhva1">Yahoo Baba</h1>
+    <nav id="dhva" class="d111">
+        <h1>Yahoo Baba</h1>
     </nav>
     <div class="main" id="dada" style="border: 2px solid black;">
-        <h1 class="h12"> Home</h1>
+        <h1 id="h12"> Home</h1>
         <h1>About Us</h1>
         <h1>Galary</h1>
         <h1>contect us</h1>
@@ -97,11 +96,39 @@
             </ul>
         </div>
     </div>
+    <!-- 
+    click(onclick) onclick no use ghani badhijagiyaye thay chhe jem ke koy butoon par bija pez par java mate use thay chhe 
+    Double Click(ondblclick)
+    RIght Click
+    MOuse Hover (onmouseenter) onmouseenter no use bav badhi jagiyaye thay chhe jem ke mouse upar hover mu sakiye chhiye koy pan color cheng kari sakiye mouse kee upar thi
+    Mouse Out (onmouseout)
+    mouse Down (onmousedown)
+    Mouse Up(onmouseup)
+    key Press(onkeypress)
+    key Up(onkeyup)
+    Load(onload)
+    unload(onunload)
+    Resize(onresize)
+    Scroll(onscroll)
+    -->
     <script>
-        
-    </script>
-    <script src="dom.js"></script>
-    <!-- <link rel="stylesheet" href="dom.js"> -->
-</body>
+        // click(onclick)
+        var a ;
+        document.getElementById("dhva").onclick = abc;
 
+        function abc(){
+            document.getElementById("dhva").style.background = "green";
+        }
+
+
+        var a ;
+        document.getElementById("dada").onmouseenter = ddd;
+
+        function ddd(){
+            document.getElementById("dada").style.background = "red";
+        }
+
+    </script>
+
+</body>
 </html>

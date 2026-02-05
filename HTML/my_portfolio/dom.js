@@ -75,12 +75,42 @@ var n;
 
         // querySelector document.querySelector(CSS Selector) aa pela eliment ne j target kare chhe 
         // querySelectorAll document.querySelectorAll() aa badha eliment ne target kare chhe
-    
+
         var d;
         d=document.querySelector("#dada");
         console.log(d);
         d=document.getElementById("dada");
         console.log(d);
+        d=document.querySelectorAll(".d12")[0].innerHTML;
+        console.log(d);
 
-          
+
+        // dom in three method
+        // 1) style
+        // 2) class name
+        // 3) classList
+
+        // style
+        var dh;
+        dh = document.querySelector("#dhva");
+        console.log(dh);
+        document.querySelector("#dhva").style.backgroundColor= "rgba(60, 20, 222, 0.27)".color="";
+        document.querySelectorAll("h1")[0].style.color="blue";
+        document.querySelectorAll("h1")[3].style.color="blue";
+
+
+        // class name 
+        // class name cheng kari sakiye chhi
+         
+        var d;
+        // document.querySelector(".d1111").className = "dada";
+        // document.getElementsByClassName("d1111").style.color = "pink";
+        // d=document.querySelector(".d1111").className;
+        console.log(d);
+
+        // claslist
+        var d;
+        document.querySelector("#dhva").classList.add("abc" , "efg");
+        d = document.querySelector("#dhva").classList;
+        console.log(d);
 //  document.getElementByI
