@@ -1,135 +1,1606 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    .adapt-sec {
-            padding: 100px 0px;
-        }
+<?php
+include "connection.php";
+require "admin/phpmailer/class.phpmailer.php";
+require "admin/phpmailer/class.smtp.php";
+?>
+
+<style type="text/css">
+   .header-logo img {
+      margin-top: 15px;
+   }
+
+   .dropdown-mega-content .menu-details h4 a {
+
+      color: #101010 !important;
+      padding-left: 0px !important;
+   }
+
+   .displ-none {
+      display: none;
+   }
+
+   button {
+      background: #000;
+      border-radius: 5x;
+   }
+
+   button.hover_txt:hover {
+      background: #183EC2;
+      border: none;
+   }
+
+   .login {
+      background-color: transparent;
+   }
+
+   .login.hover_txt:hover {
+      background-color: transparent;
+      color: #183EC2;
+   }
+
+
+   #header .header-logo img {
+      -webkit-transition: all .3s ease;
+      transition: all .3s ease;
+      position: relative;
+      top: -15px;
+   }
+
+   @media (max-width:768px) {
+      #header .header-logo img {
+         top: 0px;
+      }
+
+      .displ-none {
+         display: block;
+      }
+
+      a.mob {
+         font-size: 10px;
+
+      }
+   }
+
+   .header-logo img {
+      margin-top: 5px;
+   }
+
+   #header .header-btn-collapse-nav {
+      margin-top: -25px;
+   }
+
+   #header .header-logo {
+      margin: -5px 0 5px;
+   }
+
+   .dropdown-mega-sub-title {
+      font-size: .9em !important;
+   }
+
+   .fa-caret-down {
+      line-height: 35px;
+      min-height: 38px;
+      min-width: 30px;
+      position: absolute;
+      right: -20px;
+      text-align: center;
+      top: 0
+   }
+
+   html #header.header-semi-transparent {
+      min-height: 100px !important;
+      padding: 10px 0;
+   }
+
+   .header-nav-main ul li a {
+      text-decoration: none;
+   }
+
+   #header.sticky {
+      box-shadow: 0 3px 2px 0 #f5f5f5;
+   }
+
+   .top-contact p {
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 19.5px;
+      color: #6B7280;
+   }
+
+   .dropdown-toggle::after {
+      border: none;
+      background-image: url(../images/dowm-aerrow.png);
+      vertical-align: sub;
+      width: 12px;
+      height: 12px;
+      background-repeat: no-repeat;
+   }
+
+   .header-nav ul li a.dropdown-toggle {
+      margin-left: 25px;
+   }
+
+   #header .header-nav-main nav>ul>li>a,
+   #header .header-nav-main nav>ul>li>button,
+   .login-btn {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 22.5px;
+      text-align: left;
+      color: #101010;
+   }
+
+   #header .header-nav-main nav>ul>li>button>a {
+      margin-left: 0 !important;
+   }
+
+   #header .header-logo {
+      margin: 0;
+      padding: 10px 0;
+      width: 200px;
+      height: 80px;
+   }
+
+   #header .header-row {
+      align-self: normal !important;
+   }
+
+   header {
+      transition: 0.5s ease;
+      z-index: 9;
+   }
+
+   .fixedHeader {
+      position: fixed !important;
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 2px 7px 0px #eee;
+      transition: 0.4s ease;
+   }
+
+   .arrow {
+      border: solid #6B7280;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    width: 10px;
+    height: 10px;
+    left: 8px;
+    top: -2px;
+   }
+
+   li>button.login-btn>a {
+      font-size: 15px;
+      font-weight: 6000;
+   }
+
+   #header .header-nav-main nav>ul>li>a.dropdown-toggle:after {
+      color: transparent;
+   }
+
+   .down {
+   transform: rotate(45deg);
+    /* -webkit-transform: rotate(45deg); */
+   }
+   .up {
+   transform: rotate(-135deg);
+   }
+   .dropdown-item i::after {
+      display: none !important;
+   }
+
+   #mainNav {
+      align-items: center;
+   }
+
+   #header .header-btn-collapse-nav {
+      margin-top: -50px;
+      margin-right: 15px;
+   }
+
+   .top-contact a {
+      text-decoration: none;
+      /* Remove underline */
+      color: inherit;
+      /* Inherit color from parent element */
+   }
+
+   @media (max-width: 991px) {
+      .navbar-header {
+         float: none;
+      }
+
+      #header .header-nav-main nav>ul li {
+         width: 100%;
+      }
+
+      .navbar-toggle {
+         display: block;
+      }
+
+      .navbar-collapse {
+         border-top: 1px solid transparent;
+         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+
+      /* .navbar-collapse.collapse {
+         display: none !important;
+      } */
+
+      .navbar-nav {
+         float: none !important;
+         margin: 7.5px -15px;
+      }
+
+      .navbar-nav>li {
+         float: none;
+      }
+
+      .navbar-nav>li>a {
+         padding-top: 10px;
+         padding-bottom: 10px;
+      }
+
+      .navbar-text {
+         float: none;
+         margin: 15px 0;
+      }
+
+      /* since 3.1.0 */
+      /* .navbar-collapse.collapse.in {
+         display: block !important;
+      } */
+
+      /* .collapsing {
+         overflow: hidden !important;
+      } */
+
+      .fas.fa-caret-down {
+         display: none;
+      }
+   }
+
+   .fixed-top {
+      position: fixed !important;
+      top: 0 !important;
+      right: 0 !important;
+      left: 0 !important;
+      z-index: 1030 !important;
+   }
+
+   @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+
+   .fa {
+      display: inline-block;
+      font: normal normal normal 14px / 1 FontAwesome !important;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+   }
+   .dropdown-mega-content .menu-details h4 {
+      font-family: Poppins;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 27px;
+      text-align: left;
+      color: #101010;
+   }
+
+   .dropdown-mega-content .menu-details p {
+      font-family: Poppins;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22.68px;
+      text-align: left;
+      color: #6B7280;
+   }
+
+   .dropdown-mega-content .tab-content {
+      border-radius: 0;
+      box-shadow: none;
+      background-color: transparent;
+      border-top: 0;
+      padding: 15px;
+      border: none;
+      padding-bottom: 0px !important;
+   }
+
+   .dropdown-mega-content .nav-pills {
+      border-right: 1px solid #E5E7EB;
+      height: 350px;
+   }
+
+   .dropdown-mega-content .nav-pills h3 {
+      font-family: Poppins;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 80px;
+      text-align: left;
+      color: #101010;
+   }
+
+   .dropdown-mega-content .nav-pills .nav-link.active,
+   .dropdown-mega-content .nav-pills .show>.nav-link {
+      color: #183EC2 !important;
+      background-color: #EDF3FF !important;
+      border-right: 2px solid #183EC2 !important;
+   }
+
+   .nav-pills .nav-link {
+      margin-right: 0px !important;
+   }
+
+   .dropdown-mega-content .nav-pills .nav-link {
+      border-radius: 0px;
+      font-family: Poppins;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 30px;
+      text-align: left;
+      color: #101010;
+   }
+
+   #header .header-nav-main nav>ul>li>a.dropdown-toggle:after {
+      display: none;
+   }
+
+   #header .header-nav-main nav>ul>li.dropdown .dropdown-menu li a {
+      border-bottom: none !important;
+   }
+
+   #header .header-nav-main nav>ul>li.open>a,
+   #header .header-nav-main nav>ul>li:hover>a {
+      border-color: transparent;
+      background: transparent !important;
+   }
+
+   #header .header-nav-main nav>ul>li.dropdown .dropdown-menu {
+      border-top-color: transparent !important;
+      box-shadow: 0px 4px 15px 0px #0000000D !important;
+      border: 1px solid #E5E7EB !important;
+      border-radius: 10px !important;
+      background-color: #eef4fe !important;
+   }
+
+   .fade {
+      transition: opacity .15s linear !important;
+   }
+
+   .dropdown-menu .dropdown-item:hover {
+      color: #183EC2 !important;
+      background-color: #EDF3FF !important;
+   }
+
+   @media (min-width: 992px) {
+
+      #header .header-nav-main nav>ul>li.dropdown .dropdown-menu {
+         background-color: #fff !important;
+   }
+
+      #header .header-nav-main nav>ul>li.dropdown .dropdown-menu li a.active,
+      #header .header-nav-main nav>ul>li.dropdown .dropdown-menu li a:active,
+      #header .header-nav-main nav>ul>li.dropdown .dropdown-menu li a:focus,
+      #header .header-nav-main nav>ul>li.dropdown .dropdown-menu li a:hover {
+         background-color: #f8f9fa;
+         color: #ec141d;
+         margin-left: 0px !important;
+         display: block;
+         transform: none !important;
+         transition: none !important;
+      }
+   }
+
+   @media only screen and (min-device-width : 320px) and (max-device-width : 992px) {
+      .dropdown-mega-content .nav-pills {
+         border-right: 1px solid #E5E7EB;
+         height: auto !important;
+         margin-bottom: 35px;
+      }
+      
+      .dropdown-mega-content h3 {
+         padding-left: 10px;
+      }
+
+      #header .header-nav-main nav {
+         max-height: 90vh !important;
+         /* overflow: hidden; */
+         overflow-y: auto;
+         padding: 0 15px;
+      }
+
+      .li-menu {
+         float: left;
+         height: auto !important;
+         display: block !important;
+         align-items: center;
+         border-bottom: 2px solid transparent;
+      }
+   }
+
+   .mobile-menu-box h4 {
+      border-radius: 0px;
+      font-family: Poppins;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 30px;
+      text-align: left;
+      color: #101010;
+   }
+
+   .mobile-menu-links a {
+      font-family: Poppins;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 27px;
+      text-align: left;
+      color: #101010;
+      display: block;
+      text-decoration: none;
+   }
+
+   .link-box-1,
+   .link-box-2,
+   .link-box-3,
+   .link-box-4 {
+      display: none;
+   }
+
+   .mobile-menu-box .arrow {
+      border: solid #6B7280;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 3px;
+      width: 10px;
+      height: 10px;
+      left: 0px !important;
+      top: -6px;
+   }
+
+   .dropdown-menu>li>a {
+      display: block;
+      padding: 3px 20px;
+      clear: both;
+      font-weight: 600;
+      line-height: 1.42857143;
+      color: #101010;
+      white-space: nowrap;
+   }
+
+   /* #header .header-nav-main nav>ul>li.dropdown .dropdown-menu{
+   display: block !important;
+} */
+   /* .dropdown:hover {
+      border-bottom: 2px solid #183EC2 !important;
+   } */
+   @media (min-width: 992px) {
+  .dropdown:hover {
+    border-bottom: 2px solid #183EC2 !important;
+  }
+}
+@media (max-width: 992px) {
+  .li-menu.call-me {
+    padding-bottom: 8px !important;
+  }
+}
+
+   .header-nav ul li a.dropdown-toggle {
+      margin-left: 0px;
+   }
+
+   .li-menu {
+      float: left;
+      height: 78px;
+      align-items: center;
+      border-bottom: 2px solid transparent;
+   }
+
+   @media (min-width: 992px) {
+      #header .header-nav-main nav>ul>li.dropdown:hover>.dropdown-menu {
+         top: 78px !important;
+         visibility: visible;
+         opacity: 1;
+         -webkit-transform: rotateX(0deg);
+         -moz-transform: rotateX(0deg);
+         -ms-transform: rotateX(0deg);
+         transform: rotateX(0deg);
+      }
+
+      .drop-menu-1 {
+         margin-top: 2px !important;
+      }
+   }
+
+   .headser-ind-box {
+      padding: 26px 24px 16px 24px;
+      background: #F3F6FA;
+      min-height: 100%;
+   }
+
+   .headser-ind-icon {
+      box-shadow: 0px 0px 15px 0px #0000000D;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+   }
+
+   .headser-ind-icon img {
+      width: 20px;
+   }
+
+   .headser-ind-box h4 {
+      font-family: Poppins;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 80px;
+      text-align: left;
+      color: #101010;
+   }
+
+   .headser-ind-box p {
+      font-family: Poppins;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 26px;
+      text-align: left;
+      color: #101010;
+   }
+   .required-star {
+      color: red;
+      font-weight: bold;
+      margin-left: 2px;
+   }
+   .iti__flag-container {
+      background: transparent !important;
+      z-index: 4;
+   }
+   .iti {
+      width: 100% !important;
+   }
+
+/* MOBILE RIGHT SLIDE MENU */
+@media (max-width: 991px) {
+
+  .navbar-collapse {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    z-index: 1050;
+    padding: 20px;
+    overflow-y: auto;
+    transition: right 0.35s ease-in-out;
+    /* box-shadow: -10px 0 30px rgba(0,0,0,0.15); */
+  }
+
+  /* when menu opens */
+  .navbar-collapse.show {
+    right: 0;
+  }
+
+  /* prevent body scroll */
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  /* Hamburger → Cross */
+  .navbar-toggler.open .navbar-toggler-icon {
+    background-image: none;
+    position: relative;
+  }
+
+  .navbar-toggler.open .navbar-toggler-icon::before,
+  .navbar-toggler.open .navbar-toggler-icon::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 2px;
+    background: #000;
+    left: 0;
+  }
+
+  .navbar-toggler.open .navbar-toggler-icon::before {
+    transform: rotate(45deg);
+    top: 10px;
+  }
+
+  .navbar-toggler.open .navbar-toggler-icon::after {
+    transform: rotate(-45deg);
+    top: 10px;
+  }
+
+   /* .dropdown:hover {
+      border-bottom: none !important;
+   } */
+
+}
+
+@media (max-width: 991px) {
+  #mobileNav {
+    display: block !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .demo-login {
+      justify-content: space-between;
+  }
+}
+@media (max-width: 991px) {
+    .sub-manu a{
+        font-size: 12px !important;
+        font-style: normal !important;
+        line-height: 10px !important;
+        font-weight: 500 !important;
+        padding: 7px 8px !important;
+        margin: 1px 0 !important;
+        border-radius: 0 !important;
+        text-align: left !important;
+        font-family: Poppins !important;
+        letter-spacing: .5px !important;
+    }
+    
+}
+
+@media (max-width: 992px) {
+  #callMeMenu {
+    display: none;
+    position: static; /* prevents overlay issues in mobile nav */
+  }
+}
 
 </style>
-<body>
-    <section class="adapt-sec">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-sm-12 col-lg-6 col-md-6">
-                    <h3 class="text-left" style="color:#222; text-align:center; font-size:24px;">
-                        <strong
-                            style="font-size: 34px;font-weight: 600;word-wrap: break-word;text-transform: none;">What
-                            Are Digital Employees?</strong>
-                    </h3>
-                    <!-- <p style="font-weight: 500;font-size: 20px;color: #183EC2;">Experience the Power of Predictive -->
-                    <!-- Intelligence</p> -->
-                    <p>Not humans. Not bots. They are intelligent digital coworkers <br>built to work faster, smarter,
-                        and without breaks. They use AI,<br> RPA, and NLP to perform business operations like human
-                        <br>employees—but with greater speed and accuracy, 24x7.
-                    </p>
 
-                    <div class="ai-point-block">
-                        <div class="ai-point-block1">
-                            <div>
-                                <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_1_2351)">
-                                        <path
-                                            d="M40.625 50H9.375C4.19688 50 0 45.8031 0 40.625V9.375C0 4.19688 4.19688 0 9.375 0H40.625C45.8031 0 50 4.19688 50 9.375V40.625C50 45.8031 45.8031 50 40.625 50Z"
-                                            fill="#E3E9FF" />
 
-                                        <g clip-path="url(#clip1_1_2351)">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M31 15.3538C31.8283 15.3538 32.5 16.0254 32.5 16.8538C32.5 17.6822 31.8283 18.3538 31 18.3538C30.1716 18.3538 29.5 17.6822 29.5 16.8538C29.5 16.0254 30.1716 15.3538 31 15.3538ZM34.6428 16.8538C34.6428 14.8419 33.0119 13.2109 31 13.2109C28.9881 13.2109 27.3571 14.8419 27.3571 16.8538C27.3571 18.8657 28.9881 20.4967 31 20.4967C33.0119 20.4967 34.6428 18.8657 34.6428 16.8538ZM19 15.3538C18.1715 15.3538 17.5 16.0254 17.5 16.8538C17.5 17.6822 18.1715 18.3538 19 18.3538C19.8284 18.3538 20.5 17.6822 20.5 16.8538C20.5 16.0254 19.8284 15.3538 19 15.3538ZM15.3571 16.8538C15.3571 14.8419 16.9881 13.2109 19 13.2109C21.0119 13.2109 22.6428 14.8419 22.6428 16.8538C22.6428 18.8657 21.0119 20.4967 19 20.4967C16.9881 20.4967 15.3571 18.8657 15.3571 16.8538ZM30.3571 25.4252C30.3571 24.0745 29.8572 22.8405 29.0323 21.8982C29.6487 21.6843 30.3108 21.5681 31 21.5681C34.3137 21.5681 37 24.2544 37 27.5681C37 28.0415 36.6161 28.4252 36.1428 28.4252H29.439C30.0186 27.5693 30.3571 26.5368 30.3571 25.4252ZM20.561 28.4252C19.9814 27.5693 19.6429 26.5368 19.6429 25.4252C19.6429 24.0745 20.1428 22.8405 20.9677 21.8982C20.3513 21.6843 19.6892 21.5681 19 21.5681C15.6863 21.5681 13 24.2544 13 27.5681C13 28.0415 13.3838 28.4252 13.8571 28.4252H20.561ZM25 23.9252C25.8284 23.9252 26.5 24.5968 26.5 25.4252C26.5 26.2537 25.8284 26.9252 25 26.9252C24.1715 26.9252 23.5 26.2537 23.5 25.4252C23.5 24.5968 24.1715 23.9252 25 23.9252ZM28.6428 25.4252C28.6428 23.4133 27.0119 21.7824 25 21.7824C22.9881 21.7824 21.3571 23.4133 21.3571 25.4252C21.3571 27.4371 22.9881 29.0681 25 29.0681C27.0119 29.0681 28.6428 27.4371 28.6428 25.4252ZM25 30.1395C28.3137 30.1395 31 32.8258 31 36.1395C31 36.6128 30.6161 36.9967 30.1428 36.9967H19.8571C19.3837 36.9967 19 36.6128 19 36.1395C19 32.8258 21.6863 30.1395 25 30.1395Z"
-                                                fill="#183EC2" />
-                                        </g>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_1_2351">
-                                            <rect width="50" height="50" fill="white" />
-                                        </clipPath>
-                                        <clipPath id="clip1_1_2351">
-                                            <rect width="24" height="24" fill="white" transform="translate(13 13)" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="ai-point-block1">
-                            <h4 class="ai-point-block1-1"><b>Seamless Role Adoption.</b></h4>
-                            <p>They take on roles like Purchase Assistants, Finance Executives, and HR Associates to
-                                handle repetitive tasks.</p>
-                        </div>
-                    </div>
-                    <div class="ai-point-block">
-                        <div>
-                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_1_2351)">
-                                    <path
-                                        d="M40.625 50H9.375C4.19688 50 0 45.8031 0 40.625V9.375C0 4.19688 4.19688 0 9.375 0H40.625C45.8031 0 50 4.19688 50 9.375V40.625C50 45.8031 45.8031 50 40.625 50Z"
-                                        fill="#E3E9FF" />
-                                    <g clip-path="url(#clip1_1_2351)">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M31 15.3538C31.8283 15.3538 32.5 16.0254 32.5 16.8538C32.5 17.6822 31.8283 18.3538 31 18.3538C30.1716 18.3538 29.5 17.6822 29.5 16.8538C29.5 16.0254 30.1716 15.3538 31 15.3538ZM34.6428 16.8538C34.6428 14.8419 33.0119 13.2109 31 13.2109C28.9881 13.2109 27.3571 14.8419 27.3571 16.8538C27.3571 18.8657 28.9881 20.4967 31 20.4967C33.0119 20.4967 34.6428 18.8657 34.6428 16.8538ZM19 15.3538C18.1715 15.3538 17.5 16.0254 17.5 16.8538C17.5 17.6822 18.1715 18.3538 19 18.3538C19.8284 18.3538 20.5 17.6822 20.5 16.8538C20.5 16.0254 19.8284 15.3538 19 15.3538ZM15.3571 16.8538C15.3571 14.8419 16.9881 13.2109 19 13.2109C21.0119 13.2109 22.6428 14.8419 22.6428 16.8538C22.6428 18.8657 21.0119 20.4967 19 20.4967C16.9881 20.4967 15.3571 18.8657 15.3571 16.8538ZM30.3571 25.4252C30.3571 24.0745 29.8572 22.8405 29.0323 21.8982C29.6487 21.6843 30.3108 21.5681 31 21.5681C34.3137 21.5681 37 24.2544 37 27.5681C37 28.0415 36.6161 28.4252 36.1428 28.4252H29.439C30.0186 27.5693 30.3571 26.5368 30.3571 25.4252ZM20.561 28.4252C19.9814 27.5693 19.6429 26.5368 19.6429 25.4252C19.6429 24.0745 20.1428 22.8405 20.9677 21.8982C20.3513 21.6843 19.6892 21.5681 19 21.5681C15.6863 21.5681 13 24.2544 13 27.5681C13 28.0415 13.3838 28.4252 13.8571 28.4252H20.561ZM25 23.9252C25.8284 23.9252 26.5 24.5968 26.5 25.4252C26.5 26.2537 25.8284 26.9252 25 26.9252C24.1715 26.9252 23.5 26.2537 23.5 25.4252C23.5 24.5968 24.1715 23.9252 25 23.9252ZM28.6428 25.4252C28.6428 23.4133 27.0119 21.7824 25 21.7824C22.9881 21.7824 21.3571 23.4133 21.3571 25.4252C21.3571 27.4371 22.9881 29.0681 25 29.0681C27.0119 29.0681 28.6428 27.4371 28.6428 25.4252ZM25 30.1395C28.3137 30.1395 31 32.8258 31 36.1395C31 36.6128 30.6161 36.9967 30.1428 36.9967H19.8571C19.3837 36.9967 19 36.6128 19 36.1395C19 32.8258 21.6863 30.1395 25 30.1395Z"
-                                            fill="#183EC2" />
-                                    </g>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_1_2351">
-                                        <rect width="50" height="50" fill="white" />
-                                    </clipPath>
-                                    <clipPath id="clip1_1_2351">
-                                        <rect width="24" height="24" fill="white" transform="translate(13 13)" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4>Intelligent Execution. </h4>
-                            <p>They understand instructions, execute workflows. in your ERP, process documents, and
-                                compare data automatically.</p>
-                        </div>
-                    </div>
-                    <div class="ai-point-block">
-                        <div>
-                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_1_2351)">
-                                    <path
-                                        d="M40.625 50H9.375C4.19688 50 0 45.8031 0 40.625V9.375C0 4.19688 4.19688 0 9.375 0H40.625C45.8031 0 50 4.19688 50 9.375V40.625C50 45.8031 45.8031 50 40.625 50Z"
-                                        fill="#E3E9FF" />
-                                    <g clip-path="url(#clip1_1_2351)">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M31 15.3538C31.8283 15.3538 32.5 16.0254 32.5 16.8538C32.5 17.6822 31.8283 18.3538 31 18.3538C30.1716 18.3538 29.5 17.6822 29.5 16.8538C29.5 16.0254 30.1716 15.3538 31 15.3538ZM34.6428 16.8538C34.6428 14.8419 33.0119 13.2109 31 13.2109C28.9881 13.2109 27.3571 14.8419 27.3571 16.8538C27.3571 18.8657 28.9881 20.4967 31 20.4967C33.0119 20.4967 34.6428 18.8657 34.6428 16.8538ZM19 15.3538C18.1715 15.3538 17.5 16.0254 17.5 16.8538C17.5 17.6822 18.1715 18.3538 19 18.3538C19.8284 18.3538 20.5 17.6822 20.5 16.8538C20.5 16.0254 19.8284 15.3538 19 15.3538ZM15.3571 16.8538C15.3571 14.8419 16.9881 13.2109 19 13.2109C21.0119 13.2109 22.6428 14.8419 22.6428 16.8538C22.6428 18.8657 21.0119 20.4967 19 20.4967C16.9881 20.4967 15.3571 18.8657 15.3571 16.8538ZM30.3571 25.4252C30.3571 24.0745 29.8572 22.8405 29.0323 21.8982C29.6487 21.6843 30.3108 21.5681 31 21.5681C34.3137 21.5681 37 24.2544 37 27.5681C37 28.0415 36.6161 28.4252 36.1428 28.4252H29.439C30.0186 27.5693 30.3571 26.5368 30.3571 25.4252ZM20.561 28.4252C19.9814 27.5693 19.6429 26.5368 19.6429 25.4252C19.6429 24.0745 20.1428 22.8405 20.9677 21.8982C20.3513 21.6843 19.6892 21.5681 19 21.5681C15.6863 21.5681 13 24.2544 13 27.5681C13 28.0415 13.3838 28.4252 13.8571 28.4252H20.561ZM25 23.9252C25.8284 23.9252 26.5 24.5968 26.5 25.4252C26.5 26.2537 25.8284 26.9252 25 26.9252C24.1715 26.9252 23.5 26.2537 23.5 25.4252C23.5 24.5968 24.1715 23.9252 25 23.9252ZM28.6428 25.4252C28.6428 23.4133 27.0119 21.7824 25 21.7824C22.9881 21.7824 21.3571 23.4133 21.3571 25.4252C21.3571 27.4371 22.9881 29.0681 25 29.0681C27.0119 29.0681 28.6428 27.4371 28.6428 25.4252ZM25 30.1395C28.3137 30.1395 31 32.8258 31 36.1395C31 36.6128 30.6161 36.9967 30.1428 36.9967H19.8571C19.3837 36.9967 19 36.6128 19 36.1395C19 32.8258 21.6863 30.1395 25 30.1395Z"
-                                            fill="#183EC2" />
-                                    </g>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_1_2351">
-                                        <rect width="50" height="50" fill="white" />
-                                    </clipPath>
-                                    <clipPath id="clip1_1_2351">
-                                        <rect width="24" height="24" fill="white" transform="translate(13 13)" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4>Multi-Channel Delivery. </h4>
-                            <p>Results are delivered through ERP Dashboards, Email & <br> WhatsApp Bots, Web/Mobile
-                                Apps, and API-based automations.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-6 col-md-6">
-                    <div class="display: flex;justify-content: center;align-items: center;">
-                        <img src="Mask group.png" alt="">
-                    </div>
-                </div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="css/sweetalert.css" rel="stylesheet" type="text/css">
+<!-- <link href="css/real_estate_crm.css" rel="stylesheet" type="text/css"> -->
+<script src="js/sweetalert.min.js"></script>
+<script defer src="js/jquery.sweet-alert.custom.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- Hotjar Tracking Code for https://strategicerp.com/ -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script>
+   (function(h, o, t, j, a, r) {
+      h.hj = h.hj || function() {
+         (h.hj.q = h.hj.q || []).push(arguments)
+      };
+      h._hjSettings = {
+         hjid: 2750010,
+         hjsv: 6
+      };
+      a = o.getElementsByTagName('head')[0];
+      r = o.createElement('script');
+      r.async = 1;
+      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+      a.appendChild(r);
+   })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+</script>
+   <!-- fb pixel code -->
+ <div class="modal fade" id="salesAppointmentModal" tabindex="-1" aria-labelledby="salesAppointmentModalLabel" aria-hidden="true" style="opacity: 1;">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content" style="border-radius: 10px;">
+            <div class="modal-header" style="border: none;"> <button type="button" class="btn-close" style="font-size:15px" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div id="salesmodalbody" class="modal-body text-center" style="padding:25px !important">
+               <svg class="mb-4 fs-5" width="96" height="81" viewBox="0 0 96 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M66.7868 15.2697C66.7868 12.586 64.5979 10.5122 61.9228 10.5122H7.81077C5.13558 10.5122 2.94678 12.708 2.94678 15.2697V64.7967C2.94678 67.4804 5.13558 69.5542 7.81077 69.5542H66.9083L66.7868 15.2697Z" fill="white"/>
+               <path d="M23.4971 28.3277H31.7659V36.6229H23.4971V28.3277Z" fill="#F3877E"/>
+               <path d="M38.0891 28.3277H46.3579V36.6229H38.0891V28.3277Z" fill="#34CBA0"/>
+               <path d="M52.8025 28.3277H61.0713V36.6229H52.8025V28.3277Z" fill="#FFC408"/>
+               <path d="M8.78296 41.8699H17.0518V50.165H8.78296V41.8699Z" fill="#D7E8FF"/>
+               <path d="M23.4971 41.8699H31.7659V50.165H23.4971V41.8699Z" fill="#FFC408"/>
+               <path d="M38.0891 50.165V41.8699H46.3579" fill="#2AABF5"/>
+               <path d="M8.78296 55.5237H17.0518V63.8189H8.78296V55.5237Z" fill="#F3877E"/>
+               <path d="M23.4971 55.5237H31.7659V63.8189H23.4971V55.5237Z" fill="#D7E8FF"/>
+               <path d="M60.4637 78.6936C70.6716 78.6936 78.9469 70.392 78.9469 60.1514C78.9469 49.9109 70.6716 41.6093 60.4637 41.6093C50.2557 41.6093 41.9805 49.9109 41.9805 60.1514C41.9805 70.392 50.2557 78.6936 60.4637 78.6936Z" fill="#D7E8FF"/>
+               <path d="M66.7867 22.8433V15.158C66.7867 12.4743 64.5979 10.4005 61.9227 10.4005H7.81077C5.13558 10.4005 2.94678 12.5963 2.94678 15.158V22.8433H66.7867Z" fill="#2AABF5"/>
+               <path d="M39.1836 69.5542H7.81077C5.13558 69.5542 2.94678 67.3584 2.94678 64.7966V15.2696C2.94678 12.5859 5.13558 10.5121 7.81077 10.5121H62.0444C64.7195 10.5121 66.9083 12.7079 66.9083 15.2696V37.7154" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M66.7867 22.8432V15.158C66.7867 12.4743 64.5979 10.4005 61.9227 10.4005H7.81077C5.13558 10.4005 2.94678 12.5963 2.94678 15.158V22.8432H66.7867Z" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M14.2554 16.6074C12.3098 16.6074 10.6074 15.0215 10.6074 12.9477V6.11643C10.6074 4.16463 12.1882 2.4568 14.2554 2.4568C16.201 2.4568 17.9034 4.04264 17.9034 6.11643V10.386" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M27.9966 16.6074C26.051 16.6074 24.3486 15.0215 24.3486 12.9477V6.11643C24.3486 4.16463 25.9294 2.4568 27.9966 2.4568C29.9422 2.4568 31.6446 4.04264 31.6446 6.11643V10.386" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M41.7371 16.6074C39.7915 16.6074 38.0891 15.0215 38.0891 12.9477V6.11643C38.0891 4.16463 39.6699 2.4568 41.7371 2.4568C43.6827 2.4568 45.3851 4.04264 45.3851 6.11643V10.386" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M55.5997 16.6074C53.6541 16.6074 51.9517 15.0215 51.9517 12.9477V6.11643C51.9517 4.16463 53.5325 2.4568 55.5997 2.4568C57.5453 2.4568 59.2477 4.04264 59.2477 6.11643V10.386" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M23.4971 28.3277H31.7659V36.6228H23.4971V28.3277Z" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M38.0891 28.3277H46.3579V36.6228H38.0891V28.3277Z" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M52.8025 28.3277H61.0713V36.6228H52.8025V28.3277Z" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M8.78296 41.8699H17.0518V50.165H8.78296V41.8699Z" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M23.4971 41.8699H31.7659V50.165H23.4971V41.8699Z" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M38.0891 50.165V41.8699H46.3579" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M8.78296 55.5237H17.0518V63.8189H8.78296V55.5237Z" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M23.4971 55.5237H31.7659V63.8189H23.4971V55.5237Z" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M60.4637 78.6861C70.6716 78.6861 78.9469 70.3845 78.9469 60.144C78.9469 49.9034 70.6716 41.6018 60.4637 41.6018C50.2557 41.6018 41.9805 49.9034 41.9805 60.144C41.9805 70.3845 50.2557 78.6861 60.4637 78.6861Z" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M60.4637 73.9432C68.0525 73.9432 74.2045 67.7716 74.2045 60.1586C74.2045 52.5456 68.0525 46.374 60.4637 46.374C52.8749 46.374 46.7229 52.5456 46.7229 60.1586C46.7229 67.7716 52.8749 73.9432 60.4637 73.9432Z" stroke="#151F81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M60.4636 50.156V60.159H65.6924" stroke="#151F81" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>
+
+               <p class="mb-4 fs-5" style="font-size: 19px !important;">
+                  Please enter your contact number so our AI assistant reaches out to
+                  you
+               </p>
+               <form>
+                  <label for="contactNoSA" class="form-label text-start d-block">Contact No<span class="required-star">*</span></label>
+                  <div class="input-group mb-3">
+                     <input type="tel" class="form-control" id="Contact-No" placeholder="Enter your number" required />
+                  </div>
+                  <button id="sales-submit-btn" type="submit" style="font-size: 13px;padding: 5px 20px;background: #183EC2;color: #fff; marging-top:20px width:135px" class="btn">
+                     Submit
+                  </button>
+               </form>
             </div>
-        </div>
-    </section>
-    
-</body>
-</html>
+         </div>
+      </div>
+   </div>
+
+   <!-- Support Modal -->
+   <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="supportModalLabel" aria-hidden="true" style="opacity: 1;">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content" style="border-radius: 10px;">
+            <div class="modal-header" style="border: none;"> <button type="button" class="btn-close" style="font-size:15px" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div id="supportmodalbody" class="modal-body text-center" style="padding:25px !important">
+               <svg class="mb-4 fs-5" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <g clip-path="url(#clip0_1_3995)">
+               <path d="M1.17188 13.5895C1.17188 6.67063 6.83047 1.07344 13.7723 1.17328C20.4966 1.27 25.9642 6.78453 26.0067 13.5092C26.0305 17.2752 24.3773 20.6552 21.7505 22.9478C21.4733 23.1897 21.5131 23.6313 21.8298 23.8186L24.1697 25.203C24.548 25.4267 24.3892 26.0067 23.9497 26.0066L13.3544 26.0039C6.60484 25.8786 1.17188 20.3689 1.17188 13.5895Z" fill="#7ACAA6"/>
+               <path d="M24.1698 25.203L21.8299 23.8186C21.5149 23.6322 21.4712 23.1914 21.747 22.9508C24.4038 20.6337 26.0657 17.2047 26.0056 13.3886C25.9013 6.78781 20.5588 1.36953 13.9599 1.17718C13.0242 1.15 12.111 1.22656 11.2307 1.39578C16.9346 2.48921 21.2815 7.51687 21.3193 13.5092C21.3376 16.4112 20.3602 19.0841 18.7087 21.2067C17.7115 22.4884 18.0356 24.3472 19.4332 25.1741L19.4821 25.203C19.8563 25.4244 19.7045 25.9931 19.2759 26.0055L23.9496 26.0066C24.3893 26.0067 24.5481 25.4269 24.1698 25.203Z" fill="#57BE92"/>
+               <path d="M61.6766 46.2448H33.5069C26.4711 46.2448 22.6209 38.0455 27.1145 32.6317L27.3644 32.3306C29.3441 29.9456 30.4277 26.9434 30.4277 23.8439V18.4117C30.4278 8.89031 38.1463 1.17188 47.6675 1.17188C57.1888 1.17188 64.9072 8.89031 64.9072 18.4116V24.0272C64.9072 27.1592 66.0136 30.1906 68.031 32.5864C72.5808 37.9892 68.7399 46.2448 61.6766 46.2448Z" fill="#C59191"/>
+               <path d="M76.4844 60.2047V78.8281H18.6985V60.3453C18.6985 56.1609 21.2063 52.3844 25.0641 50.7609L34.3907 46.7047L37.5329 45.3391C39.9157 44.3031 41.4579 41.9531 41.4579 39.3547V38.1484H53.7266V39.2922C53.7266 41.9031 55.2829 44.2625 57.6813 45.2906L70.2985 50.6984C74.0594 52.3656 76.4844 56.0922 76.4844 60.2047Z" fill="white"/>
+               <path d="M34.3906 51.1461C37.5744 52.0973 42.2606 53.112 47.9727 53.0122C53.3322 52.9186 57.7319 51.8764 60.7931 50.8986L62.3142 47.2764L57.682 45.2911C55.2823 44.2625 53.7266 41.903 53.7266 39.2922V38.1492H41.4573V39.3544C41.4573 41.9528 39.9159 44.3037 37.533 45.3398L33.7812 46.9711L34.3906 51.1461Z" fill="#FFCEBF"/>
+               <path d="M70.2991 50.6989L60.7947 46.6253L60.793 46.6255V78.8281H76.4844V60.2053C76.4844 56.092 74.0597 52.3653 70.2991 50.6989Z" fill="#8795DE"/>
+               <path d="M34.3907 46.7047V78.8281H18.6985V60.3453C18.6985 56.1609 21.2063 52.3844 25.0641 50.7609L34.3907 46.7047Z" fill="#8795DE"/>
+               <path d="M51.0774 35.6498H48.3312C47.0812 35.6498 46.0679 34.6366 46.0679 33.3866C46.0679 32.1366 47.0812 31.1233 48.3312 31.1233H51.0774C52.3274 31.1233 53.3407 32.1366 53.3407 33.3866C53.3407 34.6366 52.3274 35.6498 51.0774 35.6498Z" fill="white"/>
+               <path d="M48.3312 32.295C47.7293 32.295 47.2397 32.7847 47.2397 33.3864C47.2397 33.9881 47.7294 34.4778 48.3312 34.4778H51.0774C51.6793 34.4778 52.1688 33.9881 52.1688 33.3864C52.1688 32.7847 51.6791 32.295 51.0774 32.295H48.3312Z" fill="black"/>
+               <path d="M47.5917 60.6219C48.2167 60.6219 48.7234 60.1152 48.7234 59.4901C48.7234 58.8651 48.2167 58.3584 47.5917 58.3584C46.9667 58.3584 46.46 58.8651 46.46 59.4901C46.46 60.1152 46.9667 60.6219 47.5917 60.6219Z" fill="black"/>
+               <path d="M51.8446 44.8833C53.2561 44.8833 54.6012 44.5998 55.8273 44.0883C54.5121 42.8742 53.7264 41.1469 53.7264 39.2922V38.1492H41.4571V39.3544C41.4571 40.2931 41.2551 41.1991 40.8857 42.0228C42.7436 43.7937 45.257 44.8833 48.0264 44.8833H51.8446Z" fill="#FFB09E"/>
+               <path d="M59.8544 19.6923V29.8422C59.8544 35.5603 55.2189 40.1956 49.501 40.1956H45.6825C39.9644 40.1956 35.3291 35.5602 35.3291 29.8422V19.6923C35.3291 15.9725 38.3447 12.9569 42.0646 12.9569H53.1189C56.8389 12.957 59.8544 15.9725 59.8544 19.6923Z" fill="#FFCEBF"/>
+               <path d="M51.0774 35.6498H48.3312C47.0812 35.6498 46.0679 34.6366 46.0679 33.3866C46.0679 32.1366 47.0812 31.1233 48.3312 31.1233H51.0774C52.3274 31.1233 53.3407 32.1366 53.3407 33.3866C53.3407 34.6366 52.3274 35.6498 51.0774 35.6498Z" fill="#685E68"/>
+               <path d="M50.0383 10.2706C50.3013 6.95421 53.4761 4.75343 56.5149 3.61359C61.5416 6.62562 64.9069 12.1253 64.9069 18.4116V19.5967C64.629 19.655 64.3524 19.7061 64.0791 19.7469C62.405 19.9969 60.9794 19.8887 60.0055 19.7469C53.7297 18.9108 49.7208 14.2759 50.0383 10.2706Z" fill="#B98080"/>
+               <path d="M47.6675 1.17188C51.5609 1.17188 55.1525 2.46312 58.0385 4.63984C56.5988 7.145 53.293 12.098 47.0939 15.7647C42.492 18.4869 38.1528 19.4016 35.4806 19.747H30.428V18.4116C30.4278 8.89031 38.1463 1.17188 47.6675 1.17188Z" fill="#C59191"/>
+               <path d="M66.9388 78.8281H29.4254L27.3563 59.3097C27.2096 57.9253 28.2949 56.7189 29.6869 56.7189H66.6771C68.0693 56.7189 69.1546 57.9253 69.0077 59.3097L66.9388 78.8281Z" fill="#EFEDEF"/>
+               <path d="M66.6772 56.7188H61.9897C63.3819 56.7188 64.4672 57.9252 64.3205 59.3095L62.2515 78.8281H66.939L69.008 59.3097C69.1547 57.9252 68.0694 56.7188 66.6772 56.7188Z" fill="#E5E1E5"/>
+               <path d="M78.8281 80H1.17188C0.524531 80 0 79.4753 0 78.8281C0 78.1809 0.524531 77.6562 1.17188 77.6562H78.8281C79.4755 77.6562 80 78.1809 80 78.8281C80 79.4753 79.4755 80 78.8281 80Z" fill="#C9BFC8"/>
+               <path d="M48.1821 71.0547C49.9943 71.0547 51.4634 69.5856 51.4634 67.7734C51.4634 65.9613 49.9943 64.4922 48.1821 64.4922C46.3699 64.4922 44.9009 65.9613 44.9009 67.7734C44.9009 69.5856 46.3699 71.0547 48.1821 71.0547Z" fill="#C9BFC8"/>
+               <path d="M18.277 14.7611C18.9242 14.7611 19.4489 14.2364 19.4489 13.5892C19.4489 12.9421 18.9242 12.4174 18.277 12.4174C17.6298 12.4174 17.1052 12.9421 17.1052 13.5892C17.1052 14.2364 17.6298 14.7611 18.277 14.7611ZM8.90203 14.7611C9.54922 14.7611 10.0739 14.2364 10.0739 13.5892C10.0739 12.9421 9.54922 12.4174 8.90203 12.4174C8.25484 12.4174 7.73016 12.9421 7.73016 13.5892C7.73016 14.2364 8.25484 14.7611 8.90203 14.7611ZM13.5895 14.7611C14.2367 14.7611 14.7614 14.2364 14.7614 13.5892C14.7614 12.9421 14.2367 12.4174 13.5895 12.4174C12.9423 12.4174 12.4177 12.9421 12.4177 13.5892C12.4177 14.2364 12.9423 14.7611 13.5895 14.7611ZM13.3325 27.1757C13.3397 27.1758 13.3469 27.1758 13.3541 27.1758L23.9492 27.1785H23.9498C24.6819 27.1785 25.3033 26.7042 25.4966 25.9983C25.69 25.2921 25.3964 24.5672 24.7664 24.1946L23.155 23.2411C25.745 20.6741 27.2017 17.1716 27.1786 13.5019C27.1322 6.16315 21.1256 0.107058 13.7891 0.00143269C6.18672 -0.107786 0 6.04175 0 13.5896C0 20.8275 5.96375 27.0189 13.3325 27.1757ZM5.69531 5.58018C7.85625 3.45018 10.7125 2.30253 13.7555 2.34487C19.8263 2.43221 24.7964 7.44378 24.8348 13.5166C24.8556 16.793 23.4506 19.9088 20.98 22.0647C20.5669 22.425 20.3505 22.9658 20.4005 23.5113C20.4505 24.0564 20.7619 24.5483 21.233 24.8269L21.2447 24.8338L13.3656 24.8319C7.27484 24.715 2.34375 19.6972 2.34375 13.5896C2.34375 10.555 3.53406 7.71065 5.69531 5.58018ZM78.8281 77.6563H77.6562V60.2047C77.6562 55.6325 74.9545 51.4807 70.7602 49.6214L64.5842 46.9744C66.087 46.5002 67.4447 45.6546 68.5494 44.4816C70.2161 42.7121 71.1719 40.311 71.1719 37.8939C71.1719 35.673 70.3959 33.5767 68.9277 31.8313C67.0911 29.6505 66.0797 26.8789 66.0797 24.0267V18.4111C66.0797 13.4927 64.1642 8.86956 60.6864 5.39346C57.2086 1.91534 52.585 2.64422e-05 47.6673 2.64422e-05C37.5155 2.64422e-05 29.2564 8.25909 29.2564 18.411V23.8438C29.257 26.795 28.0972 29.6121 26.2125 31.8828C23.8405 34.7407 23.3477 38.6046 24.9266 41.9666C26.0984 44.4622 28.2122 46.2552 30.7427 47.0141L24.6098 49.681C20.3072 51.4916 17.5269 55.6777 17.5269 60.3455V74.1408C17.5269 74.788 18.0514 75.3127 18.6987 75.3127C19.3461 75.3127 19.8706 74.788 19.8706 74.1408V60.3455C19.8706 56.6233 22.0877 53.285 25.5317 51.8358L33.2189 48.493V51.1546V51.163V55.5469H29.6872C28.6919 55.5469 27.7392 55.9713 27.0734 56.7113C26.4078 57.4513 26.0862 58.4433 26.1912 59.433L28.123 77.6563H1.17188C0.524531 77.6563 0 78.181 0 78.8282C0 79.4753 0.524531 80 1.17188 80H29.4228H29.4342H66.9386H66.94H66.9416H78.8281C79.4755 80 80 79.4753 80 78.8282C80 78.181 79.4755 77.6563 78.8281 77.6563ZM67.1345 33.3403C68.2425 34.6575 68.8281 36.2321 68.8281 37.8938C68.8281 39.7199 68.1047 41.5352 66.8433 42.8746C65.5077 44.2925 63.6728 45.0735 61.6767 45.0735H60.1495L58.1434 44.2136C56.3911 43.4621 55.1923 41.851 54.9473 39.9964C58.5631 38.0496 61.0267 34.2286 61.0267 29.8422V21.0324C61.3697 21.0557 61.7123 21.0683 62.0541 21.0683C62.6177 21.0683 63.1791 21.0363 63.7361 20.9732V24.0266C63.7359 27.4303 64.9431 30.7382 67.1345 33.3403ZM47.952 51.8405C43.7597 51.9147 39.5989 51.3835 35.5625 50.2639V47.4738L35.9014 47.3264C35.9041 47.3253 35.9067 47.3241 35.9095 47.323L38.0002 46.4139C40.3273 45.4022 41.9719 43.33 42.4705 40.9085C43.4909 41.2052 44.568 41.3674 45.683 41.3674H49.5016C50.6208 41.3674 51.7019 41.2039 52.7258 40.905C53.2408 43.3155 54.8916 45.3691 57.2198 46.3678L59.4511 47.3241C59.4525 47.3247 59.4539 47.3253 59.4553 47.3258L59.6206 47.3966V50.0336C55.8281 51.1636 51.907 51.7714 47.952 51.8405ZM59.6205 52.4736V55.5471H35.5625V52.6908C39.3616 53.6869 43.2622 54.191 47.1892 54.191C47.457 54.191 47.725 54.1886 47.993 54.1839C51.9289 54.1152 55.8327 53.54 59.6205 52.4736ZM63.7359 18.61C60.508 19.0461 56.8694 18.1814 54.3625 16.2391C53.8511 15.8428 53.115 15.936 52.7184 16.4477C52.322 16.9592 52.4155 17.6953 52.927 18.0917C54.5659 19.3614 56.5427 20.2558 58.683 20.7067V27.0866C58.1198 28.37 57.493 29.4374 56.0797 30.6033C55.4847 31.0942 54.8334 31.5019 54.1359 31.8253C53.5664 30.7139 52.4097 29.9511 51.0775 29.9511H48.3313C46.437 29.9511 44.8961 31.4922 44.8961 33.3863C44.8961 35.2803 46.437 36.8214 48.3313 36.8214H51.0775C52.6716 36.8214 54.0153 35.7299 54.4011 34.2552C55.9688 33.6578 58.5248 31.5269 58.5255 31.5261C57.7319 35.7866 53.9888 39.023 49.5017 39.023H45.6828C40.6203 39.023 36.5016 34.9044 36.5016 29.8417V20.7833C40.4817 20.1594 44.2419 18.8125 47.6903 16.7728C52.9409 13.6671 56.3089 9.60862 58.3414 6.40221C61.8191 9.49956 63.7973 13.94 63.7359 18.61ZM52.1686 33.3896C52.1669 33.99 51.6781 34.478 51.0773 34.478H48.3311C47.7292 34.478 47.2397 33.9883 47.2397 33.3866C47.2397 32.7849 47.7294 32.2952 48.3311 32.2952H51.0773C51.678 32.2952 52.1666 32.7828 52.1686 33.383V33.3896ZM31.6 18.411C31.6 9.55143 38.8077 2.34378 47.6673 2.34378C50.8447 2.34378 53.8809 3.26096 56.4755 4.96846C54.605 7.96675 51.4567 11.8224 46.4972 14.7561C43.0948 16.7686 39.3628 18.0535 35.4044 18.575H35.3312C35.3308 18.575 35.3303 18.575 35.3297 18.575C35.3291 18.575 35.3288 18.575 35.3281 18.575H31.6V18.411ZM27.0478 40.9703C25.8595 38.4394 26.2305 35.5308 28.0145 33.3814C30.2531 30.6844 31.6027 27.3519 31.6002 23.8438V20.9188H34.158V29.8422C34.158 34.2311 36.6247 38.0539 40.2438 39.9997C40.0173 41.8683 38.8222 43.5007 37.0656 44.2644L35.205 45.0735H33.5064C30.7109 45.0735 28.2362 43.5013 27.0478 40.9703ZM67.8427 59.1861L65.8847 77.6563H30.4797L28.5217 59.1861C28.4862 58.8513 28.5906 58.5291 28.8158 58.2789C29.0409 58.0286 29.3505 57.8908 29.687 57.8908H66.6772C67.0137 57.8908 67.3233 58.0286 67.5484 58.2789C67.7736 58.5291 67.878 58.8513 67.8427 59.1861ZM75.3125 77.6563H68.2414L70.1731 59.4333C70.2781 58.4435 69.9564 57.4514 69.2909 56.7114C68.6252 55.9714 67.6727 55.5471 66.6772 55.5471H61.9641V50.9149C61.9642 50.9007 61.9644 50.8866 61.9641 50.8724V48.4013L69.8236 51.7699C73.158 53.248 75.3125 56.5588 75.3125 60.2047V77.6563ZM48.182 63.3203C45.7266 63.3203 43.7289 65.318 43.7289 67.7735C43.7289 70.2289 45.7266 72.2266 48.182 72.2266C50.6375 72.2266 52.6352 70.2289 52.6352 67.7735C52.6352 65.318 50.6375 63.3203 48.182 63.3203ZM48.182 69.8828C47.0189 69.8828 46.0727 68.9366 46.0727 67.7735C46.0727 66.6103 47.0189 65.6641 48.182 65.6641C49.3452 65.6641 50.2914 66.6103 50.2914 67.7735C50.2914 68.9366 49.3453 69.8828 48.182 69.8828Z" fill="black"/>
+               </g>
+               <defs>
+               <clipPath id="clip0_1_3995">
+               <rect width="80" height="80" fill="white"/>
+               </clipPath>
+               </defs>
+               </svg>
+
+
+               <p class="mb-4 fs-5" style="font-size: 19px !important;">
+                  Please enter your contact number so our AI assistant reaches out to
+                  you
+               </p>
+               <form>
+                  <label for="contactNoSupport" class="form-label text-start d-block">Contact No<span class="required-star">*</span></label>
+                  <div class="input-group mb-3">
+                     <input type="tel" class="form-control" id="supportcontactno" placeholder="Enter your number" required />
+                  </div>
+                  <button id="support-submit-btn" type="submit" style="font-size: 13px;padding: 5px 20px;background: #183EC2;color: #fff; marging-top:20px width:135px" class="btn">
+                     Submit
+                  </button>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+<header id="header" class="fixed-top w-100 custom-header-semi-transparent" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 49,  'stickyChangeLogo': false}">
+   <div class="header-body" style="background: #fff;">
+      <div class="top-header">
+         <div class="container">
+            <div class="top-contact align-items-center d-flex justify-content-end">
+               <p class="mr-4 mb-0"><i class="fa fa-phone"></i><a href="tel:9820180931"> +91 98201 80931</a></p>
+               <p class="mb-0"><i class="fa fa-envelope"></i><a href="mailto:enquiry@strategicerp.com"> enquiry@strategicerp.com</a></p>
+            </div>
+         </div>
+      </div>
+      <div class="header-container container">
+         <div class="header-row">
+            <div class="header-column">
+               <div class="header-row">
+                  <div class="header-logo">
+                     <a href="https://strategicerp.com"><img src="https://strategicerp.com/images/StrategicERP.svg" alt="strategicERP" width="200" height="69" data-sticky-width="212" data-sticky-height="69" data-sticky-top="63"></a>
+                  </div>
+               </div>
+            </div>
+            <div class="header-column justify-content-end">
+
+               <div class="header-row mt-0">
+                  <div class="header-nav">
+                     <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
+                    <!-- <button class="btn header-btn-collapse-nav" id="menuToggle" type="button">
+                        <i class="fas fa-bars"></i>
+                     </button> -->
+                    <button class="btn header-btn-collapse-nav" id="menuToggle" type="button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                     <!-- <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".navbar-collapse "><i class="fas fa-bars"></i></button> -->
+                        <!-- <nav class="navbar-collapse  collapse" id="mobileNav"> -->
+                        <nav class="navbar-collapse" id="mobileNav">
+                           <ul class="nav nav-pills" id="mainNav">
+                              <li class="dropdown me-4 li-menu d-lg-flex call-me">
+                                 <button id="callMeBtn" class="dropdown-item drop-btn0" style="background: white;border: 2px solid #183EC2;border-radius: 50px;padding: 4px 15px 3px 15px;color: #183EC2;margin-right: 10px;width: max-content;"><i class="fas fa-phone"></i> Call Me</button>
+                                 <!-- <button class="btn drop-btn0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: white;border: 2px solid #183EC2;border-radius: 50px;padding: 4px 15px 3px 15px;color: #183EC2;margin-right: 10px;width: max-content;">
+                                    <i class="fas fa-phone"></i> 
+                                    Call Me
+                                 </button> -->
+                                 <ul id="callMeMenu" class="dropdown-menu drop-menu-0">
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#salesAppointmentModal"><i class="fa-regular fa-calendar-days"></i> Sales Appointment</a></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#supportModal" class="dropdown-item"><i class="fas fa-headset"></i> Support</a></li>
+                                 </ul>
+                              </li>
+                              <li class="dropdown dropdown-mega li-menu d-lg-flex me-4">
+                                 <a href="#" class="dropdown-item dropdown-toggle drop-btn1 d-flex align-items-center justify-content-between" style="color: #000;text-transform: none;font-family: 'Poppins';font-weight: 500;"> Products<i class="arrow down"></i></a>
+                                 <ul class="dropdown-menu drop-menu-1 p-0">
+                                    <li>
+                                       <div class="dropdown-mega-content p-0">
+                                          <div class="d-none d-lg-block">
+                                             <div class="d-lg-flex align-items-start ">
+                                                <div class="nav flex-column nav-pills col-lg-3 pe-0 pt-4 pb-4 ps-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                   <h3 class="mb-4">Products</h3>
+                                                   <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Real Estate ERP</button>
+                                                   <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Infrastructure ERP</button>
+                                                   <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Other Industries</button>
+                                                   <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Mobile Apps</button>
+                                                   <!-- <button class="nav-link" id="v-pills-ai-tab" data-bs-toggle="pill" data-bs-target="#v-pills-ai" type="button" role="tab" aria-controls="v-pills-ai" aria-selected="false">Artificial Intelligence (AI)</button> -->
+                                                </div>
+                                                <div class="tab-content pt-0 col-lg-9" id="v-pills-tabContent" data-tabs-content="example-tabs">
+                                                   <div class="tab-pane show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                      <div class="menu-content">
+                                                         <div class="row">
+                                                            <div class="col-lg-8 pt-4 pb-4">
+                                                               <div class="row">
+                                                                  <div class="col-lg-6">
+                                                                     <a href="./real-estate-crm.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Real Estate CRM</h4>
+                                                                           <p>Campaign Management, Sales Automation, Timely Communication & Lead Conversion</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/real-estate-large.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Real Estate Large</h4>
+                                                                           <p>Boost Lead Conversion Rates & Streamline Operations From Land Acquisition To Possession</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/real-estate-basic.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Real Estate Basic</h4>
+                                                                           <p>Get Real Estate CRM Efficiency & Generate Financial and Compliance Reports</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/erp-smartcity.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Smart City ERP</h4>
+                                                                           <p>Urban Sustainability, Waste Management, Disaster Management & Civic Management</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/real-estate-medium.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Real Estate Medium</h4>
+                                                                           <p>Sales Performance, Project Execution, Data Management, Finance, HR & Payroll</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/property-facilities-management.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Property Management</h4>
+                                                                           <p>Track & Manage Residential & Commercial Properties, Automate Rentals, Maintenance & Sales</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                               <div class="headser-ind-box p-4">
+                                                                  <h4>Industries</h4>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/images/icon3.png" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Residential Real Estate</p>
+                                                                  </div>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/images/icon4.png" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Commercial Real Estate</p>
+                                                                  </div>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/images/icon1.png" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Property Management</p>
+                                                                  </div>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/images/icon2.png" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Smart City Management</p>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div class="tab-pane" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                                      <div class="menu-content">
+                                                         <div class="row">
+                                                            <div class="col-lg-8 pt-4 pb-4">
+                                                               <div class="row">
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/infrastructure-basic.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Infrastructure Basic</h4>
+                                                                           <p>High-level Overview Of Multiple Projects, Schedule, Compliance, Real-Time Inventory Control & Site Management</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/inventory-management.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Inventory - P2P</h4>
+                                                                           <p>Manage Inventory, Centralized Visibility, Streamline Procurement & Evaluate Vendors</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/infrastructure-medium.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Infrastructure Medium</h4>
+                                                                           <p>Site Management, Project Budgeting, Financial
+                                                                              Planning, Data Forecasting & Visual Reporting</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/project-portfolio-management.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Projects - PPM</h4>
+                                                                           <p>Project Optimization, Site Management, Resource
+                                                                              Utilization & Business Performance Analytics</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/infrastructure-large.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Infrastructure Large</h4>
+                                                                           <p>A Comprehensive View of Critical Business Functions from Planning to Execution</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/plant-and-machinery-management.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Plant & Machinery</h4>
+                                                                           <p>Remote Asset Monitoring, Preventive Maintenance,
+                                                                              Procurement & Reporting</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                               <div class="headser-ind-box p-4">
+                                                                  <h4>Industries</h4>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/home/RE-Building-icon.svg" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Civil Construction</p>
+                                                                  </div>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/images/Icon/buildings.png" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Building Construction</p>
+                                                                  </div>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/home/RE-Building-icon.svg" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Turnkey Water Supply
+                                                                        Infrastructure</p>
+                                                                  </div>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/home/RE-Building-icon.svg" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Oil, Gas & Power Supply
+                                                                        Infrastructure</p>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div class="tab-pane" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                                      <div class="menu-content">
+                                                         <div class="row">
+                                                            <div class="col-lg-8 pt-4 pb-4">
+                                                               <div class="row">
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/business-to-government.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Government Software Solutions</h4>
+                                                                           <p>Smooth Government Operations, Streamlined Communication & Contracts Management In Real-Time</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/b2b-erp.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>B2B ERP Solution</h4>
+                                                                           <p>Compliance Reporting Automation, Real-Time Financial Insights & Expense Management</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/ceramic.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Ceramic Automation Solutions</h4>
+                                                                           <p>Production Scheduling, Budgeting, Sales, Real-Time Inventory Tracking & GPS Monitoring</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/hcm.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Human Capital (HCM)</h4>
+                                                                           <p>Manage End-to-End HR Tasks From Hiring To Payroll & Compliance</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/document-management-software.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Document Management Software</h4>
+                                                                           <p>Secure Data Storage with Cloud DMS, Archive Of Accessible Documents & Workflow Optimization</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/manufacturing-erp.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Manufacturing ERP</h4>
+                                                                           <p>Production Optimization, Cost Control, Machinery, Assets & Quality Management In Real-Time</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                               <div class="headser-ind-box p-4">
+                                                                  <h4>Industries</h4>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/home/RE-Building-icon.svg" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Ceramic Manufacturing</p>
+                                                                  </div>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/home/RE-Building-icon.svg" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Government Software Solutions</p>
+                                                                  </div>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/home/RE-Building-icon.svg" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">B2B Software Solutions</p>
+                                                                  </div>
+                                                                  <div class="headser-ind-info d-flex align-items-center mb-4">
+                                                                     <div class="headser-ind-icon me-3">
+                                                                        <img src="https://strategicerp.com/home/RE-Building-icon.svg" class="img-fluid" alt="">
+                                                                     </div>
+                                                                     <p class="mb-0">Document Management
+                                                                        Solutions</p>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div class="tab-pane" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                                      <div class="menu-content">
+                                                         <div class="row">
+                                                            <div class="col-lg-8 pt-4 pb-4">
+                                                               <div class="row">
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/CRM-app.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>CRM App</h4>
+                                                                           <p>Optimize Sales, Convert Leads, Respond Instantly To Queries & Get Real-Time Campaign Insights</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/customer-app.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Customer App</h4>
+                                                                           <p>Real-Time Project Updates, Payment Tracking & Service Request Management</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/project-portfolio-management-app.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>PPM App</h4>
+                                                                           <p>Track Progress, Minimize Errors & Manage Projects With Digital Insights</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/partner-app.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Partner App</h4>
+                                                                           <p>Manage Reselling With Project Insights, Direct Dialing, EMI Calculations & Brokerage Reports</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/ess-app.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>ESS App</h4>
+                                                                           <p>GPS-tagged attendance, Access Shared Team Directory For Workforce Management</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-6">
+                                                                     <a href="https://strategicerp.com/facility-app.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Facility App</h4>
+                                                                           <p>Seamless Property Services, Customizable Dashboards, Service Booking & Issue Management</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                               <div class="headser-ind-box p-4">
+                                                                  <h4>Download Now!</h4>
+                                                                  <div class="download-img-box">
+                                                                     <img src="https://strategicerp.com/images/ppm-app/PPM-App.png" class="img-fluid mb-5" alt="">
+                                                                     <div class="app-btns d-flex align-items-center">
+                                                                        <a href="#" class="m-0 p-0"><img src="https://strategicerp.com/images/ppm-app/image__9_.png" class="img-fluid me-3" alt=""></a>
+                                                                        <a href="#" class="m-0 p-0"><img src="https://strategicerp.com/images/ppm-app/image-GS.png" class="img-fluid" alt=""></a>
+                                                                     </div>
+
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <!-- <div class="tab-pane" id="v-pills-ai" role="tabpanel" aria-labelledby="v-pills-ai-tab">
+                                                      <div class="menu-content">
+                                                         <div class="row">
+                                                            <div class="col-lg-8 pt-4 pb-4">
+                                                               <div class="row">
+                                                                  <div class="col-lg-12">
+                                                                     <a href="./development-tool.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Development Tools</h4>
+                                                                           <p>Build, automate, and deploy enterprise apps 10x faster with our AI-powered No-Code/Low-Code platform and turn complex processes into smart, scalable workflows without writing a single line of code.</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                                  <div class="col-lg-12">
+                                                                     <a href="./chanakya-ai.php" class="p-0">
+                                                                        <div class="menu-details p-3">
+                                                                           <h4>Chanakya AI</h4>
+                                                                           <p>Bring intelligence to your ERP with powerful predictive analytics, intelligent automation and next-level decision intelligence supercharging productivity, eliminating guesswork and elevating accuracy across every department.</p>
+                                                                        </div>
+                                                                     </a>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                               <div class="headser-ind-box p-4">
+                                                                  <h4>Download Now!</h4>
+                                                                  <div class="download-img-box">
+                                                                     <img src="https://strategicerp.com/images/ppm-app/PPM-App.png" class="img-fluid mb-5" alt="">
+                                                                     <div class="app-btns d-flex align-items-center">
+                                                                        <a href="#" class="m-0 p-0"><img src="https://strategicerp.com/images/ppm-app/image__9_.png" class="img-fluid me-3" alt=""></a>
+                                                                        <a href="#" class="m-0 p-0"><img src="https://strategicerp.com/images/ppm-app/image-GS.png" class="img-fluid" alt=""></a>
+                                                                     </div>
+
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+
+                                                         </div>
+                                                      </div>
+                                                   </div> -->
+                                                </div>
+                                             </div>
+                                          </div>
+
+                                          <!-- mobile menu  -->
+                                          <div class="d-block d-lg-none pt-3 pb-3">
+                                             <div class="mobile-menu-box p-3 pt-0 pb-0">
+                                                <div class="d-flex align-items-center justify-content-between" style="border-bottom: 1px solid #e8e8e8;">
+                                                   <h4 class="link-1">Real Estate ERP</h4>
+                                                   <i class="arrow down link-1"></i>
+                                                </div>
+                                                <div class="mobile-menu-links link-box-1 sub-manu">
+                                                   <a href="https://strategicerp.com/real-estate-crm.php">Real Estate CRM</a>
+                                                   <a href="https://strategicerp.com/real-estate-basic.php">Real Estate Basic</a>
+                                                   <a href="https://strategicerp.com/real-estate-medium.php">Real Estate Medium</a>
+                                                   <a href="https://strategicerp.com/real-estate-large.php">Real Estate Large</a>
+                                                   <a href="https://strategicerp.com/erp-smartcity.php">Smart City ERP</a>
+                                                   <a href="https://strategicerp.com/property-facilities-management.php">Property Management</a>
+                                                </div>
+                                             </div>
+                                             <div class="mobile-menu-box p-3 pt-0 pb-0">
+                                                <div class="d-flex align-items-center justify-content-between" style="border-bottom: 1px solid #e8e8e8;">
+                                                   <h4 class="link-2">Infrastructure ERP</h4>
+                                                   <i class="arrow down link-2"></i>
+                                                </div>
+                                                <div class="mobile-menu-links link-box-2 sub-manu">
+                                                   <a href="https://strategicerp.com/infrastructure-basic.php">Infrastructure Basic</a>
+                                                   <a href="https://strategicerp.com/infrastructure-medium.php">Infrastructure Medium</a>
+                                                   <a href="https://strategicerp.com/infrastructure-large.php">Infrastructure Large</a>
+                                                   <a href="https://strategicerp.com/project-portfolio-management.php">Projects - PPM</a>
+                                                   <a href="https://strategicerp.com/inventory-management.php">Inventory - P2P</a>
+                                                   <a href="https://strategicerp.com/plant-and-machinery-management.php">Plant & Machinery</a>
+                                                </div>
+                                             </div>
+                                             <div class="mobile-menu-box p-3 pt-0 pb-0">
+                                                <div class="d-flex align-items-center justify-content-between" style="border-bottom: 1px solid #e8e8e8;">
+                                                   <h4 class="link-3">Other Industries</h4>
+                                                   <i class="arrow down link-3"></i>
+                                                </div>
+                                                <div class="mobile-menu-links link-box-3 sub-manu">
+                                                   <a href="https://strategicerp.com/business-to-government.php">Government Software Solutions</a>
+                                                   <a href="https://strategicerp.com/ceramic.php">Ceramic Automation Solutions</a>
+                                                   <a href="https://strategicerp.com/document-management-software.php">Document Management Software</a>
+                                                   <a href="https://strategicerp.com/b2b-erp.php">B2B ERP Solution</a>
+                                                   <a href="https://strategicerp.com/hcm.php">Human Capital (HCM)</a>
+                                                   <a href="https://strategicerp.com/manufacturing-erp.php">Manufacturing ERP</a>
+                                                </div>
+                                             </div>
+                                             <div class="mobile-menu-box p-3 pt-0 pb-0">
+                                                <div class="d-flex align-items-center justify-content-between" style="border-bottom: 1px solid #e8e8e8;">
+                                                   <h4 class="link-4">Mobile App</h4>
+                                                   <i class="arrow down link-4"></i>
+                                                </div>
+                                                <div class="mobile-menu-links link-box-4 sub-manu">
+                                                   <a href="https://strategicerp.com/CRM-app.php">CRM App</a>
+                                                   <a href="https://strategicerp.com/project-portfolio-management-app.php">PPM App</a>
+                                                   <a href="https://strategicerp.com/ess-app.php">ESS App</a>
+                                                   <a href="https://strategicerp.com/customer-app.php">Customer App</a>
+                                                   <a href="https://strategicerp.com/partner-app.php">Partner App</a>
+                                                   <a href="https://strategicerp.com/facility-app.php">Facility App</a>
+                                                </div>
+                                             </div>
+                                             <!-- <div class="mobile-menu-box p-3 pt-0 pb-0">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                   <h4 class="link-5">Artificial Intelligence (AI)</h4>
+                                                   <i class="arrow down"></i>
+                                                </div>
+                                                <div class="mobile-menu-links link-box-4">
+                                                   <a href="https://strategicerp.com/development-tool.php">Development Tools</a>
+                                                   <a href="https://strategicerp.com/chanakya-ai.php">Chanakya AI</a>
+                                                </div>
+                                             </div> -->
+                                          </div>
+                                       </div>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <!-- <li class="dropdown me-4 li-menu d-lg-flex"><a href="#" class="dropdown-item dropdown-toggle drop-btn2" style="color: #000;text-transform: none;font-family: 'Poppins';font-weight: 500;">Services<i class="arrow down"></i></a>
+                                 <ul class="dropdown-menu drop-menu-2">
+                                    <li><a href="https://strategicerp.com/services.php" class="dropdown-item">Advisory Services</a></li>
+                                    <li><a href="https://strategicerp.com/Rapid-Application-Development.php" class="dropdown-item">Rapid Application Development</a></li>
+                                 </ul>
+                              </li> -->
+                              <li class="dropdown me-4 li-menu d-lg-flex">
+                                 <a href="#" class="dropdown-item dropdown-toggle drop-btn2 d-flex align-items-center justify-content-between" style="color: #000;text-transform: none;font-family: 'Poppins';font-weight: 500;">AI<i class="arrow down"></i></a>
+                                 <ul class="dropdown-menu drop-menu-2">
+                                    <li><a href="https://strategicerp.com/development-tool.php" class="dropdown-item">Development Tools</a></li>
+                                    <li><a href="https://strategicerp.com/chanakya-ai.php" class="dropdown-item">Chanakya AI</a></li>
+                                    <li><a href="https://strategicerp.com/digital-employee.php" class="dropdown-item">Digital Employee</a></li>
+                                 </ul>
+                              </li>
+                              <li class="dropdown me-4 li-menu d-lg-flex"><a href="#" class="dropdown-item dropdown-toggle drop-btn3 d-flex align-items-center justify-content-between" style="color: #000;text-transform: none;font-family: 'Poppins';font-weight: 500;"> About Us<i class="arrow down"></i></a>
+                                 <ul class="dropdown-menu drop-menu-3">
+                                    <li><a href="https://strategicerp.com/who-we-are.php" class="dropdown-item">Who we are</a></li>
+                                    <li><a href="https://strategicerp.com/vision-mission.php" class="dropdown-item">Vision Mission</a></li>
+                                    <li><a href="https://strategicerp.com/our-team.php" class="dropdown-item">Our Team</a></li>
+                                    <li><a href="https://strategicerp.com/clients.php" class="dropdown-item">Our Clients</a></li>
+                                    <li><a href="https://strategicerp.com/investor.php" class="dropdown-item">Investor</a></li>
+                                 </ul>
+                              </li>
+
+                              <li class="dropdown me-4 li-menu d-lg-flex"> <a href="#" class="dropdown-item dropdown-toggle drop-btn4 d-flex align-items-center justify-content-between" style="color: #000;text-transform: none;font-family: 'Poppins';font-weight: 500;">Resources<i class="arrow down"></i></a>
+                                 <ul class="dropdown-menu drop-menu-4">
+                                    <li><a href="https://strategicerp.com/case-studies.php" class="dropdown-item">Case Studies</a></li>
+                                    <li><a href="https://strategicerp.com/testimonials.php" class="dropdown-item">Testimonials</a></li>
+                                    <li><a href="https://strategicerp.com/press.php" class="dropdown-item">StrategicERP in News</a></li>
+                                    <li><a href="https://strategicerp.com/blog.php" class="dropdown-item">Blogs </a></li>
+                                    <li><a href="https://strategicerp.com/knowledge-base.php" class="dropdown-item">Knowledge Base </a></li>
+                                 </ul>
+                              </li>
+
+                              <li class="li-menu me-4 d-lg-flex">
+                                 <a href="contact-us.php" class="dropdown-item ms-lg-4" style="color: #000;text-transform: none;font-family: 'Poppins';margin-right: 5px;font-weight: 500">Contact Us</a>
+                              </li>
+                           </ul>
+                           <form class="d-flex pb-3 pb-lg-0 demo-login">
+                              <button type="button" onclick="window.open('https://29.strategicerpcloud.com/', '_blank')" class="hover_txt" style="width: fit-content;align-items: center;white-space: normal;border-radius: 4px;font-style: normal;font-weight: 500;padding: 10px 20px;font-family: Poppins;letter-spacing: .5px;border: none;line-height: 24px;color: #000000;font-size: 16px;background: #fff;">Login</button>
+                              <button type="button" onclick="window.open('https://strategicerp.com/demo.php', '_blank')" class="hover_txt" style="width: fit-content;align-items: center;white-space: normal;border-radius: 4px;font-style: normal;font-weight: 500;padding: 10px 20px;font-family: Poppins;letter-spacing: .5px;border: none;line-height: 24px;color: #FFF;font-size: 16px;">Free Demo <i class="fa fa-arrow-right ms-2"></i></button>
+                           </form>
+                        </nav>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+      </div>
+   </div>
+      <script>
+         $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+               $('#header').addClass('fixedHeader');
+            } else {
+               $('#header').removeClass('fixedHeader');
+            }
+         });
+      </script>
+      <script>
+         $('.nav-link').hover(function(e) {
+            e.preventDefault()
+            $(this).tab('show')
+         })
+
+         $(function() {
+            $('#myTab').tab('show')
+         })
+
+
+         $(document).ready(function() {
+            $(".link-1").click(function() {
+               $(".link-box-1").slideToggle();
+            });
+            $(".link-2").click(function() {
+               $(".link-box-2").slideToggle();
+            });
+            $(".link-3").click(function() {
+               $(".link-box-3").slideToggle();
+            });
+            $(".link-4").click(function() {
+               $(".link-box-4").slideToggle();
+            });
+         });
+      </script>
+</header>
+<script type="application/ld+json">
+   {
+      "@context": "https://schema.org/",
+      "@type": "WebSite",
+      "name": "StrategicERP",
+      "url": "https://strategicerp.com/",
+      "potentialAction": {
+         "@type": "SearchAction",
+         "target": "{search_term_string}",
+         "query-input": "required name=search_term_string"
+      }
+   }
+</script>
+<script type="application/ld+json">
+   {
+      "@context": "https://schema.org",
+      "@type": "Corporation",
+      "name": "StrategicERP",
+      "url": "https://strategicerp.com/",
+      "logo": "https://strategicerp.com/images/StrategicERP.svg",
+      "sameAs": [
+         "https://twitter.com/strategicerpita/",
+         "https://www.facebook.com/ITAStrategicerp/",
+         "https://www.instagram.com/strategicerp/",
+         "https://www.linkedin.com/company/itaakash-strategic-software-pvt-ltd-",
+         "https://www.youtube.com/channel/UCl-tRfDh-0FB5qy_ymp4n9A"
+      ]
+   }
+</script>
+
+<div class="iti">
+   <div class="iti__flag-container"> … </div>
+   <input … >
+</div>
+
+<div class="iti">
+   <div class="iti">
+      <div class="iti__flag-container">…</div>
+      <input … />
+   </div>
+</div>
+
+<script>
+  /* ----- common options ----- */
+  const itiOpts = {
+  separateDialCode: true,
+   initialCountry: "in", // set default
+   utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+   };
+
+  /* === Sales phone === */
+  const phoneInput   = document.getElementById("Contact-No");
+  const itiSales     = window.intlTelInput(phoneInput, itiOpts);
+
+  /* === Support phone === */
+  const supportInput = document.getElementById("supportcontactno");
+  const itiSupport   = window.intlTelInput(supportInput, itiOpts);
+
+  /* Restrict to digits only */
+  phoneInput.addEventListener("input",   () => phoneInput.value   = phoneInput.value.replace(/\D/g, ""));
+  supportInput.addEventListener("input", () => supportInput.value = supportInput.value.replace(/\D/g, ""));
+
+  /* Helper to show success msg */
+  function showTempMessage(target, txt) {
+   // const div = document.createElement("div");
+   // div.textContent = txt;
+   // div.style.cssText = "color: green; margin-top: 5px; margin-bottom: 5px; font-weight: 500;";
+
+   // // Replace the button with the success message
+   // target.replaceWith(div);
+
+   // // After 3 seconds, bring the button back and remove the message
+   // setTimeout(() => {
+   //    div.replaceWith(target);
+   // }, 3000);
+   
+   const content = `<div><svg width="261" height="52" viewBox="0 0 261 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <g clip-path="url(#clip0_1_1317)">
+                     <path d="M0.5 5.04478C0.575709 4.0909 0.982014 3.28724 1.71387 2.6363C2.44572 1.98787 3.42742 1.46962 4.66147 1.08907C5.89301 0.708522 7.35671 0.430621 9.0526 0.257872C10.7485 0.0851228 12.5958 0 14.5995 0C16.6033 0 18.385 0.0675975 20.0607 0.200289C21.7364 0.335484 23.3061 0.47819 24.7698 0.63091C26.2335 0.78363 27.6594 0.926336 29.0474 1.06153C30.4354 1.19673 31.8208 1.26182 33.2088 1.26182C31.8587 2.44603 30.347 3.1921 28.6713 3.49754C26.9956 3.80298 25.214 3.95571 23.3263 3.95571C22.6701 3.95571 21.9963 3.94569 21.3048 3.92817C20.6108 3.90814 19.9168 3.90063 19.2254 3.90063C17.9913 6.99759 16.5756 10.8582 14.9781 15.4823C13.3781 20.1065 11.7706 25.3641 10.1529 31.2476C9.72893 32.7773 9.34281 34.1718 8.99708 35.4336C8.65134 36.6954 8.34093 37.8796 8.07343 38.9887C7.8034 40.0978 7.60151 41.1393 7.46775 42.1132C7.33148 43.0871 7.26586 44.0535 7.26586 45.0074V45.6383C7.26586 45.8687 7.28605 46.0765 7.32391 46.2692C5.59017 46.2692 4.39649 45.8962 3.74035 45.1501C3.0842 44.404 2.75865 43.4201 2.75865 42.1984C2.75865 41.0893 2.99083 39.7724 3.45265 38.2427C3.91448 36.7155 4.39649 35.2433 4.89869 33.8288C5.55232 31.9561 6.34221 29.7504 7.26839 27.2067C8.19204 24.6656 9.18383 22.0368 10.2438 19.3229C11.3037 16.609 12.3813 13.9051 13.4791 11.2112C14.5768 8.51728 15.6469 6.07877 16.6866 3.90063C14.6828 3.93818 12.9491 3.97824 11.4854 4.01579C10.0217 4.05335 8.68162 4.11093 7.46775 4.18854C6.25389 4.26615 5.10816 4.3713 4.02804 4.504C2.94793 4.63919 1.77444 4.81945 0.502524 5.04978L0.5 5.04478Z" fill="#183EC2"></path>
+                     <path d="M36.8504 39.0438C36.8504 38.4329 36.9463 37.7745 37.1381 37.066C37.3299 36.36 37.5318 35.6239 37.7438 34.8578C37.9558 34.0942 38.1577 33.3306 38.352 32.5645C38.5438 31.8009 38.6397 31.0748 38.6397 30.3863C38.6397 29.3924 38.4277 28.6864 38.0037 28.2658C37.5798 27.8452 37.0599 27.6349 36.4441 27.6349C35.4801 27.6349 34.6145 28.0279 33.8448 28.8091C33.0725 29.5927 32.371 30.5666 31.735 31.7333C31.0991 32.9 30.5111 34.1693 29.9735 35.5463C29.4335 36.9233 28.9035 38.1926 28.3836 39.3593C27.8638 40.526 27.3515 41.4999 26.8518 42.2835C26.3496 43.0671 25.8297 43.4577 25.2922 43.4577C24.9464 43.4577 24.6184 43.2849 24.3105 42.9419C24.0026 42.5989 23.7528 42.1483 23.5584 41.595C23.3641 41.0417 23.2127 40.4108 23.0966 39.7023C22.9805 38.9963 22.9225 38.2602 22.9225 37.4941C22.9225 35.6589 23.2304 33.4708 23.8461 30.9296C24.4619 28.3885 25.272 25.7421 26.2739 22.9882C27.2758 20.2367 28.4114 17.5128 29.6833 14.8189C30.9552 12.125 32.2271 9.69649 33.4965 7.53838C34.7684 5.38027 35.9899 3.64026 37.1659 2.32086C38.3419 1.00145 39.3513 0.343002 40.1993 0.343002C40.545 0.343002 40.8428 0.458168 41.0952 0.685997C41.345 0.916329 41.5368 1.21176 41.6731 1.57478C41.8068 1.9378 41.9128 2.33087 41.9911 2.74897C42.0668 3.16958 42.1072 3.57016 42.1072 3.95321C42.1072 4.83198 41.933 5.89351 41.5873 7.1353C41.2416 8.37709 40.7671 9.69649 40.1715 11.091C39.5734 12.4855 38.8618 13.9101 38.034 15.3622C37.2037 16.8143 36.3003 18.1988 35.3186 19.5182C34.3369 20.8376 33.2871 22.0418 32.1691 23.1309C31.0511 24.2199 29.9331 25.1087 28.8177 25.7972C28.472 26.6384 28.1616 27.5547 27.894 28.5487C27.624 29.5426 27.4019 30.5466 27.2303 31.558C27.0562 32.572 26.9224 33.5559 26.8265 34.5098C26.7307 35.4662 26.6827 36.3249 26.6827 37.091C26.6827 37.5116 26.6928 37.8746 26.713 38.1801C26.7332 38.4855 26.7609 38.7734 26.7988 39.0413C27.4928 37.091 28.2448 35.2208 29.0524 33.4232C29.8625 31.6281 30.7558 30.0408 31.7401 28.6638C32.7218 27.2869 33.7817 26.1978 34.9173 25.3966C36.053 24.593 37.2567 24.1924 38.5286 24.1924C39.3387 24.1924 40.0226 24.3451 40.5804 24.6506C41.1381 24.956 41.5923 25.3491 41.9381 25.8248C42.2838 26.3029 42.5362 26.8562 42.6901 27.4872C42.8441 28.1181 42.9223 28.739 42.9223 29.3498C42.9223 30.2286 42.7961 31.0974 42.5463 31.9586C42.2939 32.8198 42.0062 33.651 41.6781 34.4522C41.3501 35.2559 41.0624 36.0395 40.8125 36.8031C40.5602 37.5692 40.4365 38.2927 40.4365 38.9812C40.4365 39.7473 40.6005 40.3006 40.9286 40.6436C41.2542 40.9866 41.6706 41.1594 42.1702 41.1594C42.8239 41.1594 43.5582 40.9115 44.3658 40.4133C45.1759 39.9176 45.9835 39.2566 46.7935 38.4354C47.6036 37.6143 48.391 36.6504 49.1632 35.5413C49.9329 34.4322 50.6093 33.248 51.1872 31.9861L51.9392 32.6746C51.3235 34.0892 50.6093 35.3986 49.8017 36.6028C48.9916 37.807 48.1058 38.8586 47.1443 39.7548C46.1803 40.6536 45.1683 41.3597 44.1109 41.8754C43.051 42.3911 41.9633 42.649 40.8453 42.649C39.4952 42.649 38.4958 42.306 37.8397 41.6175C37.1835 40.929 36.858 40.0703 36.858 39.0388L36.8504 39.0438ZM39.9141 4.9872C39.6062 4.9872 39.0384 5.51296 38.2081 6.56448C37.3804 7.61599 36.4466 9.0105 35.4044 10.7505C34.3646 12.4905 33.3148 14.4759 32.2549 16.7141C31.195 18.9498 30.2991 21.2356 29.5672 23.5665C30.877 22.4975 32.1691 21.0929 33.4385 19.3529C34.7104 17.6129 35.846 15.8379 36.8479 14.0202C37.8498 12.2051 38.6473 10.5052 39.2454 8.91787C39.8435 7.33308 40.1412 6.17642 40.1412 5.45037C40.1412 5.14493 40.063 4.99221 39.9091 4.99221L39.9141 4.9872Z" fill="#183EC2"></path>
+                     <path d="M66.3239 29.1245C66.4779 29.1621 66.6899 29.2196 66.9599 29.2973C67.2299 29.3749 67.4899 29.47 67.7397 29.5852C67.9895 29.7003 68.2015 29.833 68.3757 29.9858C68.5498 30.1385 68.6356 30.3287 68.6356 30.5591C68.6356 30.9021 68.4615 31.3828 68.1157 31.9936C67.77 32.6045 67.3839 33.283 66.9599 34.0291C66.5359 34.7752 66.1498 35.5388 65.8041 36.3224C65.4583 37.106 65.2842 37.8421 65.2842 38.5306C65.2842 39.1039 65.4381 39.6672 65.746 40.223C66.0539 40.7763 66.5561 41.0542 67.2476 41.0542C68.2873 41.0542 69.6551 40.3081 71.351 38.8185C73.0469 37.3288 74.7605 35.0531 76.4942 31.9962L77.0721 32.5695C76.4563 34.1367 75.7043 35.5613 74.8185 36.8406C73.9327 38.1225 72.9788 39.2191 71.9567 40.1379C70.9346 41.0542 69.8848 41.7627 68.8072 42.2584C67.7271 42.7542 66.6697 43.0045 65.6299 43.0045C64.2041 43.0045 63.1543 42.5839 62.4804 41.7427C61.8066 40.9015 61.4685 39.9852 61.4685 38.9912C61.4685 38.5331 61.5265 37.9798 61.6426 37.3288C59.9467 39.547 58.425 41.2094 57.0773 42.316C55.7272 43.4251 54.3417 43.9784 52.9159 43.9784C51.6818 43.9784 50.6623 43.5854 49.8522 42.8042C49.0421 42.0206 48.6383 40.8264 48.6383 39.2216C48.6383 38.0749 48.8604 36.8532 49.302 35.5513C49.7462 34.2519 50.3519 32.9425 51.1216 31.6231C51.8913 30.3037 52.7973 29.0444 53.837 27.8402C54.8767 26.6359 55.9846 25.5744 57.1606 24.6581C58.3341 23.7417 59.5581 23.0057 60.83 22.4499C62.1019 21.8966 63.3738 21.6187 64.6432 21.6187C66.1448 21.6187 67.3965 22.0118 68.3984 22.7929C69.4002 23.5765 69.8999 24.618 69.8999 25.9174C69.8999 26.8738 69.64 27.5222 69.1201 27.8677C68.6003 28.2107 67.9164 28.3834 67.0684 28.3834C67.2602 27.6949 67.3561 27.0265 67.3561 26.378C67.3561 25.4993 67.1441 24.7432 66.7201 24.1123C66.2962 23.4814 65.5643 23.1659 64.5246 23.1659C63.6009 23.1659 62.6748 23.4338 61.7511 23.9696C60.8275 24.5053 59.9215 25.2214 59.0357 26.1202C58.1499 27.019 57.3221 28.0404 56.5499 29.1871C55.7777 30.3338 55.0963 31.5079 54.4982 32.7122C53.9001 33.9164 53.4383 35.1006 53.1102 36.2673C52.7821 37.434 52.6181 38.4755 52.6181 39.3918C52.6181 40.8815 53.1379 41.6275 54.1777 41.6275C55.0635 41.6275 56.0654 41.1694 57.1833 40.2506C58.3013 39.3342 59.4168 38.2251 60.5347 36.9258C61.6527 35.6264 62.7202 34.2594 63.7423 32.8273C64.7618 31.3928 65.6198 30.161 66.3138 29.1295L66.3239 29.1245Z" fill="#183EC2"></path>
+                     <path d="M73.2009 40.879C73.2009 40.7262 73.4129 40.1329 73.8368 39.1014C74.2608 38.0699 74.7226 36.8456 75.2248 35.4311C75.7245 34.0166 76.1964 32.5369 76.6406 30.9872C77.0822 29.44 77.3043 28.0354 77.3043 26.7736C77.5365 26.5057 77.9024 26.2378 78.4021 25.97C78.9018 25.7021 79.4216 25.5694 79.9617 25.5694C81.0014 25.5694 81.5213 26.0676 81.5213 27.059C81.5213 27.6699 81.3472 28.6839 81.0014 30.0984C80.6557 31.5129 80.2115 33.0226 79.6715 34.6274C80.4412 33.4808 81.2891 32.3066 82.2153 31.1024C83.1415 29.8981 84.1232 28.809 85.1629 27.8351C86.2027 26.8612 87.2727 26.0676 88.3705 25.4567C89.4682 24.8458 90.5761 24.5404 91.6941 24.5404C92.4259 24.5404 93.0619 24.6831 93.602 24.971C94.142 25.2564 94.5836 25.6495 94.9319 26.1452C95.2776 26.6434 95.5376 27.1967 95.7117 27.8076C95.8858 28.4185 95.9716 29.0494 95.9716 29.7003C95.9716 30.5791 95.8455 31.4203 95.5956 32.224C95.3433 33.0276 95.0757 33.7912 94.7855 34.5173C94.4953 35.2433 94.2278 35.9594 93.9754 36.6679C93.7231 37.3764 93.5994 38.0724 93.5994 38.7609C93.5994 39.5646 93.7635 40.1279 94.0915 40.4533C94.4171 40.7788 94.8335 40.9415 95.3332 40.9415C96.065 40.9415 96.7969 40.6737 97.5287 40.1379C98.2606 39.6021 98.9748 38.9061 99.6662 38.0449C100.358 37.1836 101.024 36.2297 101.66 35.1782C102.296 34.1267 102.881 33.0677 103.421 31.9961L104.057 32.7422C103.442 34.1568 102.775 35.4561 102.064 36.6403C101.35 37.8246 100.58 38.8485 99.752 39.7073C98.9243 40.5685 98.0385 41.237 97.0947 41.7152C96.1508 42.1934 95.1388 42.4312 94.0612 42.4312C92.7111 42.4312 91.7017 42.0882 91.0278 41.3997C90.354 40.7112 90.0159 39.8324 90.0159 38.7634C90.0159 38.1901 90.1017 37.5792 90.2758 36.9283C90.4499 36.2798 90.6417 35.6089 90.8537 34.9229C91.0657 34.2344 91.2575 33.5459 91.4316 32.8599C91.6058 32.1714 91.6916 31.4829 91.6916 30.7969C91.6916 29.7279 91.4695 28.9918 91.0278 28.5887C90.5837 28.1882 90.0361 27.9879 89.3799 27.9879C88.1862 27.9879 86.9724 28.4861 85.7383 29.4775C84.5042 30.4714 83.3106 31.7057 82.1547 33.1753C80.9989 34.6475 79.9112 36.1947 78.8892 37.8195C77.8671 39.4444 76.9914 40.8865 76.2595 42.1483C75.6438 42.1483 75.0558 42.0431 74.498 41.8328C73.9403 41.6225 73.5062 41.3071 73.1984 40.8865L73.2009 40.879Z" fill="#183EC2"></path>
+                     <path d="M113.655 33.1378C114.079 33.1378 114.705 33.0327 115.532 32.8223C116.36 32.612 117.18 32.2866 117.988 31.8484C118.798 31.4103 119.51 30.8445 120.125 30.1585C120.741 29.47 121.049 28.6313 121.049 27.6349C121.049 26.8312 120.759 26.2028 120.183 25.7421C119.605 25.284 118.932 25.0536 118.159 25.0536C117.004 25.0536 115.944 25.4467 114.982 26.2278C114.018 27.0115 113.122 27.9954 112.294 29.1796C111.464 30.3638 110.725 31.6657 110.069 33.0777C109.412 34.4923 108.855 35.8217 108.393 37.0635C107.931 38.3053 107.545 39.3943 107.237 40.3307C106.929 41.267 106.717 41.8303 106.601 42.0206C106.407 42.3636 106.119 42.624 105.736 42.7942C105.349 42.967 104.983 43.0521 104.638 43.0521C104.136 43.0521 103.752 42.8994 103.482 42.5939C103.212 42.2885 103.01 41.8779 102.876 41.3622C102.74 40.8464 102.664 40.2631 102.644 39.6146C102.624 38.9662 102.616 38.3153 102.616 37.6643C102.616 35.6765 102.952 33.3731 103.628 30.7569C104.302 28.1381 105.178 25.4442 106.258 22.6727C107.336 19.9012 108.532 17.1798 109.841 14.5034C111.151 11.8296 112.461 9.43862 113.771 7.33809C115.081 5.23756 116.294 3.54512 117.412 2.26327C118.53 0.983927 119.434 0.343002 120.128 0.343002C120.668 0.343002 121.099 0.706026 121.428 1.43207C121.756 2.15812 121.92 3.03689 121.92 4.06838C121.92 5.40781 121.622 6.87743 121.024 8.48224C120.426 10.0871 119.608 11.7019 118.568 13.3267C117.528 14.9516 116.284 16.4988 114.841 17.9709C113.395 19.443 111.825 20.6949 110.132 21.7263C108.86 24.8233 107.906 27.8326 107.272 30.7569C106.636 33.6811 106.319 36.1371 106.319 38.125C106.934 36.5978 107.686 34.9053 108.572 33.0502C109.458 31.1975 110.45 29.4575 111.547 27.8326C112.645 26.2078 113.839 24.8433 115.131 23.7342C116.421 22.6251 117.799 22.0718 119.262 22.0718C120.726 22.0718 121.902 22.5701 122.904 23.5615C123.906 24.5554 124.405 25.7597 124.405 27.1742C124.405 28.3985 124.087 29.44 123.451 30.2987C122.816 31.1574 122.053 31.856 121.168 32.3917C120.282 32.9275 119.376 33.308 118.452 33.5384C117.528 33.7687 116.776 33.8814 116.199 33.8814C116.236 34.1868 116.352 34.7501 116.544 35.5738C116.736 36.395 117.016 37.2262 117.382 38.0674C117.748 38.9086 118.2 39.6547 118.74 40.3031C119.28 40.9541 119.934 41.277 120.706 41.277C121.516 41.277 122.303 41.0392 123.075 40.561C123.845 40.0828 124.597 39.4244 125.329 38.5832C126.061 37.7419 126.755 36.748 127.409 35.6014C128.062 34.4547 128.68 33.2329 129.258 31.9311L129.836 32.5044C129.412 33.9189 128.824 35.2859 128.075 36.6028C127.323 37.9222 126.485 39.0889 125.561 40.1003C124.638 41.1143 123.653 41.9255 122.614 42.5364C121.574 43.1472 120.552 43.4527 119.55 43.4527C118.432 43.4527 117.498 43.0796 116.746 42.3336C115.994 41.5875 115.388 40.6812 114.927 39.6096C114.465 38.5406 114.137 37.4115 113.945 36.2273C113.751 35.043 113.655 34.0116 113.655 33.1303V33.1378ZM119.78 4.9872C119.472 4.9872 119.007 5.38027 118.392 6.16139C117.776 6.94502 117.062 7.99654 116.254 9.31344C115.444 10.6328 114.596 12.1726 113.71 13.9276C112.824 15.6851 111.956 17.5203 111.111 19.4305C112.421 18.3615 113.624 17.1748 114.722 15.8754C115.82 14.576 116.754 13.2767 117.526 11.9773C118.296 10.6779 118.894 9.45364 119.318 8.30699C119.742 7.16033 119.954 6.22398 119.954 5.49794C119.954 5.15494 119.896 4.98219 119.78 4.98219V4.9872Z" fill="#183EC2"></path>
+                     <path d="M153.473 42.311C153.278 42.8844 153.155 43.4377 153.097 43.9734C153.039 44.5092 153.011 44.9849 153.011 45.408C153.011 47.0128 153.425 48.2746 154.252 49.191C155.08 50.1073 156.342 50.5679 158.038 50.5679C159.348 50.5679 160.524 50.29 161.563 49.7367C162.603 49.1834 163.537 48.4549 164.367 47.5586C165.195 46.6598 165.927 45.6383 166.563 44.4917C167.199 43.345 167.739 42.1708 168.18 40.9666C168.622 39.7624 169.008 38.5882 169.336 37.4415C169.662 36.2949 169.924 35.2634 170.116 34.3445C170.424 33.0452 170.77 31.3627 171.156 29.2998C171.539 27.2368 172.004 25.0011 172.544 22.5926C171.772 24.0447 170.944 25.3941 170.058 26.6334C169.172 27.8752 168.218 28.9367 167.196 29.8155C166.174 30.6943 165.066 31.3828 163.873 31.8785C162.679 32.3767 161.387 32.6246 160.001 32.6246C157.728 32.6246 156.11 31.9936 155.146 30.7318C154.182 29.47 153.702 27.8276 153.702 25.8022C153.702 24.3126 153.904 22.6877 154.308 20.9302C154.712 19.1727 155.166 17.4151 155.666 15.6551C156.165 13.8975 156.62 12.1876 157.023 10.5227C157.427 8.86028 157.629 7.37814 157.629 6.07877C157.629 4.85701 157.387 3.80549 156.907 2.92672C156.425 2.04796 155.567 1.60732 154.336 1.60732C153.256 1.60732 152.332 1.95031 151.562 2.63881C150.79 3.3273 150.147 4.16851 149.627 5.16245C149.107 6.15638 148.721 7.22542 148.471 8.37208C148.218 9.51873 148.095 10.5702 148.095 11.5266C148.095 12.6733 148.249 13.6096 148.557 14.3357C147.093 14.3357 146.061 13.9551 145.465 13.189C144.867 12.4254 144.569 11.4891 144.569 10.38C144.569 9.19576 144.859 7.99153 145.437 6.76726C146.015 5.5455 146.815 4.42639 147.835 3.41242C148.854 2.40096 150.03 1.57728 151.36 0.946366C152.69 0.315456 154.106 1.16974e-06 155.608 1.16974e-06C156.685 1.16974e-06 157.611 0.17275 158.381 0.515745C159.151 0.85874 159.777 1.30939 160.259 1.86269C160.741 2.41599 161.086 3.03688 161.298 3.72537C161.51 4.41387 161.616 5.10236 161.616 5.78835C161.616 6.8599 161.415 8.16678 161.011 9.71652C160.607 11.2637 160.163 12.8986 159.681 14.6186C159.199 16.3386 158.757 18.0861 158.351 19.8637C157.947 21.6412 157.745 23.2936 157.745 24.8233C157.745 26.5057 158.053 27.8427 158.669 28.8366C159.285 29.8305 160.324 30.3262 161.791 30.3262C163.138 30.3262 164.41 29.8956 165.604 29.0369C166.797 28.1781 167.915 27.059 168.955 25.682C169.995 24.3051 170.939 22.7779 171.787 21.0954C172.635 19.413 173.384 17.7331 174.04 16.0507C174.54 13.9877 175.07 11.9898 175.63 10.0595C176.188 8.12923 176.756 6.41926 177.334 4.92711C177.912 3.43746 178.51 2.24324 179.125 1.34444C179.741 0.445644 180.357 -0.00250244 180.975 -0.00250244C181.359 -0.00250244 181.861 0.160232 182.477 0.485702C183.093 0.811171 183.67 1.25932 184.211 1.83264C183.554 2.90419 182.969 3.89562 182.449 4.81445C181.929 5.73077 181.447 6.71719 181.006 7.7662C180.561 8.81772 180.13 9.9844 179.706 11.2637C179.282 12.5456 178.83 14.0653 178.348 15.8228C177.866 17.5804 177.326 19.6258 176.73 21.9567C176.132 24.2875 175.448 27.0215 174.679 30.156C174.063 32.602 173.369 35.1157 172.599 37.6944C171.827 40.2731 170.828 42.624 169.594 44.747C168.36 46.8676 166.81 48.6076 164.943 49.9646C163.073 51.3215 160.753 52 157.98 52C156.862 52 155.822 51.8848 154.858 51.657C153.894 51.4267 153.056 51.0837 152.345 50.6255C151.63 50.1674 151.063 49.6015 150.639 48.9331C150.215 48.2646 150.003 47.491 150.003 46.6122C150.003 45.6183 150.283 44.7571 150.841 44.0335C151.398 43.3075 152.276 42.7341 153.47 42.3135L153.473 42.311Z" fill="#183EC2"></path>
+                     <path d="M195.89 37.6668C194.85 37.6668 193.924 37.4766 193.116 37.0935C191.766 38.8135 190.323 40.2456 188.783 41.3922C187.241 42.5389 185.74 43.1122 184.276 43.1122C182.618 43.1122 181.445 42.604 180.751 41.5925C180.057 40.581 179.711 39.3468 179.711 37.8947C179.711 36.7105 179.905 35.4787 180.289 34.1968C180.672 32.9175 181.175 31.7408 181.79 30.6717C182.406 29.6027 183.12 28.7139 183.928 28.0054C184.738 27.2994 185.546 26.9439 186.356 26.9439C186.701 26.9439 187.108 27.039 187.569 27.2293C187.224 27.5347 186.807 28.108 186.328 28.9493C185.846 29.7905 185.394 30.7268 184.97 31.7583C184.546 32.7898 184.19 33.8213 183.9 34.8553C183.612 35.8868 183.466 36.768 183.466 37.4916C183.466 38.6382 183.648 39.4694 184.014 39.9852C184.38 40.5009 184.889 40.7588 185.546 40.7588C186.356 40.7588 187.317 40.3282 188.435 39.4694C189.553 38.6107 190.651 37.5116 191.728 36.1722C190.61 35.2934 189.763 34.1367 189.185 32.7047C188.607 31.2701 188.316 29.8105 188.316 28.3183C188.316 27.3645 188.44 26.4557 188.692 25.5944C188.942 24.7357 189.308 23.9696 189.79 23.3011C190.272 22.6326 190.86 22.0969 191.552 21.6963C192.246 21.2957 193.053 21.0929 193.98 21.0929C195.559 21.0929 196.619 21.5135 197.157 22.3547C197.697 23.196 197.967 24.2475 197.967 25.5093C197.967 26.9989 197.601 28.6538 196.869 30.4689C196.137 32.2841 195.211 34.0341 194.096 35.714C194.79 36.0971 195.521 36.2873 196.291 36.2873C196.753 36.2873 197.263 36.2222 197.823 36.0871C198.381 35.9544 198.949 35.724 199.526 35.3986C200.104 35.0756 200.655 34.6525 201.174 34.1367C201.694 33.621 202.128 32.9625 202.474 32.1589L203.168 32.7322C202.782 33.6485 202.3 34.4146 201.722 35.0255C201.144 35.6364 200.528 36.1446 199.872 36.5452C199.216 36.9458 198.542 37.2337 197.851 37.4065C197.157 37.5792 196.501 37.6643 195.885 37.6643L195.89 37.6668ZM190.805 28.4936C190.805 29.6027 190.969 30.7218 191.297 31.8484C191.622 32.9751 192.115 33.9214 192.771 34.6875C193.732 33.273 194.535 31.7934 195.168 30.2436C195.804 28.6964 196.122 27.2343 196.122 25.8573C196.122 24.7482 195.958 23.937 195.63 23.4213C195.302 22.9055 194.888 22.6477 194.388 22.6477C194.002 22.6477 193.598 22.8004 193.174 23.1058C192.75 23.4113 192.364 23.8219 192.019 24.3376C191.673 24.8533 191.383 25.4642 191.151 26.1728C190.918 26.8813 190.805 27.6549 190.805 28.4936Z" fill="#183EC2"></path>
+                     <path d="M217.331 25.7421C217.485 25.7797 217.714 25.8273 218.025 25.8848C218.333 25.9424 218.64 26.0275 218.948 26.1427C219.256 26.2579 219.526 26.4106 219.758 26.6009C219.991 26.7936 220.104 27.0014 220.104 27.2318C220.104 27.3845 219.902 27.9002 219.498 28.779C219.095 29.6578 218.651 30.6993 218.169 31.9035C217.687 33.1078 217.245 34.3495 216.839 35.6289C216.435 36.9107 216.233 38.0274 216.233 38.9837C216.233 39.6722 216.377 40.2255 216.667 40.6461C216.955 41.0667 217.447 41.277 218.141 41.277C218.757 41.277 219.471 41.0667 220.278 40.6461C221.088 40.2255 221.934 39.6247 222.822 38.841C223.708 38.0574 224.584 37.0935 225.452 35.9469C226.32 34.8002 227.1 33.4808 227.791 31.9911L228.543 32.5069C227.927 34.0741 227.165 35.4987 226.259 36.778C225.353 38.0599 224.382 39.1565 223.342 40.0753C222.302 40.9941 221.232 41.7102 220.134 42.2259C219.037 42.7417 217.967 42.9995 216.927 42.9995C215.385 42.9995 214.328 42.5889 213.75 41.7677C213.172 40.9466 212.882 39.9426 212.882 38.7584C212.882 38.3002 212.919 37.8321 212.998 37.3539C213.073 36.8757 213.172 36.39 213.288 35.8918C212.748 36.8482 212.19 37.7545 211.612 38.6157C211.034 39.4744 210.426 40.2305 209.793 40.8815C209.157 41.5299 208.5 42.0456 207.827 42.4287C207.153 42.8092 206.449 43.002 205.717 43.002C204.407 43.002 203.357 42.4287 202.567 41.282C201.778 40.1354 201.384 38.7784 201.384 37.2112C201.384 36.1421 201.566 34.8528 201.931 33.3406C202.297 31.8309 202.742 30.4089 203.261 29.0694C203.781 27.7325 204.339 26.5859 204.937 25.6295C205.535 24.6756 206.045 24.1949 206.469 24.1949C206.661 24.1949 206.989 24.3001 207.451 24.5104C207.912 24.7207 208.299 24.9986 208.606 25.3416C208.299 25.8398 207.923 26.5358 207.478 27.4346C207.034 28.3334 206.613 29.3173 206.207 30.3863C205.803 31.4579 205.454 32.5645 205.167 33.7111C204.879 34.8578 204.733 35.9093 204.733 36.8632C204.733 37.0935 204.75 37.4265 204.791 37.8671C204.829 38.3078 204.914 38.7359 205.051 39.1565C205.184 39.5771 205.396 39.9401 205.687 40.2456C205.974 40.551 206.35 40.7037 206.812 40.7037C207.698 40.7037 208.642 40.1304 209.644 38.9837C210.646 37.8371 211.627 36.4601 212.591 34.8553C213.553 33.2505 214.449 31.5981 215.279 29.8956C216.107 28.1957 216.791 26.8087 217.331 25.7396V25.7421Z" fill="#183EC2"></path>
+                     <path d="M241.833 41.8529C241.333 41.8529 240.899 41.7277 240.533 41.4798C240.167 41.232 239.983 40.8414 239.983 40.3056C239.983 39.6572 240.349 39.1014 241.081 38.6432C241.812 38.1851 242.565 37.9547 243.334 37.9547C243.796 37.9547 244.162 38.0499 244.432 38.2427C244.702 38.4354 244.836 38.796 244.836 39.3317C244.836 39.9051 244.528 40.4684 243.912 41.0242C243.296 41.5775 242.602 41.8554 241.833 41.8554V41.8529ZM243.508 35.3735C243.508 34.685 243.614 33.8839 243.826 32.965C244.038 32.0487 244.298 31.1024 244.606 30.1285C244.914 29.1545 245.26 28.1706 245.646 27.1767C246.029 26.1828 246.378 25.284 246.686 24.4828C247.763 21.7313 248.881 18.9023 250.037 15.9981C251.193 13.0939 252.328 10.4576 253.446 8.08666C254.564 5.71824 255.622 3.77795 256.624 2.26827C257.626 0.758592 258.532 0.00500488 259.339 0.00500488C259.647 0.00500488 259.917 0.130185 260.149 0.378043C260.381 0.628404 260.495 0.941355 260.495 1.32441C260.495 1.86018 260.177 2.92922 259.541 4.53404C258.905 6.13885 258.077 8.03158 257.055 10.2097C256.033 12.3879 254.887 14.7312 253.616 17.2324C252.344 19.736 251.072 22.162 249.802 24.5129C248.533 26.8637 247.337 29.0043 246.219 30.9346C245.101 32.8649 244.197 34.347 243.503 35.3785L243.508 35.3735Z" fill="#183EC2"></path>
+                     </g>
+                     <defs>
+                     <clipPath id="clip0_1_1317">
+                     <rect width="260" height="52" fill="white" transform="translate(0.5)"></rect>
+                     </clipPath>
+                     </defs>
+                     </svg>
+                     </div>
+                     <h6 class="pt-4" style="font-size: 16px;">Your details are successfully submitted. You will now receive a call from our AI assistant.</h6>
+                  <div style="display: flex;justify-content: center;" class="p-3">
+                  <button type="submit" class="btn" data-bs-dismiss="modal" aria-label="Close" style="font-size: 13px;padding: 5px 20px;background: #183EC2;color: #fff;width: 90px;">OK</button></div>`;
+
+   document.getElementById('supportmodalbody').innerHTML = content;
+   document.getElementById('salesmodalbody').innerHTML = content;
+   }
+
+  /* === SALES submit === */
+  document.getElementById("sales-submit-btn").addEventListener("click", async e => {
+    e.preventDefault();
+    const fullNumber = itiSales.getNumber();
+    if (!itiSales.isValidNumber()) { alert("Please enter a valid number."); return; }
+
+    const submitBtn = document.getElementById("sales-submit-btn");
+    showTempMessage(submitBtn, "✅ Successfully submitted!");
+
+    itiSales.setNumber("");                           // clear field & dial-code
+    await fetch("https://strategicerp.centiloquy.com/runtime/webhook/d84fb41a-f8a9-430c-aff0-e3f72231216b/webhookTrigger/8b9654af-f16c-4fce-bf27-4c7e22d1d538", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ to_number: fullNumber })
+    });
+  });
+
+  /* === SUPPORT submit === */
+  document.getElementById("support-submit-btn").addEventListener("click", async e => {
+    e.preventDefault();
+    const fullNumber = itiSupport.getNumber();
+    if (!itiSupport.isValidNumber()) { alert("Please enter a valid number."); return; }
+
+    const submitBtn = document.getElementById("support-submit-btn");
+    showTempMessage(submitBtn, "✅ Successfully submitted!");
+    itiSupport.setNumber("");
+    await fetch("https://strategicerp.centiloquy.com/runtime/webhook/d84fb41a-f8a9-430c-aff0-e3f72231216b/webhookTrigger/6a046553-9847-4eec-8b75-179af3e65cf2", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ to_number: fullNumber })
+    });
+  });
+</script>
+
+<script>
+  const toggleBtn = document.getElementById("menuToggle");
+  const mobileNav = document.getElementById("mobileNav");
+  const icon = toggleBtn.querySelector("i");
+
+  toggleBtn.addEventListener("click", function () {
+    if (window.innerWidth > 991) return;
+    const isOpen = mobileNav.classList.contains("show");
+
+    if (isOpen) {
+      mobileNav.classList.remove("show");
+      document.body.classList.remove("menu-open");
+      icon.classList.remove("fa-times");
+      icon.classList.add("fa-bars");
+      document.getElementById("callMeMenu").style.display = "none";
+    } else {
+      mobileNav.classList.add("show");
+      document.body.classList.add("menu-open");
+      icon.classList.remove("fa-bars");
+      icon.classList.add("fa-times");
+    }
+
+  });
+</script>
+<script>
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("arrow")) {
+      e.target.classList.toggle("down");
+      e.target.classList.toggle("up");
+    }
+  });
+</script>
+
+<script>
+  const btn = document.getElementById("callMeBtn");
+  const menu = document.getElementById("callMeMenu");
+
+  btn.addEventListener("click", function (e) {
+
+    // MOBILE → custom toggle
+    if (window.innerWidth <= 992) {
+      e.preventDefault();       // stop Bootstrap dropdown
+      e.stopPropagation();
+
+      menu.style.display =
+        menu.style.display === "block" ? "none" : "block";
+    }
+    // DESKTOP → Bootstrap handles it automatically
+  });
+
+  // Reset styles when resizing to desktop
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 992) {
+      menu.style.display = "";
+    }
+  });
+</script>
+
+
+
+
+apps-fileview.texmex_20260128.08_p2
+header.php
+Displaying digital-employee.php.
