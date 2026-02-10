@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Sign-In System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .value {
+            color: #333;
+        }
+
+        .video-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #video_signin {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            border: 3px solid #667eea;
+        }
+
+        #img_signin {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            border: 3px solid #4CAF50;
+            display: none;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .status-in {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-out {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .hidden-fields {
+            max-height: 300px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: inline-block;
+            width: 200px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: calc(100% - 210px);
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👤 Employee Sign-In System</h1>
+
+        <!-- Employee Info Section -->
+        <div class="info-box">
+            <div class="info-row">
+                <span class="label">Employee Code:</span>
+                <span class="value" id="signin_employee_code">-</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Employee Name:</span>
+                <span class="value" id="signin_employee_name">-</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Date:</span>
+                <span class="value" id="signin_top_date">-</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Sign-In Time:</span>
+                <span class="value" id="currenttime_signin_emp">-</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Location:</span>
+                <span class="value" id="signin_loc_span">-</span>
+            </div>
+        </div>
+
+        <!-- Camera/Photo Section -->
+        <div class="video-container">
+            <video id="video_signin" autoplay></video>
+            <img id="img_signin" alt="Sign-In Photo">
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="click_photo_signin" onclick="capturePhoto()">📸 Capture Photo</button>
+            <button onclick="refreshSignInData()">🔄 Refresh Data</button>
+            <button onclick="toggleFields()">👁️ Toggle Fields</button>
+        </div>
+
+        <!-- Project & Attendance Type -->
+        <div class="section-title">Attendance Details</div>
+        <div class="form-group">
+            <label>Project:</label>
+            <select id="project_dropdownlist">
+                <option value="">Select Project</option>
+                <option value="Project A">Project A</option>
+                <option value="Project B">Project B</option>
+                <option value="Project C">Project C</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Attendance Type:</label>
+            <select id="inputGroupSelect02">
+                <option value="">Select Type</option>
+                <option value="Present">Present</option>
+                <option value="WFH">Work From Home</option>
+                <option value="On Duty">On Duty</option>
+            </select>
+        </div>
+
+        <!-- Hidden Form Fields -->
+        <div class="section-title">Hidden Form Fields (All Data)</div>
+        <div class="hidden-fields" id="hiddenFieldsContainer" style="display: none;">
+            <!-- Basic Info -->
+            <div class="form-group"><label>ESS:</label><input type="text" id="column39451" readonly></div>
+            <div class="form-group"><label>Remarks:</label><input type="text" id="column40408" readonly></div>
+            <div class="form-group"><label>Within Radius:</label><input type="text" id="column44832" readonly></div>
+            <div class="form-group"><label>Sub Project:</label><input type="text" id="column38120" readonly></div>
+            <div class="form-group"><label>Company:</label><input type="text" id="column31847" readonly></div>
+            
+            <!-- Employee Info -->
+            <div class="form-group"><label>Grade:</label><input type="text" id="column65439" readonly></div>
+            <div class="form-group"><label>Branch:</label><input type="text" id="column71424" readonly></div>
+            <div class="form-group"><label>Shift:</label><input type="text" id="column71772" readonly></div>
+            <div class="form-group"><label>Department:</label><input type="text" id="column65440" readonly></div>
+            <div class="form-group"><label>Employee Name:</label><input type="text" id="column8557" readonly></div>
+            <div class="form-group"><label>Employee Code:</label><input type="text" id="column8558" readonly></div>
+            
+            <!-- Attendance -->
+            <div class="form-group"><label>Attendance Type:</label><input type="text" id="column38113" readonly></div>
+            <div class="form-group"><label>In Time:</label><input type="text" id="column8559" readonly></div>
+            <div class="form-group"><label>Out Time:</label><input type="text" id="column8560" readonly></div>
+            <div class="form-group"><label>Remarks:</label><input type="text" id="column8668" readonly></div>
+            
+            <!-- System Fields -->
+            <div class="form-group"><label>Active:</label><input type="text" id="active" readonly></div>
+            <div class="form-group"><label>Created By:</label><input type="text" id="created_by" readonly></div>
+            <div class="form-group"><label>Created Date:</label><input type="text" id="created_date" readonly></div>
+            <div class="form-group"><label>Modified By:</label><input type="text" id="modified_by" readonly></div>
+            <div class="form-group"><label>Modified Date:</label><input type="text" id="modified_date" readonly></div>
+            <div class="form-group"><label>State:</label><input type="text" id="state" readonly></div>
+            <div class="form-group"><label>Parent State:</label><input type="text" id="parentstatereportid" readonly></div>
+            <div class="form-group"><label>State Owner:</label><input type="text" id="stateownerid" readonly></div>
+            
+            <!-- User Info -->
+            <div class="form-group"><label>ERP User:</label><input type="text" id="column36613" readonly></div>
+            <div class="form-group"><label>Manager:</label><input type="text" id="column36616" readonly></div>
+            <div class="form-group"><label>HOD:</label><input type="text" id="column72803" readonly></div>
+            
+            <!-- Location & Time -->
+            <div class="form-group"><label>Shift Time:</label><input type="text" id="column38969" readonly></div>
+            <div class="form-group"><label>Project Name:</label><input type="text" id="column39414" readonly></div>
+            <div class="form-group"><label>Sign In Location:</label><input type="text" id="column39790" readonly></div>
+            <div class="form-group"><label>Sign Out Location:</label><input type="text" id="column39791" readonly></div>
+            <div class="form-group"><label>Current Location:</label><input type="text" id="column39792" readonly></div>
+            <div class="form-group"><label>Actual Sign In:</label><input type="text" id="column38414" readonly></div>
+            <div class="form-group"><label>Actual Sign Out:</label><input type="text" id="column38415" readonly></div>
+            <div class="form-group"><label>Modify Attendance:</label><input type="text" id="column38416" readonly></div>
+            
+            <!-- IDs -->
+            <div class="form-group"><label>ID Selected:</label><input type="text" id="idselected" readonly></div>
+            <div class="form-group"><label>Column 38111:</label><input type="text" id="column38111" readonly></div>
+            <div class="form-group"><label>Column 58076:</label><input type="text" id="column58076" readonly></div>
+            <div class="form-group"><label>In Project:</label><input type="text" id="column67066" readonly></div>
+            <div class="form-group"><label>Out Project:</label><input type="text" id="column67067" readonly></div>
+            <div class="form-group"><label>In Photo:</label><input type="text" id="column66843" readonly></div>
+        </div>
+
+        <!-- Console Output -->
+        <div class="section-title">Console Output</div>
+        <div class="console-output" id="consoleOutput">
+            System ready. Click "Refresh Data" to load employee information...
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Our API Script -->
+    <script src="employee-signin-api.js"></script>
+    
+    <!-- Additional Functions -->
+    <script>
+        // Toggle hidden fields display
+        function toggleFields() {
+            var container = document.getElementById('hiddenFieldsContainer');
+            if (container.style.display === 'none') {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        // Dummy photo capture function
+        function capturePhoto() {
+            alert('Photo capture functionality - આ actual implementation માં camera API વાપરશે');
+            addConsoleLog('📸 Photo captured!');
+        }
+
+        // Console log helper
+        function addConsoleLog(message) {
+            var console = document.getElementById('consoleOutput');
+            var timestamp = new Date().toLocaleTimeString();
+            console.innerHTML += `\n[${timestamp}] ${message}`;
+            console.scrollTop = console.scrollHeight;
+        }
+
+        // Dummy signoutbtn function
+        function signoutbtn() {
+            alert('✅ Employee has already signed in and signed out for today!');
+            addConsoleLog('✅ Sign-out detected - Both sign-in and sign-out completed');
+        }
+
+        // Override console.log to show in our custom console
+        var originalLog = console.log;
+        console.log = function() {
+            originalLog.apply(console, arguments);
+            var message = Array.from(arguments).join(' ');
+            addConsoleLog(message);
+        };
+
+        // Override console.error
+        var originalError = console.error;
+        console.error = function() {
+            originalError.apply(console, arguments);
+            var message = '❌ ' + Array.from(arguments).join(' ');
+            addConsoleLog(message);
+        };
+    </script>
+</body>
+</html>
