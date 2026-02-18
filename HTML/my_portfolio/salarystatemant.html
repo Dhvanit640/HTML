@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* Main Container */
+    .table-container {
+        border: 2px solid #6c63ff;
+        padding: 20px;
+        border-radius: 6px;
+        background-color: #f9f9f9;
+    }
+
+    /* Section Title */
+    .section-title {
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 40px;
+        background-color: #fff;
+    }
+
+    /* Table Header */
+    table thead th {
+        background-color: #e6e6e6;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 10px;
+        border: 1px solid #cfcfcf;
+        text-align: center;
+    }
+
+    /* Table Body Cells */
+    table tbody td {
+        padding: 8px;
+        font-size: 13px;
+        border: 1px solid #d9d9d9;
+        text-align: center;
+    }
+
+    /* Zebra Striping */
+    table tbody tr:nth-child(even) {
+        background-color: #f5f5f5;
+    }
+
+    /* Hover Effect */
+    table tbody tr:hover {
+        background-color: #eef0ff;
+    }
+
+    /* View Button */
+    .view-btn {
+        background: linear-gradient(45deg, #6c63ff, #8e44ad);
+        color: #fff;
+        border: none;
+        padding: 6px 14px;
+        font-size: 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    .view-btn:hover {
+        opacity: 0.85;
+        transform: scale(1.05);
+    }
+
+    /* No Data Message */
+    .no-data {
+        text-align: center;
+        padding: 20px;
+        font-weight: 500;
+        color: #888;
+    }
+
+    /* Responsive Scroll */
+    .table-wrapper {
+        overflow-x: auto;
+    }
+</style>
+
+<body>
+    <div class="table-container">
+
+        <div class="section-title">Meetings :</div>
+        <div class="table-wrapper">
+            <table id="meetingsTable" id="meetingsTable">
+                <thead>
+                    <th>Meeting Code</th>
+                    <th>Meeting Date</th>
+                    <th>Meeting Topic</th>
+                    <th>Start Time</th>
+                    <th>Coordinator</th>
+                    <th>Participants</th>
+                    <th>Meeting Link</th>
+                    <th>Status</th>
+                    <th>View Agenda</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="section-title">Visits :</div>
+        <div class="table-wrapper">
+            <table id="visitsTable" id="visitsTable">
+                <thead>
+                    <th>Visit Code</th>
+                    <th>Visit Date</th>
+                    <th>Customer Name</th>
+                    <th>Visit Purpose</th>
+                    <th>Visit Initiated By</th>
+                    <th>Visit Participants</th>
+                    <th>Visit Duration</th>
+                    <th>Journey KM</th>
+                    <th>View Details</th>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+
+
+    <script>
+
+        function renderTable(tableId, data, columns, viewButtonCallback) {
+
+            const tableBody = document.querySelector(`#${tableId} tbody`);
+            tableBody.innerHTML = "";
+
+            if (!data || data.length === 0) {
+                tableBody.innerHTML = `
+            <tr>
+                <td colspan="${columns.length}" style="text-align:center;">
+                    No Data Found
+                </td>
+            </tr>
+        `;
+                return;
+            }
+
+            data.forEach(row => {
+
+                let tr = document.createElement("tr");
+
+                columns.forEach(col => {
+                    let td = document.createElement("td");
+
+                    if (col === "action") {
+                        let btn = document.createElement("button");
+                        btn.textContent = "View";
+                        btn.className = "view-btn";
+                        btn.onclick = function () {
+                            viewButtonCallback(row);
+                        };
+                        td.appendChild(btn);
+                    } else {
+                        td.textContent = row[col] || "";
+                    }
+
+                    tr.appendChild(td);
+                });
+
+                tableBody.appendChild(tr);
+            });
+        }
+        function loadMeetings() {
+
+            fetch("/api/getMeetings ")
+                .then(res => res.json())
+                .then(data => {
+
+                    const columns = [
+                        "meeting_code",
+                        "meeting_date",
+                        "meeting_topic",
+                        "start_time",
+                        "coordinator",
+                        "participants",
+                        "meeting_link",
+                        "status",
+                        "action"
+                    ];
+
+                    renderTable("meetingsTable", data, columns, function (row) {
+                        console.log("View Meeting:", row);
+                    });
+
+                });
+        }
+        function loadVisits() {
+
+            fetch("/api/getVisits")
+                .then(res => res.json())
+                .then(data => {
+
+                    const columns = [
+                        "visit_code",
+                        "visit_date",
+                        "customer_name",
+                        "visit_purpose",
+                        "initiated_by",
+                        "participants",
+                        "duration",
+                        "journey_km",
+                        "action"
+                    ];
+
+                    renderTable("visitsTable", data, columns, function (row) {
+                        console.log("View Visit:", row);
+                    });
+
+                });
+        }
+
+    </script>
+</body>
+
+</html>
