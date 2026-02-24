@@ -4,312 +4,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>calendar main</title>
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.default.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.default.mobile.min.css" />
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-
-    <script src="https://jsuites.net/v4/jsuites.js"></script>
-    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <!-- PDF Downlord link -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
-    <script src="https://kendo.cdn.telerik.com/2022.2.510/js/kendo.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
-
-
-    <style>
-        .k-event,
-        .k-event .k-link,
-        .k-more-events,
-        .k-task-complete,
-        .k-task-single {
-            height: max-content !important;
-            font-size: 12px !important;
-        }
-
-        .k-button-solid-base.k-selected {
-            background-color: rgb(93 81 226) !important;
-            border-color: none !important;
-        }
-
-        .k-button-solid-base.k-focus {
-            border-color: rgb(93 81 226);
-            box-shadow: rgb(93 81 226) 0px 0px 4px 0px;
-        }
-
-        /* new */
-
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .popup-box {
-            width: 60%;
-            height: 60%;
-            background: #000;
-            /* Black page */
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .popup-header {
-            background: #222;
-            color: #fff;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .popup-body {
-            flex: 1;
-        }
-
-        .close-btn {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-    </style>
-
-
-    <script>
-        // Get the query string part of the URL
-        const queryString = window.location.search;
-        // Parse the query string
-        const urlParams = new URLSearchParams(queryString);
-        // Get individual parameters
-        window.token = urlParams.get('token'); // "Mukesh" callajax(finalurl)
-        window.targetcloud = (urlParams.get('cloudcode') != '' && urlParams.get('cloudcode') != null) ? urlParams.get('cloudcode') : top.document.forms[0]["cloudcode"].value;//urlParams.get('targetcloud');   // "30"
-        window.targetuser = (urlParams.get('targetuser') != '' && urlParams.get('targetuser') != null) ? urlParams.get('targetuser') : top.document.forms[0]["username"].value;
-        console.log(window.targetuser, window.targetcloud);
-    </script>
-
+    <title>Document</title>
 </head>
+<style>
+    /* Main Container */
+    .table-container {
+        border: 2px solid #6c63ff;
+        padding: 20px;
+        border-radius: 6px;
+        background-color: #f9f9f9;
+    }
+
+    /* Section Title */
+    .section-title {
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 40px;
+        background-color: #fff;
+    }
+
+    /* Table Header */
+    table thead th {
+        background-color: #e6e6e6;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 10px;
+        border: 1px solid #cfcfcf;
+        text-align: center;
+    }
+
+    /* Table Body Cells */
+    table tbody td {
+        padding: 8px;
+        font-size: 13px;
+        border: 1px solid #d9d9d9;
+        text-align: center;
+    }
+
+    /* Zebra Striping */
+    table tbody tr:nth-child(even) {
+        background-color: #f5f5f5;
+    }
+
+    /* Hover Effect */
+    table tbody tr:hover {
+        background-color: #eef0ff;
+    }
+
+    /* View Button */
+    .view-btn {
+        background: linear-gradient(45deg, #6c63ff, #8e44ad);
+        color: #fff;
+        border: none;
+        padding: 6px 14px;
+        font-size: 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    .view-btn:hover {
+        opacity: 0.85;
+        transform: scale(1.05);
+    }
+
+    /* No Data Message */
+    .no-data {
+        text-align: center;
+        padding: 20px;
+        font-weight: 500;
+        color: #888;
+    }
+
+    /* Responsive Scroll */
+    .table-wrapper {
+        overflow-x: auto;
+    }
+</style>
 
 <body>
+    <div class="table-container">
 
-    <div id="scheduler"></div>
-
-    <!-- Popup Overlay -->
-    <div id="customPopupOverlay" class="popup-overlay">
-        <div class="popup-box">
-            <div class="popup-header">
-                <span>Details</span>
-                <button onclick="closePopup()" class="close-btn">×</button>
-            </div>
-            <div class="popup-body">
-                <!-- Currently black page -->
-            </div>
+        <div class="section-title">Meetings :</div>
+        <div class="table-wrapper">
+            <table id="meetingsTable">
+                <thead>
+                    <th>Meeting Code</th>
+                    <th>Meeting Date</th>
+                    <th>Meeting Topic</th>
+                    <th>Start Time</th>
+                    <th>Coordinator</th>
+                    <th>Participants</th>
+                    <th>Meeting Link</th>
+                    <th>Status</th>
+                    <th>View Agenda</th>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
+
+        <div class="section-title">Visits :</div>
+        <div class="table-wrapper">
+            <table id="visitsTable">
+                <thead>
+                    <th>Visit Code</th>
+                    <th>Visit Date</th>
+                    <th>Customer Name</th>
+                    <th>Visit Purpose</th>
+                    <th>Visit Initiated By</th>
+                    <th>Visit Participants</th>
+                    <th>Visit Duration</th>
+                    <th>Journey KM</th>
+                    <th>View Details</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
     </div>
     <script>
-        function callajax(finalurl) {
-            var returndata = "";
-            $.ajax({
-                url: finalurl,
-                async: false,
-                contentType: false,
-                processData: false,
-                type: 'POST',
-                success: function (data) {
-                    returndata = data
-                },
-                error: function (e) {
+        function renderTable(tableId, data, columns, viewButtonCallback) {
 
-                }
-            });
-            $("#loader-html").css("display", "none");
-            return returndata;
-        }
+            const tableBody = document.querySelector(`#${tableId} tbody`);
+            tableBody.innerHTML = "";
 
-        function showCalender() {
-            var getUrl = window.location;
-            var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
-            baseurl = baseurl.split("pages")[0];
-
-            // var cloudcode = top.document.forms[0]["cloudcode"].value;
-            // var username = top.document.forms[0]["username"].value;
-
-            var cloudcode = window.targetcloud;
-            var username = window.targetuser;
-            var tokenParam = window.token ? `&token=${encodeURIComponent(window.token)}` : "";
-
-            // Get current date
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            const currentMonth = currentDate.getMonth() + 1;
-            const lastDayOfMonth = new Date(currentYear, currentMonth, 0).getDate();
-            const startDate = `${currentYear}-01-01`;
-            const endDate = `${currentYear}-${currentMonth < 10 ? '0' + currentMonth : currentMonth}-${lastDayOfMonth}`;
-
-            var urltotal = `${baseurl}getFunction.do?actn=getsqljsondata&sqlfieldid=65925&cloudcode=${encodeURIComponent(cloudcode)}&ids=valuestring/&valuestring=Leave_Meeting_Holiday_Calender@d@${encodeURIComponent(username)}@d@${encodeURIComponent(startDate)}@d@${encodeURIComponent(endDate)}@d@${tokenParam}`;
-
-            var data = callajax(urltotal);
-            data = JSON.parse(data);
-
-            if (data[0].txt == "txt is null") {
-                $("#scheduler").html(`<div style="align-items: center;display: flex;justify-content: center;height: -webkit-fill-available;">No Data Found</div>`);
+            if (!data || data.length === 0) {
+                tableBody.innerHTML = `
+            <tr>
+                <td colspan="${columns.length}" style="text-align:center;">
+                    No Data Found
+                </td>
+            </tr>
+        `;
                 return;
             }
 
-            data = JSON.parse(data[0].txt);
-            var schedulerElement = $("#scheduler");
-            var scheduler = schedulerElement.data("kendoScheduler");
-            if (scheduler) {
-                schedulerElement.empty();
-                scheduler.destroy();
-            }
-            var record = [];
-            for (var i = 0; i < data.length; i++) {
-                var color, subject, participant;
-                var meetingid = "";  // Declare meetingid before using it
+            data.forEach(row => {
 
-                if (data[i].agenda == '' && data[i].holiday_name != '') {
-                    color = '#9900CC';
-                    subject = data[i].holiday_name;
-                    participant = "All";
-                } else if (data[i].agenda != '' && data[i].holiday_name == '') {
-                    color = '#F69739';
-                    subject = data[i].agenda ? data[i].agenda : "";
-                    participant = data[i].meeting_coordinator ? data[i].meeting_coordinator : "";
-                    meetingid = data[i] && data[i].meeting_id ? data[i].meeting_id : "";
-                } else if (parseFloat(data[i].leave_count1) > 0) {
-                    color = '#008e13';
-                    subject = data[i].leave_type ? data[i].leave_type : "";
-                    participant = data[i].emp_name ? data[i].emp_name : "";
-                    meetingid = data[i] && data[i].leave_count1 ? data[i].leave_count1 : "";
-                }
-                // else {
-                //     color = '#6D8BE1';
-                //     subject = "";
-                //     participant = "";
-                //     meetingid = data[i] && data[i].meeting_id ? data[i].meeting_id : "";
-                // }
+                let tr = document.createElement("tr");
 
-                var fromdate = data[i].startdate;
-                var parts = fromdate.split("-");
-                var fdate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+                columns.forEach(col => {
+                    let td = document.createElement("td");
 
-                var todate = data[i].enddate;
-                if (todate == "00-00-0000") {
-                    todate = fromdate;
-                }
+                    if (col === "action") {
+                        let btn = document.createElement("button");
+                        btn.textContent = "View";
+                        btn.className = "view-btn";
+                        btn.onclick = function () {
+                            viewButtonCallback(row);
+                        };
+                        td.appendChild(btn);
+                    } else {
+                        td.textContent = row[col] || "";
+                    }
 
-                var partss = todate.split("-");
-                var edate = `${partss[2]}-${partss[1]}-${partss[0]}`;
-
-                record.push({
-                    name: [participant, subject, meetingid].filter(part => part).join(" - "),
-                    start: fdate,
-                    end: edate,
-                    background: color
+                    tr.appendChild(td);
                 });
 
-            }
-
-            $(function () {
-                $("#scheduler").kendoScheduler({
-                    views: ["day", "week", { type: "month", selected: true }],
-                    dataSource: {
-                        data: record,
-                        schema: {
-                            model: {
-                                id: "taskId",
-                                fields: {
-                                    taskId: { type: "number" },
-                                    name: { defaultValue: "No title", validation: { required: true } },
-                                    start: { type: "date", format: "YYYY-MM-DD" },
-                                    end: {
-                                        type: "date",
-                                        format: "YYYY-MM-DD",
-                                        parse: function (value) {
-                                            var endOfDay = new Date(value);
-                                            endOfDay.setHours(23, 59, 59);
-                                            return endOfDay;
-                                        }
-                                    },
-                                    description: { defaultValue: "" },
-                                    ownerId: { defaultValue: 1 },
-                                    isAllDay: { type: "boolean" },
-                                    background: { type: "string" }
-                                }
-                            }
-                        }
-                    },
-                    editable: false,
-                    selectable: true,
-                    select: function (e) {
-                        openPopup();
-                    },
-
-                    eventTemplate: '<div style="background-color: #: background #; width: 100%;">#= name #</div>'
-                });
+                tableBody.appendChild(tr);
             });
         }
+        function loadMeetings() {
 
-        showCalender();
+            fetch("/api/getMeetings")
+                .then(res => res.json())
+                .then(data => {
 
-        function openPopup() {
-            document.getElementById("customPopupOverlay").style.display = "flex";
+                    const columns = [
+                        "meeting_code",
+                        "meeting_date",
+                        "meeting_topic",
+                        "start_time",
+                        "coordinator",
+                        "participants",
+                        "meeting_link",
+                        "status",
+                        "action"
+                    ];
+
+                    renderTable("meetingsTable", data, columns, function (row) {
+                        console.log("View Meeting:", row);
+                    });
+
+                });
         }
+        function loadVisits() {
 
-        function closePopup() {
-            document.getElementById("customPopupOverlay").style.display = "none";
+            fetch("/api/getVisits")
+                .then(res => res.json())
+                .then(data => {
+
+                    const columns = [
+                        "visit_code",
+                        "visit_date",
+                        "customer_name",
+                        "visit_purpose",
+                        "initiated_by",
+                        "participants",
+                        "duration",
+                        "journey_km",
+                        "action"
+                    ];
+
+                    renderTable("visitsTable", data, columns, function (row) {
+                        console.log("View Visit:", row);
+                    });
+
+                });
         }
-
 
     </script>
 </body>

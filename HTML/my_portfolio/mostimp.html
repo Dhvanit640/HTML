@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar + Tables</title>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.default-v2.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2022.2.510/js/kendo.all.min.js"></script>
+
+    <style>
+        #scheduler {
+            height: 700px;
+        }
+
+        #eventModal,
+        #visits {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-box {
+            background: #fff;
+            padding: 20px;
+            width: 95%;
+            max-height: 90vh;
+            overflow: auto;
+            border-radius: 8px;
+        }
+
+        /* TABLE DESIGN */
+        .table-container {
+            border: 2px solid #6c63ff;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f9f9f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            background: #fff;
+        }
+
+        table th {
+            background: #e6e6e6;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="scheduler"></div>
+
+    <!-- POPUP -->
+    <div id="eventModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="$('#eventModal').hide()">X</span>
+            <h3>Meetings</h3>
+
+            <div class="table-container">
+
+                <h4>Meetings</h4>
+                <table id="meetingsTable">
+                    <thead>
+                        <th>Code</th>
+                        <th>Date</th>
+                        <th>Topic</th>
+                        <th>Start</th>
+                        <th>Coordinator</th>
+                        <th>Participants</th>
+                        <th>Link</th>
+                        <th>Status</th>
+                        <th>View</th>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="visits">
+        <div class="modal-box">
+            <span class="close-btn" onclick="$('#visits').hide()">X</span>
+            <h3>Visits</h3>
+
+            <div class="table-container">
+                <h4>Visits</h4>
+                <table id="visitsTable">
+                    <thead>
+                        <th>Code</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Purpose</th>
+                        <th>By</th>
+                        <th>Participants</th>
+                        <th>Duration</th>
+                        <th>KM</th>
+                        <th>View</th>
+                    </thead>
+                    <!-- <tbody></tbody> -->
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            /* CALENDAR DATA */
+            var record = [
+                { id: 1, name: "Republic Day", start: new Date(2026, 1, 26), end: new Date(2026, 1, 26), background: "#fce2f2"},
+                { id: 2, name: "Client Visit Meeting", start: new Date(2026, 1, 2), end: new Date(2026, 1, 2), background: "#f7ebe7" },
+                { id: 3, name: "Product meet Launch", start: new Date(2026, 1, 10), end: new Date(2026, 1, 10), background: "#6D8BE1" }
+            ];
+
+            /* KENDO CALENDAR */
+            $("#scheduler").kendoScheduler({
+                date: new Date(2026, 1, 1),
+                height: 700,
+                views: ["day", "week", { type: "month", selected: true }],
+                editable: false,
+                dataSource: { data: record },
+                eventTemplate:
+                    '<div style="background:#: background #;padding:3px;border-radius:4px;">#= name #</div>'
+            });
+
+
+            /* EVENT CLICK */
+            $("#scheduler").on("click", ".k-event", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                
+                var text = $(this).text().trim().toUpperCase();
+
+                if (text.includes("VISIT")) {
+                    // color = '#9900CC';
+                    visit();
+                    $("#visits").css("display", "flex");
+                }
+                else if (text.includes("MEET")) {
+                    meeting();
+                    $("#eventModal").css("display", "flex");
+                }
+                 else if (text.includes("VISIT")) {
+
+                    color = '#FFD700';   // Yellow
+                    subject = data[i].agenda || "";
+                    participant = data[i].participant || "";
+                }
+                meeting();
+                visit();
+
+
+            });
+
+            function meeting() {
+                fetch("/api/getMeetings")
+                    .then(res => res.json())
+                    .then(data => {
+                        const tbody = $("#meetingsTable tbody");
+                        tbody.html("");
+
+                        if (!data || data.length === 0) {
+                            tbody.html("<tr><td colspan='9'>No Data</td></tr>");
+                            return;
+                        }
+
+                        data.forEach(row => {
+                            tbody.append(`
+                                <tr>
+                                <td>${row.meeting_code || ""}</td>
+                                <td>${row.meeting_date || ""}</td>
+                                <td>${row.meeting_topic || ""}</td>
+                                <td>${row.start_time || ""}</td>
+                                <td>${row.coordinator || ""}</td>
+                                <td>${row.participants || ""}</td>
+                                <td>${row.meeting_link || ""}</td>
+                                <td>${row.status || ""}</td>
+                                <td><button>View</button></td>
+                                </tr>
+                                `);
+                        });
+                    });
+            }
+            function visit() {
+                fetch("/api/getVisits")
+                    .then(res => res.json())
+                    .then(data => {
+                        const tbody = $("#visitsTable tbody");
+                        tbody.html("");
+
+                        if (!data || data.length === 0) {
+                            tbody.html("<tr><td colspan='9'>No Data</td></tr>");
+                            return;
+                        }
+
+                        data.forEach(row => {
+                            tbody.append(`
+                                <tr>
+                                <td>${row.visit_code || ""}</td>
+                                <td>${row.visit_date || ""}</td>
+                                <td>${row.customer_name || ""}</td>
+                                <td>${row.visit_purpose || ""}</td>
+                                <td>${row.initiated_by || ""}</td>
+                                <td>${row.participants || ""}</td>
+                                <td>${row.duration || ""}</td>
+                                <td>${row.journey_km || ""}</td>
+                                <td><button>View</button></td>
+                                </tr>
+                                `);
+                        });
+                    });
+            }
+        });
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
