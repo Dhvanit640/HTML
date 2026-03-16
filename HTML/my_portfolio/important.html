@@ -79,7 +79,8 @@
 
 
         /* new css */
-        #eventModal,#visits{
+        #eventModal,
+        #visits {
             display: none;
             position: fixed;
             top: 0;
@@ -91,7 +92,7 @@
             align-items: center;
             z-index: 9999;
         }
-        
+
         .modal-box {
             background: #fff;
             padding: 20px;
@@ -273,7 +274,7 @@
             for (var i = 0; i < data.length; i++) {
                 var color, subject, participant;
                 var meetingid = "";  // Declare meetingid before using it
-                 var idText = meetingid.toUpperCase();  
+                var idText = meetingid.toUpperCase();
                 if (data[i].agenda == '' && data[i].holiday_name != '') {
                     color = '#9900CC';
                     subject = data[i].holiday_name;
@@ -290,17 +291,17 @@
                     meetingid = data[i] && data[i].leave_count1 ? data[i].leave_count1 : "";
                 }
 
-                 else if (idText.includes("VISIT")) {
-                  color = '#f7ebe7';   // Yellow
-                  subject = data[i].agenda || "";
-                  participant = data[i].participant || "";
+                else if (idText.includes("VISIT")) {
+                    color = '#f7ebe7';   // Yellow
+                    subject = data[i].agenda || "";
+                    participant = data[i].participant || "";
                 }
                 else if (idText.includes("MEET")) {
                     color = '#fce2f2';   // Red
                     subject = data[i].agenda || "";
                     participant = data[i].meeting_coordinator || data[i].participant || "";
                 }
-                            // else {
+                // else {
                 //     color = '#6D8BE1';
                 //     subject = "";
                 //     participant = "";
@@ -362,89 +363,172 @@
                 });
             });
         }
-       /* EVENT CLICK */
-            $("#scheduler").on("click", ".k-event", function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                
-                var text = $(this).text().trim().toUpperCase();
-
-                if (text.includes("VISIT")) {
-                    visit();
-                    $("#visits").css("display", "flex");
-                }
-                else if (text.includes("MEET")) {
-                    meeting();
-                    $("#eventModal").css("display", "flex");
-                }
-                
-                meeting();
-                visit();
+        /* EVENT CLICK */
+        $("#scheduler").on("click", ".k-event", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
 
 
-            });
+            var text = $(this).text().trim().toUpperCase();
 
-            function meeting() {
-                fetch("/api/getMeetings")
-                    .then(res => res.json())
-                    .then(data => {
-                        const tbody = $("#meetingsTable tbody");
-                        tbody.html("");
-
-                        if (!data || data.length === 0) {
-                            tbody.html("<tr><td colspan='9'>No Data</td></tr>");
-                            return;
-                        }
-
-                        data.forEach(row => {
-                            tbody.append(`
-                                <tr>
-                                <td>${row.meeting_code || ""}</td>
-                                <td>${row.meeting_date || ""}</td>
-                                <td>${row.meeting_topic || ""}</td>
-                                <td>${row.start_time || ""}</td>
-                                <td>${row.coordinator || ""}</td>
-                                <td>${row.participants || ""}</td>
-                                <td>${row.meeting_link || ""}</td>
-                                <td>${row.status || ""}</td>
-                                <td><button>View</button></td>
-                                </tr>
-                                `);
-                        });
-                    });
+            if (text.includes("VISIT")) {
+                Visits();
+                $("#visits").css("display", "flex");
             }
-            function visit() {
-                fetch("/api/getVisits")
-                    .then(res => res.json())
-                    .then(data => {
-                        const tbody = $("#visitsTable tbody");
-                        tbody.html("");
-
-                        if (!data || data.length === 0) {
-                            tbody.html("<tr><td colspan='9'>No Data</td></tr>");
-                            return;
-                        }
-
-                        data.forEach(row => {
-                            tbody.append(`
-                                <tr>
-                                <td>${row.visit_code || ""}</td>
-                                <td>${row.visit_date || ""}</td>
-                                <td>${row.customer_name || ""}</td>
-                                <td>${row.visit_purpose || ""}</td>
-                                <td>${row.initiated_by || ""}</td>
-                                <td>${row.participants || ""}</td>
-                                <td>${row.duration || ""}</td>
-                                <td>${row.journey_km || ""}</td>
-                                <td><button>View</button></td>
-                                </tr>
-                                `);
-                        });
-                    });
+            else if (text.includes("MEET")) {
+                Meetings();
+                $("#eventModal").css("display", "flex");
             }
-       
 
+            Meetings();
+            Visits();
+
+
+        });
+
+
+        function loadPopupData(type) {
+
+            var getUrl = window.location;
+            var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+            baseurl = baseurl.split("pages")[0];
+
+            var cloudcode = window.targetcloud;
+            var tokenParam = window.token ? "&token=" + encodeURIComponent(window.token) : "";
+
+            // type = "Meeting_Pop_Up" OR "Visit_Pop_Up"
+            var urltotal = baseurl +
+                "getFunction.do?actn=getsqljsondata" +
+                "&sqlfieldid=65925" +
+                "&cloudcode=" + encodeURIComponent(cloudcode) +
+                "&ids=valuestring/" +
+                "&valuestring=" + encodeURIComponent(type) + "@d@1@d@" +
+                tokenParam;
+
+            let data = callajax(urltotal);
+
+            try {
+                data = JSON.parse(data);
+
+                if (!data || data.length === 0) {
+                    console.log("No Data");
+                    return;
+                }
+
+                let inner = JSON.parse(data[0].txt);
+
+                if (type === "Meeting_Pop_Up") {
+                    renderMeeting(inner);
+                } else if (type === "Visit_Pop_Up") {
+                    renderVisit(inner);
+                }
+
+            } catch (err) {
+                console.error("Error loading popup data", err);
+            }
+        }
+
+        // meeting 
+        function Meetings() {
+
+            var getUrl = window.location;
+            var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+            baseurl = baseurl.split("pages")[0];
+
+            var cloudcode = window.targetcloud;
+            var tokenParam = window.token ? "&token=" + encodeURIComponent(window.token) : "";
+
+            var urltotal = baseurl +
+                "getFunction.do?actn=getsqljsondata" +
+                "&sqlfieldid=65925" +
+                "&cloudcode=" + encodeURIComponent(cloudcode) +
+                "&ids=valuestring/" +
+                "&valuestring=Meeting_Pop_Up@d@1@d@" +
+                tokenParam;
+
+            let data = callajax(urltotal);
+
+            try {
+                data = JSON.parse(data);
+
+                const tbody = $("#meetingsTable tbody");
+                tbody.html("");
+
+                if (!data || data.length === 0 || !data[0].txt) {
+                    tbody.html("<tr><td colspan='9'>No Data</td></tr>");
+                    return;
+                }
+
+                let inner = JSON.parse(data[0].txt);
+
+                inner.forEach(row => {
+                    tbody.append(`
+                <tr>
+                    <td>${row.meeting_code || ""}</td>
+                    <td>${row.meeting_date || ""}</td>
+                    <td>${row.meeting_topic || ""}</td>
+                    <td>${row.start_time || ""}</td>
+                    <td>${row.coordinator || ""}</td>
+                    <td>${row.participants || ""}</td>
+                    <td>${row.meeting_link || ""}</td>
+                    <td>${row.status || ""}</td>
+                    <td><button>View</button></td>
+                </tr>
+            `);
+                });
+
+            } catch (err) {
+                console.error("Meeting Load Error", err);
+            }
+        }
+
+        // visit
+        function Visits() {
+
+            var getUrl = window.location;
+            var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+            baseurl = baseurl.split("pages")[0];
+
+            var cloudcode = window.targetcloud;
+            var tokenParam = window.token ? "&token=" + encodeURIComponent(window.token) : "";
+
+            var urltotal = baseurl +"getFunction.do?actn=getsqljsondata"+"&sqlfieldid=65925"+"&cloudcode=" + encodeURIComponent(cloudcode)+"&ids=valuestring/"+"&valuestring=Visit_Pop_Up@d@1@d@"+tokenParam;
+
+            let data = callajax(urltotal);
+
+            try {
+                data = JSON.parse(data);
+
+                const tbody = $("#visitsTable tbody");
+                tbody.html("");
+
+                if (!data || data.length === 0 || !data[0].txt) {
+                    tbody.html("<tr><td colspan='9'>No Data</td></tr>");
+                    return;
+                }
+
+                let inner = JSON.parse(data[0].txt);
+
+                inner.forEach(row => {
+                    tbody.append(`
+                <tr>
+                    <td>${row.visit_code || ""}</td>
+                    <td>${row.visit_date || ""}</td>
+                    <td>${row.customer_name || ""}</td>
+                    <td>${row.visit_purpose || ""}</td>
+                    <td>${row.initiated_by || ""}</td>
+                    <td>${row.participants || ""}</td>
+                    <td>${row.duration || ""}</td>
+                    <td>${row.journey_km || ""}</td>
+                    <td><button>View</button></td>
+                </tr>
+            `);
+                });
+
+            } catch (err) {
+                console.error("Visit Load Error", err);
+            }
+        }
         showCalender();
 
     </script>

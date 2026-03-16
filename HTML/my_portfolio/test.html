@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ 
+    <script>
+        $(function () {
+
+    var start = moment().startOf('month');
+    var end = moment().endOf('month');
+
+    function setLabel(start, end) {
+
+        // 🔹 Front Display Format
+        $('#daterange').val(
+            start.format('MMM D, YYYY') + ' - ' + end.format('MMM D, YYYY')
+        );
+    }
+
+    // 🔥 Calendar Icon Add
+    if (!$('#daterange').parent().hasClass('date-wrapper')) {
+
+        $('#daterange').wrap('<div class="date-wrapper" style="position:relative; display:inline-block;"></div>');
+
+        $('.date-wrapper').prepend(`
+            <i class="fa fa-calendar"
+               style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:#666;">
+            </i>
+        `);
+
+        $('#daterange').css({
+            'padding-left': '35px'
+        });
+    }
+
+    $('#daterange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        opens: 'left',
+        autoApply: true,
+        locale: {
+            format: 'MMM D, YYYY'
+        },
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [
+                moment().subtract(1, 'days'),
+                moment().subtract(1, 'days')
+            ],
+            'Last 7 Days': [
+                moment().subtract(6, 'days'),
+                moment()
+            ],
+            'Last 30 Days': [
+                moment().subtract(29, 'days'),
+                moment()
+            ],
+            'This Month': [
+                moment().startOf('month'),
+                moment().endOf('month')
+            ],
+            'Last Month': [
+                moment().subtract(1, 'month').startOf('month'),
+                moment().subtract(1, 'month').endOf('month')
+            ]
+        }
+    }, function (start, end) {
+
+        // 🔥 API Format Dates
+        rangeStartDate = start.format('YYYY-MM-DD');
+        rangeEndDate = end.format('YYYY-MM-DD');
+
+        // 🔥 Auto Run Last Selected Report
+        if (activeReport === 'meeting') {
+            createmeeting_report();
+        }
+        else if (activeReport === 'visit') {
+            createvisit_report();
+        }
+
+        setLabel(start, end);
+    });
+
+    // 🔥 Set Default Month Dates for API
+    rangeStartDate = start.format('YYYY-MM-DD');
+    rangeEndDate = end.format('YYYY-MM-DD');
+
+    setLabel(start, end);
+
+});
+    </script>
+</body>
+</html>

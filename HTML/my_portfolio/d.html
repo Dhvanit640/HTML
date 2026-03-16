@@ -1,224 +1,1318 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <title>Sales Management</title>
+
+    <!-- bootstrap link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Datatable links -->
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+    <!-- Responsive table extension -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> -->
+
+    <!-- kendo -->
+
+    <!-- <link href="https://kendo.cdn.telerik.com/2024.1.130/styles/kendo.default-v2.min.css" rel="stylesheet"/>
+    <script src="https://kendo.cdn.telerik.com/2024.1.130/js/kendo.all.min.js"></script> -->
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.default.mobile.min.css" />
+    <script src="https://kendo.cdn.telerik.com/2022.2.510/js/kendo.all.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@4"></script>
+
+    <!-- Font Awesome & icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+
+        .card {
+            border: 1.5px solid #ced4e1;
+        }
+
+        .custom-tabs {
+            border-bottom: 1px solid lightgray;
+        }
+
+        .custom-tabs .nav-link {
+            border: 1.5px solid #ced4e1;
+            border-bottom: none;
+            margin-right: 8px;
+            color: #706b6b;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .custom-tabs .nav-link.active {
+            background: #ff8c1a;
+            color: white;
+            border-color: #ff8c1a;
+        }
+
+        .card-heading {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0;
+            padding: 12px 20px;
+        }
+
+        .headings-border {
+            border-bottom: 1.5px solid #dee1e9;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-box {
+            height: 450px;
+        }
+
+        .big-heading {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .card-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Each icon box */
+        .icon-btn {
+            padding: 0 15px;
+            font-size: 16px;
+            color: #6c757d;
+            cursor: pointer;
+            border-right: 1px solid #b8b9bc;
+        }
+
+        /* Remove border from last icon */
+        .icon-btn:last-child {
+            border-right: none;
+        }
+
+        .nav-link.active span svg path {
+            stroke: white !important;
+        }
+
+        /* sales order css */
+        .sales-order-container .dataTables_scroll {
+            border: 1px solid lightgray;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+        }
+
+        #order_vs_receiptanalysis_table_wrapper .dataTables_scrollHeadInner,
+        #sales_order_table_wrapper .dataTables_scrollHeadInner,
+        #daily_inventory_table_wrapper .dataTables_scrollHeadInner {
+            background: #E4E2FF !important;
+            font-size: 13px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            color: black !important;
+            background: unset;
+            border: unset;
+        }
+
+        #sales_order_table_wrapper.dataTables_wrapper.no-footer .dataTables_scrollBody {
+            border-bottom: unset;
+        }
+
+        #order_vs_receiptanalysis_table_wrapper.dataTables_wrapper.no-footer .dataTables_scrollBody {
+            border-bottom: unset;
+        }
+
+        #daily_inventory_table_wrapper.dataTables_wrapper.no-footer .dataTables_scrollBody {
+            border-bottom: unset;
+        }
+
+        #sales_order_table_length label,
+        #order_vs_receiptanalysis_table_length label,
+        #daily_inventory_table_length label {
+            /* margin-bottom: 10px; */
+            font-size: 13px;
+        }
+
+        #sales_order_table_wrapper .dataTables_length,
+        #sales_order_table_wrapper .dataTables_filter,
+        #sales_order_table_wrapper .dataTables_info,
+        #sales_order_table_wrapper .dataTables_processing,
+        #sales_order_table_wrapper .dataTables_paginate {
+            font-size: 13px;
+        }
+
+        #sales_order_table thead {
+            background: #c9c5df;
+        }
+
+        #sales_order_table thead th,
+        #order_vs_receiptanalysis_table thead th,
+        #daily_inventory_table thead th {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        #sales_order_table_wrapper .dataTables_paginate .paginate_button.current,
+        #order_vs_receiptanalysis_table_wrapper .dataTables_paginate .paginate_button.current,
+        #daily_inventory_table_wrapper .dataTables_paginate .paginate_button.current {
+            background: #6c63ff !important;
+            color: white !important;
+            border-radius: 6px;
+        }
+
+        #sales_order_table thead th,
+        #order_vs_receiptanalysis_table thead th,
+        #daily_inventory_table thead th {
+            font-size: 13px;
+        }
+
+        #sales_order_table tbody td,
+        #order_vs_receiptanalysis_table_wrapper tbody td,
+        #daily_inventory_table_wrapper tbody td {
+            color: #585D68;
+            font-weight: 400;
+            font-size: 13px;
+        }
+
+        #sales_order_table,
+        #order_vs_receiptanalysis_table,
+        #daily_inventory_table {
+            border-collapse: collapse;
+        }
+
+        #sales_order_table thead th,
+        #order_vs_receiptanalysis_table thead th,
+        #daily_inventory_table thead th {
+            background: #f5f5f5;
+            border: 1px solid #e5e5e5;
+        }
+
+        #sales_order_table tbody td,
+        #order_vs_receiptanalysis_table tbody td,
+        #daily_inventory_table tbody td {
+            border: 1px solid #f0f0f0;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            padding-top: 0;
+        }
+
+        .bottom>.d-flex.gap-2 {
+            align-items: center;
+        }
+
+        .sales-order-container {
+            /* width: 900px; */
+            margin: auto;
+            margin-top: 6px;
+            background: #fff;
+            padding: 15px;
+            /* border: 1px solid lightgray;
+            border-radius: 6px; */
+        }
+
+        .sales-order-container .dataTables_scroll {
+            border: 1px solid lightgray;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+        }
+
+        .stock-alert-badge {
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .stock-alert-Active {
+            background: #DEFFF6;
+            color: #10B981;
+        }
+
+        .stock-alert-Verification {
+            background: #D7E7FF;
+            color: #257CFF;
+        }
+
+        .stock-alert-Draft {
+            background: #FFF0D2;
+            color: #FDA700;
+        }
+
+        .calendaricon,
+        .penicon {
+            color: #5D51E2;
+            background-color: #FFFFFF;
+            /* border: none; */
+
+        }
+
+        /* ------------------ Sales Bill tab css ---------------------------------------------------- */
+
+        .revenue-container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .filter-panel {
+            width: 320px;
+            background: #cfd1e6;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .filter-panel label {
+            display: block;
+            font-size: 13px;
+            margin-top: 10px;
+            margin-bottom: 6px;
+        }
+
+        .filter-panel select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #c8c8c8;
+        }
+
+        #revenue_map {
+            width: 450px;
+            height: 300px;
+        }
+    </style>
+
 </head>
-<style>
-    /* Main Container */
-    .table-container {
-        border: 2px solid #6c63ff;
-        padding: 20px;
-        border-radius: 6px;
-        background-color: #f9f9f9;
-    }
 
-    /* Section Title */
-    .section-title {
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
+<body class="p-4">
 
-    /* Table Styling */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 40px;
-        background-color: #fff;
-    }
+    <ul class="nav custom-tabs">
+        <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#sales_deal">
+                <span><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M19.7548 3.7041H2.24519C1.84226 3.7041 1.51562 4.03074 1.51562 4.43367V16.1068C1.51562 16.5096 1.84226 16.8363 2.24519 16.8363H19.7548C20.1577 16.8363 20.4844 16.5096 20.4844 16.1068V4.43367C20.4844 4.03074 20.1577 3.7041 19.7548 3.7041Z"
+                            stroke="#686E7A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9.54117 16.8359L8.08203 20.4838" stroke="#686E7A" stroke-width="1.7"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12.4609 16.8359L13.9201 20.4838" stroke="#686E7A" stroke-width="1.7"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M6.62109 20.4844H15.3759" stroke="#686E7A" stroke-width="1.7" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M11.7305 3.7041V16.8363" stroke="#686E7A" stroke-width="1.7" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M5.16406 8.08105H8.08234" stroke="#686E7A" stroke-width="1.7" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M5.16406 12.459H6.6232" stroke="#686E7A" stroke-width="1.7" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M11.7305 11.0001L13.496 9.54097C14.0193 9.10798 14.6772 8.87109 15.3564 8.87109C16.0357 8.87109 16.6936 9.10798 17.2168 9.54097L20.4853 12.4592"
+                            stroke="#686E7A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span> Sales Deal
+            </button>
+        </li>
 
-    /* Table Header */
-    table thead th {
-        background-color: #e6e6e6;
-        font-weight: 600;
-        font-size: 14px;
-        padding: 10px;
-        border: 1px solid #cfcfcf;
-        text-align: center;
-    }
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#scheduling">
+                <span><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_321_6746)">
+                            <path
+                                d="M12.4592 1.51562H2.97476C2.1689 1.51562 1.51562 2.1689 1.51562 2.97476V19.0253C1.51562 19.8311 2.1689 20.4844 2.97476 20.4844H16.107C16.9129 20.4844 17.5661 19.8311 17.5661 19.0253V12.4592"
+                                stroke="#686E7A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M1.51562 16.1074H17.5661" stroke="#686E7A" stroke-width="1.7"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M5.89453 5.16309H8.81281" stroke="#686E7A" stroke-width="1.7"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M5.89453 8.81152H7.35367" stroke="#686E7A" stroke-width="1.7"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M13.9087 11.738L9.53125 12.526L10.2608 8.0902L16.4329 1.94723C16.5686 1.81047 16.73 1.70192 16.9079 1.62784C17.0856 1.55376 17.2763 1.51562 17.4689 1.51562C17.6616 1.51562 17.8524 1.55376 18.0301 1.62784C18.2079 1.70192 18.3693 1.81047 18.5049 1.94723L20.0516 3.49392C20.1884 3.62956 20.297 3.79094 20.371 3.96876C20.4451 4.14657 20.4832 4.33729 20.4832 4.52991C20.4832 4.72253 20.4451 4.91325 20.371 5.09105C20.297 5.26886 20.1884 5.43026 20.0516 5.5659L13.9087 11.738Z"
+                                stroke="#686E7A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_321_6746">
+                                <rect width="22" height="22" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span> Scheduling
+            </button>
+        </li>
 
-    /* Table Body Cells */
-    table tbody td {
-        padding: 8px;
-        font-size: 13px;
-        border: 1px solid #d9d9d9;
-        text-align: center;
-    }
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#order_revision">
+                <span><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_321_6755)">
+                            <path
+                                d="M8.47867 10.0459H13.52C13.52 10.0459 14.9791 10.0459 14.9791 11.505V15.0887C14.9791 15.0887 14.9791 16.5478 13.52 16.5478H8.47867C8.47867 16.5478 7.01953 16.5478 7.01953 15.0887V11.505C7.01953 11.505 7.01953 10.0459 8.47867 10.0459Z"
+                                stroke="#686E7A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M9.17188 10.0463V9.21109C9.17188 8.40522 9.82514 7.75195 10.631 7.75195H11.3752C12.181 7.75195 12.8343 8.40522 12.8343 9.21109V10.0463"
+                                stroke="#686E7A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M20.4844 10.9125C20.4859 10.7099 20.445 10.5093 20.3646 10.3234C20.2842 10.1375 20.166 9.97042 20.0175 9.83271L11 1.51562L1.98258 9.83271C1.83408 9.97042 1.71587 10.1375 1.63548 10.3234C1.55509 10.5093 1.51429 10.7099 1.51566 10.9125V19.0253C1.51566 19.4122 1.66939 19.7834 1.94303 20.057C2.21667 20.3306 2.58781 20.4844 2.97479 20.4844H19.0253C19.4122 20.4844 19.7834 20.3306 20.057 20.057C20.3308 19.7834 20.4844 19.4122 20.4844 19.0253V10.9125Z"
+                                stroke="#686E7A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_321_6755">
+                                <rect width="22" height="22" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span> Order Revision
+            </button>
+        </li>
 
-    /* Zebra Striping */
-    table tbody tr:nth-child(even) {
-        background-color: #f5f5f5;
-    }
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sales_bill">
+                <span><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.01562 9.53906H13.9751" stroke="#686E7A" stroke-width="1.71" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M8.01562 11.8828H13.9751" stroke="#686E7A" stroke-width="1.71" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M10.5777 9.53906C11.1453 9.68095 12.2804 10.1776 12.2804 11.6674C12.2804 14.2215 8.875 14.2215 8.875 14.2215C8.875 14.2215 10.5777 15.7114 13.1318 16.3499"
+                            stroke="#686E7A" stroke-width="1.71" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M10.999 20.4887C16.1071 20.4887 19.7558 18.6817 19.7558 14.6598C19.7558 10.2881 17.5666 7.37365 13.1882 5.18783L14.9103 2.97284C14.9978 2.82752 15.0453 2.66168 15.0479 2.49214C15.0505 2.32259 15.0082 2.15538 14.9252 2.00743C14.8422 1.85949 14.7216 1.73608 14.5754 1.64971C14.4293 1.56334 14.2629 1.51708 14.093 1.51562H7.90491C7.73509 1.51708 7.56868 1.56334 7.42254 1.64971C7.27639 1.73608 7.15572 1.85949 7.07275 2.00743C6.98977 2.15538 6.94744 2.32259 6.95005 2.49214C6.95267 2.66168 7.00011 2.82752 7.08761 2.97284L8.80978 5.20239C4.43138 7.4028 2.24219 10.3172 2.24219 14.6889C2.24219 18.6817 5.89085 20.4887 10.999 20.4887Z"
+                            stroke="#686E7A" stroke-width="1.71" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span> Sales Bill
+            </button>
+        </li>
+    </ul>
 
-    /* Hover Effect */
-    table tbody tr:hover {
-        background-color: #eef0ff;
-    }
+    <div class="tab-content mt-3">
 
-    /* View Button */
-    .view-btn {
-        background: linear-gradient(45deg, #6c63ff, #8e44ad);
-        color: #fff;
-        border: none;
-        padding: 6px 14px;
-        font-size: 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: 0.3s ease;
-    }
+        <div class="tab-pane fade show active" id="sales_deal">
+            <div class="row" style="margin-bottom: 1.5rem;">
+                <div class="col-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">Sales Order Details</h4>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-sliders icon-btn"></i>
+                                    <i class="fa-solid fa-rotate icon-btn"></i>
+                                    <i class="fa-solid fa-download icon-btn"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                </div>
+                            </div>
+                            <div style="height: 100%;">
+                                <div class="sales-order-container">
+                                    <table id="sales_order_table" class="display" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>order Date</th>
+                                                <th>Order ID</th>
+                                                <th>Product</th>
+                                                <th>Customer</th>
+                                                <th>Project Name</th>
+                                                <th>Order Type</th>
+                                                <th>Currenecy</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                                <!-- <th>Status</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
 
-    .view-btn:hover {
-        opacity: 0.85;
-        transform: scale(1.05);
-    }
 
-    /* No Data Message */
-    .no-data {
-        text-align: center;
-        padding: 20px;
-        font-weight: 500;
-        color: #888;
-    }
+                            </div>
 
-    /* Responsive Scroll */
-    .table-wrapper {
-        overflow-x: auto;
-    }
-</style>
-
-<body>
-    <div class="table-container">
-
-        <div class="section-title">Meetings :</div>
-        <div class="table-wrapper">
-            <table id="meetingsTable">
-                <thead>
-                    <th>Meeting Code</th>
-                    <th>Meeting Date</th>
-                    <th>Meeting Topic</th>
-                    <th>Start Time</th>
-                    <th>Coordinator</th>
-                    <th>Participants</th>
-                    <th>Meeting Link</th>
-                    <th>Status</th>
-                    <th>View Agenda</th>
-                </thead>
-                <tbody></tbody>
-            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 1.5rem;">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">Orders Over Time</h4>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-sliders icon-btn"></i>
+                                    <i class="fa-solid fa-rotate icon-btn"></i>
+                                    <i class="fa-solid fa-download icon-btn"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="ordersChart" style="height:350px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">% Of Total Revenue by Product</h4>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <span style="padding: 0px 20px;">Product Type</span>
+                                <div id="projectDonutChart" style="height:350px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">Top 10 Customers</h4>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-sliders icon-btn"></i>
+                                    <i class="fa-solid fa-rotate icon-btn"></i>
+                                    <i class="fa-solid fa-download icon-btn"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="revenueChart" style="height:350px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="section-title">Visits :</div>
-        <div class="table-wrapper">
-            <table id="visitsTable">
-                <thead>
-                    <th>Visit Code</th>
-                    <th>Visit Date</th>
-                    <th>Customer Name</th>
-                    <th>Visit Purpose</th>
-                    <th>Visit Initiated By</th>
-                    <th>Visit Participants</th>
-                    <th>Visit Duration</th>
-                    <th>Journey KM</th>
-                    <th>View Details</th>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <div class="tab-pane fade" id="scheduling">
+            <div class="row" style="margin-bottom: 1.5rem;">
+                <div class="col-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">Project Gantt</h4>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-sliders icon-btn"></i>
+                                    <i class="fa-solid fa-rotate icon-btn"></i>
+                                    <i class="fa-solid fa-download icon-btn"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <div class="card card-box">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="order_revision">
+            <div class="row" style="margin-bottom: 1.5rem;">
+                <div class="col-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">Order Revision</h4>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-sliders icon-btn"></i>
+                                    <i class="fa-solid fa-rotate icon-btn"></i>
+                                    <i class="fa-solid fa-download icon-btn"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="sales_bill">
+            <div class="row" style="margin-bottom: 1.5rem;">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">Revenue Status</h4>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-sliders icon-btn"></i>
+                                    <i class="fa-solid fa-rotate icon-btn"></i>
+                                    <i class="fa-solid fa-download icon-btn"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="monthlyRevenueChart" style="height:350px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">Sales Order Trend</h4>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-sliders icon-btn"></i>
+                                    <i class="fa-solid fa-rotate icon-btn"></i>
+                                    <i class="fa-solid fa-download icon-btn"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="orders_chart" style="height:350px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 1.5rem;">
+                <div class="col-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">Order vs advance vs Billed vs Credit note</h4>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-sliders icon-btn"></i>
+                                    <i class="fa-solid fa-rotate icon-btn"></i>
+                                    <i class="fa-solid fa-download icon-btn"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="order_summary_chart" style="height:250px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 1.5rem;">
+                <div class="col-12">
+                    <div>
+                        <div class="card card-box">
+                            <div class="headings-border">
+                                <h4 class="card-heading">Revenue Heatmap</h4>
+                            </div>
+
+                            <div class="wrapper">
+
+                                <div class="filters">
+
+                                    <label>Country</label>
+                                    <select id="country">
+                                        <option value="usa">USA</option>
+                                        <option value="india">India</option>
+                                    </select>
+
+                                    <label>State</label>
+                                    <select id="state">
+                                        <option>Auto</option>
+                                    </select>
+
+                                    <label>Location</label>
+                                    <select id="location">
+                                        <option>Auto</option>
+                                    </select>
+
+                                </div>
+
+                                <canvas id="map"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
     <script>
-        function renderTable(tableId, data, columns, viewButtonCallback) {
+        function stockAlertStatus(status) {
 
-            const tableBody = document.querySelector(`#${tableId} tbody`);
-            tableBody.innerHTML = "";
-
-            if (!data || data.length === 0) {
-                tableBody.innerHTML = `
-            <tr>
-                <td colspan="${columns.length}" style="text-align:center;">
-                    No Data Found
-                </td>
-            </tr>
-        `;
-                return;
+            if (status === "Active") {
+                return '<span class="stock-alert-badge stock-alert-Active">Active</span>';
             }
 
-            data.forEach(row => {
+            if (status === "Verification") {
+                return '<span class="stock-alert-badge stock-alert-Verification">Verification</span>';
+            }
 
-                let tr = document.createElement("tr");
+            if (status === "Draft") {
+                return '<span class="stock-alert-badge stock-alert-Draft">Draft</span>';
+            }
 
-                columns.forEach(col => {
-                    let td = document.createElement("td");
+        }
+        function dailyinventory_table() {
+            var stockAlertData = [
 
-                    if (col === "action") {
-                        let btn = document.createElement("button");
-                        btn.textContent = "View";
-                        btn.className = "view-btn";
-                        btn.onclick = function () {
-                            viewButtonCallback(row);
-                        };
-                        td.appendChild(btn);
-                    } else {
-                        td.textContent = row[col] || "";
+                { orderDate: "01/04/2025", orderId: "OD001", product: "Solar Panel Installation", customer: "Adani", project: "Solar Site", type: "Composite", currency: "INR", status: "Active" },
+                { orderDate: "01/08/2025", orderId: "OD002", product: "EPC", customer: "NPCL", project: "Admin Building", type: "Rate Contract", currency: "INR", status: "Verification" },
+                { orderDate: "01/05/2025", orderId: "OD003", product: "Fabrication of Metal Gates", customer: "Build Corp", project: "Global", type: "Composite", currency: "INR", status: "Draft" },
+                { orderDate: "01/06/2025", orderId: "OD004", product: "Road 300 KM", customer: "RBI", project: "Solar Site", type: "Product", currency: "INR", status: "Active" },
+                { orderDate: "01/06/2025", orderId: "OD005", product: "Fabrication of Metal Gates", customer: "NPCL", project: "SMC - NH48", type: "Composite", currency: "INR", status: "Active" },
+                { orderDate: "02/06/2025", orderId: "OD006", product: "Warehouse Construction", customer: "Reliance", project: "Jamnagar Plant", type: "Composite", currency: "INR", status: "Verification" },
+                { orderDate: "03/06/2025", orderId: "OD007", product: "Bridge Work", customer: "L&T", project: "River Bridge", type: "Rate Contract", currency: "INR", status: "Active" },
+                { orderDate: "04/06/2025", orderId: "OD008", product: "Pipeline Installation", customer: "ONGC", project: "Oil Field", type: "Product", currency: "INR", status: "Draft" },
+                { orderDate: "05/06/2025", orderId: "OD009", product: "Solar Plant Setup", customer: "Tata Power", project: "Solar Park", type: "Composite", currency: "INR", status: "Active" },
+                { orderDate: "06/06/2025", orderId: "OD010", product: "Highway Work", customer: "NHAI", project: "NH48", type: "Rate Contract", currency: "INR", status: "Verification" }
+
+            ];
+
+            if ($.fn.DataTable.isDataTable('#sales_order_table')) {
+                $('#sales_order_table').DataTable().clear().destroy();
+            }
+
+            $('#sales_order_table').DataTable({
+                data: stockAlertData,
+                scrollX: true,
+                pageLength: 7,
+                lengthMenu: [7, 10, 15],
+                searching: false,
+                dom: 't<"bottom d-flex justify-content-between align-items-center mt-2"<"dataTables_info"i><"d-flex gap-2"l p>>',
+                scrollY: "260px",        // tbody height
+                scrollCollapse: true,
+                initComplete: function () {
+                    $('#sales_order_table_wrapper .dataTables_scrollBody').css({
+                        "min-height": "250px"
+                    });
+                },
+
+                columns: [
+                    // {
+                    //     data: null,
+                    //     render: function () {
+                    //         // return '<input type="checkbox">';
+                    //     }
+                    // },
+                    { data: "orderDate" },
+                    { data: "orderId" },
+                    { data: "product" },
+                    { data: "customer" },
+                    { data: "project" },
+                    { data: "type" },
+                    { data: "currency" },
+                    {
+                        data: "status",
+                        render: function (data) {
+                            return stockAlertStatus(data);
+                            // return '<span class="status-badge '+data.toLowerCase()+'">'+data+'</span>';
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function () {
+                            return `
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" fill="white"/>
+                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#5D51E2"/>
+                        <path d="M5.75581 12.3553C5.65181 12.3553 5.54801 12.3156 5.46859 12.2362C5.30995 12.0776 5.30995 11.8204 5.46859 11.6618L11.8171 5.31332C11.9755 5.15468 12.2329 5.15468 12.3915 5.31332C12.5501 5.47196 12.5501 5.72911 12.3915 5.88775L6.04303 12.2362C5.96381 12.3154 5.85981 12.3553 5.75581 12.3553Z" fill="#5D51E2"/>
+                        <path d="M5.12834 15.2812C5.1001 15.2812 5.07146 15.2781 5.04282 15.272C4.82345 15.2249 4.6837 15.009 4.73082 14.7896L5.35848 11.864C5.4056 11.6446 5.62254 11.5053 5.8409 11.552C6.06027 11.5991 6.20002 11.815 6.1529 12.0344L5.52524 14.96C5.48441 15.1508 5.31582 15.2812 5.12834 15.2812Z" fill="#5D51E2"/>
+                        <path d="M8.05366 14.6539C7.94966 14.6539 7.84586 14.6143 7.76644 14.5348C7.6078 14.3762 7.6078 14.1191 7.76644 13.9604L14.1149 7.61214C14.2733 7.4535 14.5307 7.4535 14.6893 7.61214C14.848 7.77079 14.848 8.02794 14.6893 8.18658L8.34108 14.5348C8.26166 14.6143 8.15766 14.6539 8.05366 14.6539Z" fill="#5D51E2"/>
+                        <path d="M5.12767 15.281C4.94018 15.281 4.77179 15.1506 4.73076 14.9598C4.68384 14.7405 4.82338 14.5246 5.04276 14.4774L7.96837 13.8498C8.18795 13.8033 8.40387 13.9426 8.45079 14.1618C8.49771 14.3811 8.35817 14.5971 8.13879 14.6442L5.21318 15.2719C5.18454 15.2781 5.1559 15.281 5.12767 15.281Z" fill="#5D51E2"/>
+                        <path d="M13.253 9.45415C13.149 9.45415 13.045 9.41454 12.9658 9.33512L10.6678 7.03717C10.5092 6.87853 10.5092 6.62137 10.6678 6.46273C10.8262 6.30409 11.0838 6.30409 11.2422 6.46273L13.5402 8.76068C13.6988 8.91932 13.6988 9.17648 13.5402 9.33512C13.461 9.41454 13.357 9.45415 13.253 9.45415Z" fill="#5D51E2"/>
+                        <path d="M14.4023 8.30489C14.2983 8.30489 14.1943 8.26528 14.1149 8.18586C13.9562 8.02722 13.9562 7.77006 14.1149 7.61122C14.341 7.38514 14.4655 7.07903 14.4655 6.74956C14.4655 6.42009 14.341 6.11398 14.1149 5.88791C13.8886 5.66163 13.5825 5.53711 13.253 5.53711C12.9236 5.53711 12.6175 5.66163 12.3914 5.88791C12.2329 6.04655 11.9758 6.04675 11.8167 5.88791C11.6581 5.72927 11.6581 5.47211 11.8167 5.31327C12.1962 4.93362 12.7062 4.72461 13.253 4.72461C13.7996 4.72461 14.3099 4.93362 14.6893 5.31327C15.069 5.6927 15.278 6.20275 15.278 6.74956C15.278 7.29638 15.069 7.80642 14.6893 8.18586C14.6103 8.26508 14.5063 8.30489 14.4023 8.30489Z" fill="#5D51E2"/>
+                        </svg>
+
+                        &nbsp&nbsp
+                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" fill="white"/>
+                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#5D51E2"/>
+                        <g clip-path="url(#clip0_321_6488)">
+                        <path d="M13.6832 4.92439H13.2356V4.47147C13.2356 4.2127 13.0258 4.00293 12.767 4.00293C12.5083 4.00293 12.2985 4.2127 12.2985 4.47147V4.92439H7.70148V4.47147C7.70148 4.2127 7.49171 4.00293 7.23293 4.00293C6.97416 4.00293 6.76439 4.2127 6.76439 4.47147V4.92439H6.31682C5.03932 4.92439 4 5.96371 4 7.24118V13.6808C4 14.9583 5.03932 15.9976 6.31682 15.9976H13.6832C14.9607 15.9976 16 14.9583 16 13.6808V7.24118C16 5.96371 14.9607 4.92439 13.6832 4.92439ZM6.31682 5.86147H6.76439V6.77512C6.76439 7.0339 6.97416 7.24367 7.23293 7.24367C7.49171 7.24367 7.70148 7.0339 7.70148 6.77512V5.86147H12.2985V6.77512C12.2985 7.0339 12.5083 7.24367 12.7671 7.24367C13.0258 7.24367 13.2356 7.0339 13.2356 6.77512V5.86147H13.6832C14.444 5.86147 15.0629 6.48041 15.0629 7.24118V7.68878H4.93708V7.24118C4.93708 6.48041 5.55603 5.86147 6.31682 5.86147ZM13.6832 15.0605H6.31682C5.55603 15.0605 4.93708 14.4416 4.93708 13.6808V8.62586H15.0629V13.6808C15.0629 14.4416 14.444 15.0605 13.6832 15.0605ZM8.16222 10.4688C8.16222 10.7276 7.95245 10.9373 7.69368 10.9373H6.77222C6.51344 10.9373 6.30368 10.7276 6.30368 10.4688C6.30368 10.21 6.51344 10.0003 6.77222 10.0003H7.69368C7.95243 10.0003 8.16222 10.21 8.16222 10.4688ZM13.6963 10.4688C13.6963 10.7276 13.4866 10.9373 13.2278 10.9373H12.3063C12.0476 10.9373 11.8378 10.7276 11.8378 10.4688C11.8378 10.21 12.0476 10.0003 12.3063 10.0003H13.2278C13.4866 10.0003 13.6963 10.21 13.6963 10.4688ZM10.9266 10.4688C10.9266 10.7276 10.7168 10.9373 10.4581 10.9373H9.53661C9.27784 10.9373 9.06807 10.7276 9.06807 10.4688C9.06807 10.21 9.27784 10.0003 9.53661 10.0003H10.4581C10.7168 10.0003 10.9266 10.21 10.9266 10.4688ZM8.16222 13.2332C8.16222 13.492 7.95245 13.7017 7.69368 13.7017H6.77222C6.51344 13.7017 6.30368 13.492 6.30368 13.2332C6.30368 12.9744 6.51344 12.7647 6.77222 12.7647H7.69368C7.95243 12.7647 8.16222 12.9744 8.16222 13.2332ZM13.6963 13.2332C13.6963 13.492 13.4866 13.7017 13.2278 13.7017H12.3063C12.0476 13.7017 11.8378 13.492 11.8378 13.2332C11.8378 12.9744 12.0476 12.7647 12.3063 12.7647H13.2278C13.4866 12.7647 13.6963 12.9744 13.6963 13.2332ZM10.9266 13.2332C10.9266 13.492 10.7168 13.7017 10.4581 13.7017H9.53661C9.27784 13.7017 9.06807 13.492 9.06807 13.2332C9.06807 12.9744 9.27784 12.7647 9.53661 12.7647H10.4581C10.7168 12.7647 10.9266 12.9744 10.9266 13.2332Z" fill="#5D51E2"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_321_6488">
+                        <rect width="12" height="12" fill="white" transform="translate(4 4)"/>
+                        </clipPath>
+                        </defs>
+                        </svg>
+
+                    `;
+                        }
                     }
+                ]
+            });
+        };
+        dailyinventory_table();
 
-                    tr.appendChild(td);
-                });
+        async function OrdersLineChart(onchangeflag = "") {
+            var getUrl = window.location;
+            var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+            baseurl = baseurl.split("pages")[0];
 
-                tableBody.appendChild(tr);
+            var cloudcode = window.targetcloud;
+            var username = window.targetuser;
+
+            // Dummy JSON
+            var data = [
+                { day: "Day 1", value: 3 },
+                { day: "Day 2", value: 7 },
+                { day: "Day 3", value: 4 },
+                { day: "Day 4", value: 6 },
+                { day: "Day 5", value: 7 },
+                { day: "Day 6", value: 9 },
+                { day: "Day 7", value: 9 },
+                { day: "Day 8", value: 9 },
+                { day: "Day 9", value: 13 },
+                { day: "Day 10", value: 11 },
+                { day: "Day 11", value: 14 },
+                { day: "Day 12", value: 13 },
+                { day: "Day 13", value: 12 },
+                { day: "Day 14", value: 14 },
+                { day: "Day 15", value: 17 },
+                { day: "Day 16", value: 24 },
+                { day: "Day 17", value: 23 },
+                { day: "Day 18", value: 22 },
+                { day: "Day 19", value: 26 },
+                { day: "Day 20", value: 27 },
+                { day: "Day 21", value: 27 },
+                { day: "Day 22", value: 29 },
+                { day: "Day 23", value: 28 },
+                { day: "Day 24", value: 29 }
+            ];
+
+            $("#ordersChart").kendoChart({
+                legend: {
+                    position: "top"
+                },
+
+                chartArea: {
+                    background: ""
+                },
+
+                dataSource: {
+                    data: data
+                },
+
+                series: [{
+                    name: "Orders",
+                    type: "area",
+                    field: "value",
+                    categoryField: "day",
+                    color: "#5A54D6",
+                    opacity: 0.3,
+                    line: {
+                        width: 3
+                    },
+                    markers: {
+                        visible: true,
+                        size: 8,
+                        background: "#5A54D6"
+                    }
+                }],
+
+                categoryAxis: {
+                    labels: {
+                        rotation: -35
+                    },
+                    majorGridLines: {
+                        visible: true
+                    }
+                },
+
+                valueAxis: {
+                    title: {
+                        text: "Number of Orders"
+                    },
+                    min: 0,
+                    majorGridLines: {
+                        visible: true,
+                        dashType: "dash"
+                    }
+                },
+
+                tooltip: {
+                    visible: true,
+                    template: "Orders : #= value #"
+                }
             });
         }
-        function loadMeetings() {
+        OrdersLineChart();
 
-            fetch("/api/getMeetings")
-                .then(res => res.json())
-                .then(data => {
+        async function Progressbarcircularr(onchangeflag = "") {
+            var getUrl = window.location;
+            var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+            baseurl = baseurl.split("pages")[0];
 
-                    const columns = [
-                        "meeting_code",
-                        "meeting_date",
-                        "meeting_topic",
-                        "start_time",
-                        "coordinator",
-                        "participants",
-                        "meeting_link",
-                        "status",
-                        "action"
-                    ];
+            var cloudcode = window.targetcloud;
+            var username = window.targetuser;
 
-                    renderTable("meetingsTable", data, columns, function (row) {
-                        console.log("View Meeting:", row);
-                    });
+            // Dummy JSON instead of API
+            var data = [
+                { category: "Renewable Energy", value: 1, color: "#39A9DB" },
+                { category: "EPC", value: 1, color: "#97C10B" },
+                { category: "Febrication", value: 2, color: "#F6B300" },
+                { category: "Roadways", value: 1, color: "#F55672" }
+            ];
 
-                });
+            $("#projectDonutChart").kendoChart({
+                legend: {
+                    position: "bottom"
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    type: "donut",
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        template: "#= value #",
+                        color: "#fff",
+                        font: "16px Arial"
+                    }
+                },
+                series: [{
+                    data: data,
+                    field: "value",
+                    categoryField: "category",
+                    colorField: "color",
+                    holeSize: 70
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= category # : #= value #"
+                }
+            });
         }
-        function loadVisits() {
+        Progressbarcircularr();
 
-            fetch("/api/getVisits")
-                .then(res => res.json())
-                .then(data => {
+        async function ClientRevenueChart(onchangeflag = "") {
+            var getUrl = window.location;
+            var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+            baseurl = baseurl.split("pages")[0];
 
-                    const columns = [
-                        "visit_code",
-                        "visit_date",
-                        "customer_name",
-                        "visit_purpose",
-                        "initiated_by",
-                        "participants",
-                        "duration",
-                        "journey_km",
-                        "action"
-                    ];
+            var cloudcode = window.targetcloud;
+            var username = window.targetuser;
 
-                    renderTable("visitsTable", data, columns, function (row) {
-                        console.log("View Visit:", row);
-                    });
+            // Dummy JSON
+            var data = [
+                { client: "Client A", revenue: 120 },
+                { client: "Client B", revenue: 100 },
+                { client: "Client C", revenue: 90 },
+                { client: "Client D", revenue: 85 },
+                { client: "Client E", revenue: 75 },
+                { client: "Client F", revenue: 58 },
+                { client: "Client G", revenue: 50 },
+                { client: "Client H", revenue: 45 },
+                { client: "Client I", revenue: 38 },
+                { client: "Client J", revenue: 30 }
+            ];
 
-                });
+            $("#revenueChart").kendoChart({
+                chartArea: {
+                    background: ""
+                },
+
+                dataSource: {
+                    data: data
+                },
+
+                series: [{
+                    type: "column",
+                    field: "revenue",
+                    categoryField: "client",
+                    color: "#2DB6C4",
+                    gap: 1
+                }],
+
+                categoryAxis: {
+                    labels: {
+                        rotation: -45
+                    },
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+
+                valueAxis: {
+                    title: {
+                        text: "Revenue (Rs. Lakhs)"
+                    },
+                    min: 0,
+                    majorGridLines: {
+                        visible: true,
+                        dashType: "dash"
+                    }
+                },
+
+                tooltip: {
+                    visible: true,
+                    template: "#= category # : #= value # Lakhs"
+                }
+            });
+        }
+        ClientRevenueChart();
+
+
+        //------------------ Sales Bill tab js ----------------------------------------------------
+        async function MonthlyRevenueChart(onchangeflag = "") {
+            var getUrl = window.location;
+            var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+            baseurl = baseurl.split("pages")[0];
+
+            var cloudcode = window.targetcloud;
+            var username = window.targetuser;
+
+            // Dummy JSON
+            var data = [
+                { month: "Jan", revenue: 70 },
+                { month: "Feb", revenue: 88 },
+                { month: "Mar", revenue: 102 },
+                { month: "Apr", revenue: 92 },
+                { month: "May", revenue: 81 },
+                { month: "June", revenue: 96 },
+                { month: "July", revenue: 62 },
+                { month: "Aug", revenue: 81 },
+                { month: "Sept", revenue: 110 },
+                { month: "Oct", revenue: 120 },
+                { month: "Nov", revenue: 102 },
+                { month: "Dec", revenue: 81 }
+            ];
+
+            $("#monthlyRevenueChart").kendoChart({
+
+                chartArea: {
+                    background: ""
+                },
+
+                dataSource: {
+                    data: data
+                },
+
+                series: [{
+                    type: "column",
+                    field: "revenue",
+                    categoryField: "month",
+                    color: "#2DB6C4"
+                }],
+
+                categoryAxis: {
+                    labels: {
+                        rotation: 0
+                    },
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+
+                valueAxis: {
+                    title: {
+                        text: "Revenue (Rs. Lakhs)"
+                    },
+                    min: 0,
+                    majorGridLines: {
+                        visible: true,
+                        dashType: "dash"
+                    }
+                },
+
+                tooltip: {
+                    visible: true,
+                    template: "#= category # : #= value # Lakhs"
+                }
+
+            });
+        }
+        MonthlyRevenueChart();
+
+        // async function OrdersLineChart() {
+
+        //     var getUrl = window.location;
+        //     var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+        //     baseurl = baseurl.split("pages")[0];
+
+        //     var cloudcode = window.targetcloud;
+        //     var username = window.targetuser;
+
+        //     // Dummy JSON Data (Instead of API)
+        //     var data = {
+        //         months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"],
+        //         series: [
+        //             {
+        //                 name: "Series 1",
+        //                 data: [60, 64, 79, 94, 95, 94, 92, 91, 93, 96, 100, 105],
+        //                 color: "#ff4fa3"
+        //             },
+        //             {
+        //                 name: "Series 2",
+        //                 data: [59, 61, 66, 80, 93, 91, 90, 90, 91, 94, 98, 102],
+        //                 color: "#28c3d4"
+        //             }
+        //         ]
+        //     };
+
+        //     $("#orders_chart").kendoChart({
+        //         legend: {
+        //             visible: false
+        //         },
+
+        //         chartArea: {
+        //             background: "transparent"
+        //         },
+
+        //         seriesDefaults: {
+        //             type: "line",
+        //             style: "smooth",
+        //             width: 3,
+        //             markers: {
+        //                 visible: true,
+        //                 size: 6
+        //             }
+        //         },
+
+        //         series: [
+        //             {
+        //                 name: data.series[0].name,
+        //                 data: data.series[0].data,
+        //                 color: data.series[0].color
+        //             },
+        //             {
+        //                 name: data.series[1].name,
+        //                 data: data.series[1].data,
+        //                 color: data.series[1].color
+        //             }
+        //         ],
+
+        //         categoryAxis: {
+        //             categories: data.months,
+        //             majorGridLines: {
+        //                 visible: false
+        //             }
+        //         },
+
+        //         valueAxis: {
+        //             min: 55,
+        //             max: 110,
+        //             title: {
+        //                 text: "Orders"
+        //             },
+        //             line: {
+        //                 visible: false
+        //             },
+        //             majorGridLines: {
+        //                 color: "#e6e6e6",
+        //                 dashType: "dash"
+        //             }
+        //         },
+
+        //         tooltip: {
+        //             visible: true,
+        //             template: "#= series.name #: #= value #"
+        //         }
+        //     });
+
+        // }
+        // OrdersLineChart();
+
+        async function OrderSummaryChart(onchangeflag = "") {
+
+            var getUrl = window.location;
+            var baseurl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+            baseurl = baseurl.split("pages")[0];
+
+            var cloudcode = window.targetcloud;
+            var username = window.targetuser;
+
+            // Dummy JSON Data
+            var data = [
+                { category: "Order Value", value: 280, color: "#5b4fcf" },
+                { category: "Advance", value: 120, color: "#ff7f0e" },
+                { category: "Billed", value: 230, color: "#ff4fa3" },
+                { category: "Credit Note", value: 20, color: "#2a78c6" }
+            ];
+
+            $("#order_summary_chart").kendoChart({
+
+                legend: {
+                    visible: false
+                },
+
+                chartArea: {
+                    background: "transparent"
+                },
+
+                seriesDefaults: {
+                    type: "bar",
+                    labels: {
+                        visible: true,
+                        position: "right",
+                        template: "#= value #"
+                    }
+                },
+
+                series: [{
+                    data: data,
+                    field: "value",
+                    categoryField: "category",
+                    colorField: "color"
+                }],
+
+                categoryAxis: {
+                    majorGridLines: {
+                        visible: false
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+
+                valueAxis: {
+                    min: 0,
+                    max: 300,
+                    majorUnit: 50,
+                    line: {
+                        visible: false
+                    },
+                    majorGridLines: {
+                        color: "#e5e5e5",
+                        dashType: "dash"
+                    }
+                },
+
+                tooltip: {
+                    visible: true,
+                    template: "#= category #: #= value #"
+                }
+
+            });
+
+        }
+        OrderSummaryChart();
+
+
+        let chart;
+
+        /* Dummy Revenue Data */
+
+        const revenueUSA = {
+            "06": 12000, // California
+            "48": 8000,  // Texas
+            "36": 6000   // New York
+        };
+
+        const revenueIndia = {
+            "IN-MH": 15000, // Maharashtra
+            "IN-GJ": 9000,  // Gujarat
+            "IN-DL": 7000   // Delhi
+        };
+
+
+        async function loadMap(country) {
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            let url;
+            let revenue;
+
+            if (country === "usa") {
+                url = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+                revenue = revenueUSA;
+            }
+
+            if (country === "india") {
+                url = "https://raw.githubusercontent.com/geohacker/india/master/state/india_telengana.geojson";
+                revenue = revenueIndia;
+            }
+
+            const response = await fetch(url);
+            const geo = await response.json();
+
+            let features;
+
+            if (country === "usa") {
+                features = ChartGeo.topojson.feature(geo, geo.objects.states).features;
+            }
+            else {
+                features = geo.features;
+            }
+
+            const data = features.map(d => ({
+
+                feature: d,
+                value: revenue[d.id] || revenue[d.properties?.id] || 0
+
+            }));
+
+            const ctx = document.getElementById("map").getContext("2d");
+
+            chart = new Chart(ctx, {
+
+                type: "choropleth",
+
+                data: {
+                    labels: features.map(d => d.properties.name),
+
+                    datasets: [{
+                        data: data,
+                        outline: country === "usa" ? ChartGeo.topojson.mesh(geo, geo.objects.states) : undefined
+                    }]
+                },
+
+                options: {
+
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => ctx.raw.feature.properties.name + " : $" + ctx.raw.value
+                            }
+                        }
+                    },
+
+                    scales: {
+                        projection: {
+                            axis: "x",
+                            projection: country === "usa" ? "albersUsa" : "mercator"
+                        },
+
+                        color: {
+                            axis: "x",
+                            quantize: 5,
+                            legend: { position: "bottom-right" }
+                        }
+                    }
+
+                }
+
+            });
+
         }
 
+
+        $("#country").on("change", function () {
+            loadMap($(this).val());
+        });
+
+
+        loadMap("usa");
     </script>
 </body>
 
