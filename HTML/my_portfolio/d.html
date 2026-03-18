@@ -22,20 +22,20 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> -->
 
     <!-- kendo -->
 
     <!-- <link href="https://kendo.cdn.telerik.com/2024.1.130/styles/kendo.default-v2.min.css" rel="stylesheet"/>
-    <script src="https://kendo.cdn.telerik.com/2024.1.130/js/kendo.all.min.js"></script> -->
+<script src="https://kendo.cdn.telerik.com/2024.1.130/js/kendo.all.min.js"></script> -->
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.default.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.default.mobile.min.css" />
     <script src="https://kendo.cdn.telerik.com/2022.2.510/js/kendo.all.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@4"></script>
 
     <!-- Font Awesome & icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -48,6 +48,11 @@
 
         .card {
             border: 1.5px solid #ced4e1;
+        }
+
+        .paginate_button {
+            border: 1px solid #DEE1E9 !important;
+            border-radius: 5px !important;
         }
 
         .custom-tabs {
@@ -68,6 +73,18 @@
             border-color: #ff8c1a;
         }
 
+        #scheduling .custom-tabs .nav-link {
+            border: 1.5px solid #ced4e1;
+            margin-right: 8px;
+            color: #706b6b;
+            border-radius: 6px;
+        }
+
+        #scheduling .custom-tabs .nav-link.active {
+            background: #5D51E2;
+            color: white;
+        }
+
         .card-heading {
             font-size: 18px;
             font-weight: 500;
@@ -79,6 +96,7 @@
             border-bottom: 1.5px solid #dee1e9;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
         .card-box {
@@ -114,15 +132,19 @@
         }
 
         /* sales order css */
-        .sales-order-container .dataTables_scroll {
+        .sales-order-container .dataTables_scroll,
+        .production-order-container .dataTables_scroll,
+        .Order_Revision_container .dataTables_scroll {
             border: 1px solid lightgray;
             border-top-left-radius: 7px;
             border-top-right-radius: 7px;
         }
 
-        #order_vs_receiptanalysis_table_wrapper .dataTables_scrollHeadInner,
-        #sales_order_table_wrapper .dataTables_scrollHeadInner,
-        #daily_inventory_table_wrapper .dataTables_scrollHeadInner {
+        /* #order_vs_receiptanalysis_table_wrapper .dataTables_scrollHeadInner, */
+        #taskTable_wrapper .dataTables_scrollHeadInner,
+        #production_orders_wrapper .dataTables_scrollHeadInner,
+        #Order_Revision_table_wrapper .dataTables_scrollHeadInner,
+        #sales_order_table_wrapper .dataTables_scrollHeadInner {
             background: #E4E2FF !important;
             font-size: 13px;
         }
@@ -133,7 +155,10 @@
             border: unset;
         }
 
-        #sales_order_table_wrapper.dataTables_wrapper.no-footer .dataTables_scrollBody {
+        #sales_order_table_wrapper.dataTables_wrapper.no-footer .dataTables_scrollBody,
+        #production_orders_wrapper .dataTables_wrapper.no-footer .dataTables_scrollBody,
+        #Order_Revision_table_wrapper .dataTables_wrapper.no-footer .dataTables_scrollBody,
+        #taskTable_wrapper .dataTables_wrapper.no-footer .dataTables_scrollBody {
             border-bottom: unset;
         }
 
@@ -146,8 +171,9 @@
         }
 
         #sales_order_table_length label,
-        #order_vs_receiptanalysis_table_length label,
-        #daily_inventory_table_length label {
+        #production_orders_length label,
+        #Order_Revision_table_length label,
+        #taskTable_length label {
             /* margin-bottom: 10px; */
             font-size: 13px;
         }
@@ -156,60 +182,78 @@
         #sales_order_table_wrapper .dataTables_filter,
         #sales_order_table_wrapper .dataTables_info,
         #sales_order_table_wrapper .dataTables_processing,
-        #sales_order_table_wrapper .dataTables_paginate {
+        #sales_order_table_wrapper .dataTables_paginate,
+        #production_orders_wrapper .dataTables_length,
+        #production_orders_wrapper .dataTables_filter,
+        #production_orders_wrapper .dataTables_info,
+        #production_orders_wrapper .dataTables_processing,
+        #production_orders_wrapper .dataTables_paginate,
+        #Order_Revision_table_wrapper .dataTables_length,
+        #Order_Revision_table_wrapper .dataTables_filter,
+        #Order_Revision_table_wrapper .dataTables_info,
+        #Order_Revision_table_wrapper .dataTables_processing,
+        #Order_Revision_table_wrapper .dataTables_paginate {
             font-size: 13px;
         }
 
-        #sales_order_table thead {
+        #taskTable_wrapper .dataTables_length,
+        #taskTable_wrapper .dataTables_filter,
+        #taskTable_wrapper .dataTables_info,
+        #taskTable_wrapper .dataTables_processing,
+        #taskTable_wrapper .dataTables_paginate {
+            font-size: 13px;
+        }
+
+        thead {
             background: #c9c5df;
         }
 
         #sales_order_table thead th,
-        #order_vs_receiptanalysis_table thead th,
-        #daily_inventory_table thead th {
+        #taskTable thead th,
+        #production_orders_table thead th {
             font-size: 14px;
             font-weight: 600;
         }
 
         #sales_order_table_wrapper .dataTables_paginate .paginate_button.current,
-        #order_vs_receiptanalysis_table_wrapper .dataTables_paginate .paginate_button.current,
-        #daily_inventory_table_wrapper .dataTables_paginate .paginate_button.current {
+        #taskTable_wrapper .dataTables_paginate .paginate_button.current,
+        #production_orders_wrapper .dataTables_paginate .paginate_button.current,
+        #Order_Revision_table_wrapper .dataTables_paginate .paginate_button.current {
             background: #6c63ff !important;
             color: white !important;
             border-radius: 6px;
         }
 
         #sales_order_table thead th,
-        #order_vs_receiptanalysis_table thead th,
-        #daily_inventory_table thead th {
+        #taskTable thead th #production_orders thead th {
             font-size: 13px;
         }
 
         #sales_order_table tbody td,
-        #order_vs_receiptanalysis_table_wrapper tbody td,
-        #daily_inventory_table_wrapper tbody td {
+        #taskTable tbody td #production_orders tbody td {
             color: #585D68;
             font-weight: 400;
             font-size: 13px;
         }
 
         #sales_order_table,
-        #order_vs_receiptanalysis_table,
-        #daily_inventory_table {
+        #taskTable,
+        #production_orders,
+        #Order_Revision_table {
             border-collapse: collapse;
         }
 
         #sales_order_table thead th,
-        #order_vs_receiptanalysis_table thead th,
-        #daily_inventory_table thead th {
+        #taskTable thead th #production_orders thead th {
             background: #f5f5f5;
             border: 1px solid #e5e5e5;
         }
 
         #sales_order_table tbody td,
-        #order_vs_receiptanalysis_table tbody td,
-        #daily_inventory_table tbody td {
-            border: 1px solid #f0f0f0;
+        #taskTable tbody td,
+        #production_orders tbody td,
+        #Order_Revision_table tbody td {
+            border: 1px solid #e7e4e4;
         }
 
         .dataTables_wrapper .dataTables_info {
@@ -220,17 +264,20 @@
             align-items: center;
         }
 
-        .sales-order-container {
+        .sales-order-container,
+        .production-order-container,
+        .Order_Revision_container {
             /* width: 900px; */
             margin: auto;
             margin-top: 6px;
             background: #fff;
             padding: 15px;
             /* border: 1px solid lightgray;
-            border-radius: 6px; */
+border-radius: 6px; */
         }
 
-        .sales-order-container .dataTables_scroll {
+        .sales-order-container .dataTables_scroll .production-order-container .dataTables_scroll,
+        .Order_Revision_container .dataTables_scroll {
             border: 1px solid lightgray;
             border-top-left-radius: 7px;
             border-top-right-radius: 7px;
@@ -258,12 +305,91 @@
             color: #FDA700;
         }
 
+        .stock-alert-Running {
+            background: #C7F8FE;
+            color: #1AAABC;
+        }
+
+        .stock-alert-Approved {
+            background: #DEFFF6;
+            color: #10B981;
+        }
+
         .calendaricon,
         .penicon {
             color: #5D51E2;
             background-color: #FFFFFF;
             /* border: none; */
 
+        }
+
+        /* ------------------ Scheduling tab css ---------------------------------------------------- */
+        .custom-task-table {
+            width: 100%;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 13px;
+
+        }
+
+        /* Header */
+
+        .custom-task-table table thead th {
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px;
+            border-bottom: 1px solid #bfc4d9;
+            text-align: left;
+        }
+
+        /* Body rows */
+        .custom-task-table table tbody tr {
+            background: #f8f9fc;
+        }
+
+        .custom-task-table table tbody tr:nth-child(even) {
+            background: #eef1f7;
+        }
+
+        /* Cells */
+        .custom-task-table table tbody td {
+            padding: 10px;
+            font-size: 13px;
+            color: #444;
+            border-bottom: 1px solid #e0e3eb;
+        }
+
+        /* Amount column */
+        .custom-task-table .amount {
+            color: #00a65a;
+            font-weight: 600;
+        }
+
+        /* Hierarchy indentation */
+        .custom-task-table .level-1 {
+            padding-left: 10px;
+        }
+
+        .custom-task-table .level-2 {
+            padding-left: 25px;
+        }
+
+        .custom-task-table .level-3 {
+            padding-left: 40px;
+        }
+
+        /* Hover */
+        .custom-task-table table tbody tr:hover {
+            background: #e6ebf5;
+            transition: 0.2s;
+        }
+
+        /* Remove default border */
+        .custom-task-table table.dataTable.no-footer {
+            border-bottom: none;
         }
 
         /* ------------------ Sales Bill tab css ---------------------------------------------------- */
@@ -297,6 +423,517 @@
         #revenue_map {
             width: 450px;
             height: 300px;
+        }
+
+        /* new */
+        .table-box {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #d9d9d9;
+        }
+
+        #sales_order_table_wrapper thead {
+            background: #E4E2FF;
+        }
+
+        #taskTable_wrapper thead {
+            background: #E4E2FF;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        td {
+            font-size: 12px;
+        }
+
+        /* #taskTable th{
+background-color: #E4E2FF;
+} */
+        .task {
+            text-align: left;
+        }
+
+        .toggle {
+            cursor: pointer;
+            margin-right: 6px;
+            font-weight: bold;
+            color: #5b5bd6;
+        }
+
+        .child {
+            display: none;
+            background: #fafafa;
+        }
+
+        .level1 .task {
+            padding-left: 25px;
+        }
+
+        .level2 .task {
+            padding-left: 50px;
+        }
+
+        .level3 .task {
+            padding-left: 75px;
+        }
+
+        .icon-btn-part2 {
+            border: 2px solid #5b5bd6;
+            color: #5b5bd6;
+            background: white;
+            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+        }
+
+        .delete-btn {
+            border: 2px solid red;
+            color: red;
+            background: white;
+            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .icon-btn-part2:hover {
+            background: #5b5bd6;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: red;
+            color: white;
+        }
+
+        .dropdown {
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            min-width: 14%;
+            position: relative;
+            height: max-content;
+            font-size: 0.8em;
+        }
+
+        .dropdown-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #555;
+            font-size: 14px;
+            pointer-events: none;
+            /* Don't block clicks */
+        }
+
+        .k-input-button {
+            display: none !important;
+        }
+
+        .form-select {
+            --bs-form-select-bg-img: none !important;
+        }
+
+        .apply-btn {
+            padding: 3px 15px;
+            border: 1px solid #5D51E2;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #5D51E2;
+            color: #ffffff;
+        }
+
+        .apply-btn:hover {
+            background-color: #8a80fa;
+        }
+
+        .timeline-container {
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #CED4E1
+        }
+
+        /* Header */
+        .timeline-header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            background: #E4E2FF;
+            padding: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #222;
+        }
+
+        /* Rows */
+        .timeline-row {
+            position: relative;
+            height: 34px;
+            border-top: 1px solid #CED4E1;
+            border-bottom: 1px solid #CED4E1;
+            background: #ffffff;
+        }
+
+        /* Bar */
+        .timeline-bar {
+            position: absolute;
+            top: 12px;
+            height: 12px;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 9px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            margin: 0px 10px;
+        }
+
+        /* Colors */
+        .teal {
+            background: #2db6c4;
+        }
+
+        .purple {
+            background: #5b4fd3;
+        }
+
+        /* popupcss */
+        .custom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal-content {
+            background: white;
+            width: 600px;
+            border-radius: 10px;
+            /* padding: 20px; */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .close-btn {
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .form-grid label {
+            font-size: 13px;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .form-grid input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-cancel {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 8px 15px;
+            border-radius: 6px;
+        }
+
+        .btn-save {
+            background: #5a56d6;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* new popup */
+        .order-page {
+            /* display: none; */
+            min-height: 100vh;
+            background: #f0f2f5;
+        }
+
+        .order-page.active {
+            display: block;
+        }
+
+        /* Header */
+        .order-header {
+            background: linear-gradient(135deg, #5D51E2 0%, #7B6FE8 100%);
+            color: white;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .order-back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .order-back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .order-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        /* Content */
+        .order-content {
+            /* max-width: 1400px; */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Tabs */
+        .order-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-tab-btn {
+            padding: 12px 24px;
+            border: 1px solid #ddd;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .order-tab-btn.active {
+            background: #5D51E2;
+            color: white;
+            border-color: #5D51E2;
+        }
+
+        .order-tab-btn:hover:not(.active) {
+            background: #f0f0f0;
+        }
+
+        /* Tab Content */
+        .order-tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-tab-content.active {
+            display: block;
+        }
+
+        /* Overview */
+        .order-info-item {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .order-info-item strong {
+            color: #333;
+            margin-right: 10px;
+        }
+
+        /* Table Header */
+        .order-table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .order-table-header h3 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .order-table-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .order-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+            font-size: 18px;
+        }
+
+        .order-icon-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* Table */
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .order-table thead {
+            background: #E8E6F5;
+        }
+
+        .order-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .order-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .order-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* View Button */
+        .order-view-btn {
+            background: #5D51E2;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .order-view-btn:hover {
+            background: #4A3FC5;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(93, 81, 226, 0.3);
+        }
+
+        /* Action Buttons */
+        .order-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .order-btn-primary {
+            background: #5D51E2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .order-btn-success {
+            background: #00BFA6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* Detail Section */
+        .order-detail-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-section-title {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .modal-fullscreen .modal-content{
+            width: 100%;
+            height: 100%;
+        }
+        #orderDetailLevel3{
+            display: none;
         }
     </style>
 
@@ -332,7 +969,7 @@
         </li>
 
         <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#scheduling">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#scheduling" onclick="schedulingtab();">
                 <span><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_321_6746)">
                             <path
@@ -359,7 +996,8 @@
         </li>
 
         <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#order_revision">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#order_revision"
+                onclick="Order_Revision_table();">
                 <span><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_321_6755)">
                             <path
@@ -422,15 +1060,15 @@
                                     <table id="sales_order_table" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>order Date</th>
-                                                <th>Order ID</th>
-                                                <th>Product</th>
-                                                <th>Customer</th>
-                                                <th>Project Name</th>
-                                                <th>Order Type</th>
-                                                <th>Currenecy</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th style="text-align: center;">order Date</th>
+                                                <th style="text-align: center;">Order ID</th>
+                                                <th style="text-align: center;">Product</th>
+                                                <th style="text-align: center;">Customer</th>
+                                                <th style="text-align: center;">Project Name</th>
+                                                <th style="text-align: center;">Order Type</th>
+                                                <th style="text-align: center;">Currenecy</th>
+                                                <th style="text-align: center;">Status</th>
+                                                <th style="text-align: center;">Action</th>
                                                 <!-- <th>Status</th> -->
                                             </tr>
                                         </thead>
@@ -504,32 +1142,332 @@
         </div>
 
         <div class="tab-pane fade" id="scheduling">
+            <ul class="nav custom-tabs" style="border-bottom: unset;">
+                <li class="nav-item" style="display: flex;">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#execution_timeline">
+                        Execution /Timeline
+                    </button>
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#production"
+                        onclick="production_table();">
+                        Production
+                    </button>
+                </li>
+            </ul>
+
+        <div class="tab-content" style="margin-top: 15px;">
+        <div class="tab-pane fade show active" id="execution_timeline">
             <div class="row" style="margin-bottom: 1.5rem;">
+                <div class="row" style="margin-bottom: 1.5rem;">
                 <div class="col-12">
                     <div>
                         <div class="card card-box">
-                            <div class="headings-border">
-                                <h4 class="card-heading">Project Gantt</h4>
-                                <div class="card-icons">
-                                    <i class="fa-solid fa-sliders icon-btn"></i>
-                                    <i class="fa-solid fa-rotate icon-btn"></i>
-                                    <i class="fa-solid fa-download icon-btn"></i>
-                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                            <div
+                            style="border-bottom: 1.5px solid #dee1e9; display: flex;align-items: center;">
+                            <h4 class="card-heading">Project Gantt</h4>
+                            <div class="filter-icon-div" style="width: 75%">
+                            <div class="header d-flex align-items-center" style="gap: 10px;">
+                            <div class="dropdown" style="min-width: 20%;">
+                            <input id="project_name" class="form-select" />
+                            <i class="fa fa-chevron-down dropdown-icon"
+                                id="project_name_icon_down"></i>
+                            <i class="fa fa-chevron-up dropdown-icon"
+                                id="project_name_icon_up" style="display: none;"></i>
+                            </div>
+                            <div class="dropdown" style="min-width: 20%;">
+                            <input id="resource_type" class="form-select" />
+                            <i class="fa fa-chevron-down dropdown-icon"
+                                id="resource_type_icon_down"></i>
+                            <i class="fa fa-chevron-up dropdown-icon"
+                                id="resource_type_icon_up" style="display: none;"></i>
+                            </div>
+                            <div class="dropdown" style="min-width: 20%;">
+                            <input id="supplier_name" class="form-select" />
+                            <i class="fa fa-chevron-down dropdown-icon"
+                                id="supplier_name_icon_down"></i>
+                            <i class="fa fa-chevron-up dropdown-icon"
+                                id="supplier_name_icon_up" style="display: none;"></i>
+                            </div>
+
+                            <div class="dropdown" style="min-width: max-content;">
+                            <button class="btn btn-primary apply-btn" onclick="openModal()">
+                                New Parent Task
+                            </button>
+                            <div id="taskModal" class="custom-modal">
+                                <div class="modal-content">
+
+                                    <!-- Header -->
+                                    <div class="modal-header">
+                                        <h3>Create task</h3>
+                                        <span class="close-btn"
+                                            onclick="closeModal()">&times;</span>
+                                    </div>
+
+                                    <!-- Body -->
+                                    <div class="modal-body">
+
+                                        <div class="form-grid">
+
+                                            <div>
+                                                <label>Task ID</label>
+                                                <input type="text" value="2.2">
+                                            </div>
+
+                                            <div>
+                                                <label>Name</label>
+                                                <input type="text" value="Basement 2">
+                                            </div>
+
+                                            <div>
+                                                <label>Assign To</label>
+                                                <input type="text" value="Vivek">
+                                            </div>
+
+                                            <div>
+                                                <label>Qty</label>
+                                                <input type="number" value="10">
+                                            </div>
+
+                                            <div>
+                                                <label>Unit</label>
+                                                <input type="text" value="Nos">
+                                            </div>
+
+                                            <div>
+                                                <label>Rate</label>
+                                                <input type="number" value="1500">
+                                            </div>
+
+                                            <div>
+                                                <label>Start</label>
+                                                <input type="date" value="2026-02-08">
+                                            </div>
+
+                                            <div>
+                                                <label>End</label>
+                                                <input type="date" value="2026-02-08">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Footer -->
+                                    <div class="modal-footer">
+                                        <button class="btn-cancel"
+                                            onclick="closeModal()">Cancel</button>
+                                        <button class="btn-save">Save</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                          
+                                </div>
+                            </div>
+                        </div>
+
+                            </div>
+                            <div class="row" style="padding: 15px;">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div style="height: 350px; overflow-y: auto;">
+                                        <div class="table-box">
+
+                                            <table class="table mb-0">
+
+                                                <thead>
+                                                    <tr>
+                                                        <th
+                                                            style="background-color: #E4E2FF; font-size: 14px; text-align: center;">
+                                                            ID</th>
+                                                        <th style="background-color: #E4E2FF; font-size: 14px; text-align: center;"
+                                                            class="text-start">Task</th>
+                                                        <th
+                                                            style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">
+                                                            Start Date</th>
+                                                        <th
+                                                            style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">
+                                                            End Date</th>
+                                                        <th
+                                                            style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">
+                                                            %</th>
+                                                        <th
+                                                            style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">
+                                                            D</th>
+                                                        <th
+                                                            style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">
+                                                            +</th>
+                                                        <th
+                                                            style="background-color: #E4E2FF; font-size: 14px; text-align: center;">
+                                                            Delete</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr data-id="1">
+                                                        <td><span class="toggle">▶</span>1</td>
+                                                        <td class="task">Door Installation</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>10%</td>
+                                                        <td>10</td>
+                                                        <td><button class="icon-btn-part2">+</button></td>
+                                                        <td><button class="delete-btn">🗑</button></td>
+                                                    </tr>
+
+                                                    <tr data-parent="1" class="child level1">
+                                                        <td><span class="toggle">▶</span>1:1</td>
+                                                        <td class="task">Door 600*600</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>13%</td>
+                                                        <td>0</td>
+                                                        <td><button class="icon-btn-part2">+</button></td>
+                                                        <td><button class="delete-btn">🗑</button></td>
+                                                    </tr>
+
+                                                    <tr data-parent="1:1" class="child level2">
+                                                        <td>1:1:1</td>
+                                                        <td class="task">Basement 1</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>20%</td>
+                                                        <td>0</td>
+                                                        <td><button class="icon-btn-part2">+</button></td>
+                                                        <td><button class="delete-btn">🗑</button></td>
+                                                    </tr>
+
+                                                    <tr data-parent="1:1" class="child level2">
+                                                        <td>1:1:2</td>
+                                                        <td class="task">Basement 2</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>5%</td>
+                                                        <td>0</td>
+                                                        <td><button class="icon-btn-part2">+</button></td>
+                                                        <td><button class="delete-btn">🗑</button></td>
+                                                    </tr>
+
+                                                    <tr data-id="2">
+                                                        <td><span class="toggle">▶</span>2</td>
+                                                        <td class="task">Door 1200*1200</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>6%</td>
+                                                        <td>10</td>
+                                                        <td><button class="icon-btn-part2">+</button></td>
+                                                        <td><button class="delete-btn">🗑</button></td>
+                                                    </tr>
+
+                                                    <tr data-parent="2" class="child level1">
+                                                        <td>2:1</td>
+                                                        <td class="task">Basement 1</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>5%</td>
+                                                        <td>10</td>
+                                                        <td><button class="icon-btn-part2">+</button></td>
+                                                        <td><button class="delete-btn">🗑</button></td>
+                                                    </tr>
+
+                                                    <tr data-parent="2" class="child level1">
+                                                        <td>2:2</td>
+                                                        <td class="task">Basement 2</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>08-02-2026</td>
+                                                        <td>6%</td>
+                                                        <td>0</td>
+                                                        <td><button class="icon-btn-part2">+</button></td>
+                                                        <td><button class="delete-btn">🗑</button></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="timeline-container"
+                                        style="height: 350px; overflow-y: auto;">
+                                        <div id="timelineHeader" class="timeline-header"></div>
+                                        <div id="timelineBody"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <div class="card card-box">
+                                <div class="custom-task-table">
+                                    <table id="taskTable" class="display" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center;">ID</th>
+                                                <th style="text-align: center;">Task</th>
+                                                <th style="text-align: center;">Assign</th>
+                                                <th style="text-align: center;">Start</th>
+                                                <th style="text-align: center;">End</th>
+                                                <th style="text-align: center;">Qty</th>
+                                                <th style="text-align: center;">Unit</th>
+                                                <th style="text-align: center;">Rate</th>
+                                                <th style="text-align: center;">Amount</th>
+                                                <th style="text-align: center;">%</th>
+                                                <th style="text-align: center;">D</th>
+                                                <th style="text-align: center;">Delayed End</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div>
-                        <div class="card card-box">
-
+        </div>
+            <div class="tab-pane fade" id="production">
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <div class="card card-box">
+                                <div class="headings-border">
+                                    <h4 class="card-heading">Production Orders</h4>
+                                    <div class="card-icons">
+                                        <i class="fa-solid fa-sliders icon-btn"></i>
+                                        <i class="fa-solid fa-rotate icon-btn"></i>
+                                        <i class="fa-solid fa-download icon-btn"></i>
+                                        <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
+                                    </div>
+                                </div>
+                                <div class="production-order-container" style="width: 100%;">
+                                    <table id="production_orders" class="display" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">PO Task ID
+                                                </th>
+                                                <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">FG Name</th>
+                                                <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;" >Qty Planned
+                                                </th>
+                                                <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">Qty Produced
+                                                </th>
+                                                <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">RM
+                                                    Requirement</th>
+                                                <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">Status</th>
+                                                <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">Action</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
         </div>
 
         <div class="tab-pane fade" id="order_revision">
@@ -546,10 +1484,260 @@
                                     <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
                                 </div>
                             </div>
+                            <div class="Order_Revision_container" style="width: 100%;">
+                                <table id="Order_Revision_table" class="display" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">SO No</th>
+                                            <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">Customer</th>
+                                            <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">Current Rev</th>
+                                            <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">Total (₹)</th>
+                                            <th style="background-color: #E4E2FF; font-size: 14px;  text-align: center;">Status</th>
+                                            <!-- <th style="background-color: #E4E2FF; font-size: 14px;">Status</th> -->
+                                            <th style="background-color: #E4E2FF; font-size: 14px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+              <div class="modal" id="myModal_myperfo1"
+                                style="backdrop-filter: blur(2px);">
+                                <div class="modal-dialog modal-fullscreen"
+                                    style="width:85%; position:absolute; right:0;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            
+                                        </div>
+                                        <div class="modal-body" style="padding: 0px">
+                                            <div class="modal_contant">
+                                                <div>
+                                                    <div id="orderDetailLevel2"
+                                                        class="order-page">
+                                                        <div class="order-header">
+                                                            <div style="display: contents;">
+                                                <div
+                                                    style="display: flex; align-items: center;gap: 15px;">
+                                                    <i class="fa-solid fa-arrow-left-long bkarrowicon"
+                                                        style=" cursor: pointer;font-size: 1.5rem; color: #ffffff;"
+                                                        data-bs-dismiss="modal"></i>
+                                                    <div id="modal_header1"></div>
+                                                </div>
+
+                                            </div>
+                                                  </div>
+                                                  <h1 style="font-size: 22px; margin-left: 26px;">SO1001 - ABC Ltd</h1>
+                                                        <div class="order-content">
+                                                            <!-- Tabs -->
+                                                            <div class="order-tabs">
+                                                                <button
+                                                                    class="order-tab-btn active"
+                                                                    id="orderTabOverview"
+                                                                    onclick="switchOrderTab('overview')">Overview</button>
+                                                                <button
+                                                                    class="order-tab-btn"
+                                                                    id="orderTabLineItems"
+                                                                    onclick="switchOrderTab('lineItems')">Line
+                                                                    Items</button>
+                                                                <button
+                                                                    class="order-tab-btn"
+                                                                    id="orderTabRevision"
+                                                                    onclick="switchOrderTab('revisionHistory')">Revision
+                                                                    History</button>
+                                                            </div>
+
+                                                            <!-- Overview Tab -->
+                                                            <div id="orderContentOverview"
+                                                                class="order-tab-content active">
+                                                                <div
+                                                                    class="order-info-item">
+                                                                    <strong>Status:</strong>
+                                                                    <span
+                                                                        id="orderDetailStatus">Approved</span>
+                                                                </div>
+                                                                <div
+                                                                    class="order-info-item">
+                                                                    <strong>Current
+                                                                        Revision:</strong>
+                                                                    <span
+                                                                        id="orderDetailRevision">Rev
+                                                                        2</span>
+                                                                </div>
+                                                                <div
+                                                                    class="order-info-item">
+                                                                    <strong>Total
+                                                                        Amount:</strong>
+                                                                    <span
+                                                                        id="orderDetailAmount">₹
+                                                                        1,09,265</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Line Items Tab -->
+                                                            <div id="orderContentLineItems"
+                                                                class="order-tab-content">
+                                                                <div
+                                                                    class="order-table-header">
+                                                                    <h3>Line Items</h3>
+                                                                    <div
+                                                                        class="order-table-actions">
+                                                                        <button
+                                                                            class="order-icon-btn">⚙</button>
+                                                                        <button
+                                                                            class="order-icon-btn">↻</button>
+                                                                        <button
+                                                                            class="order-icon-btn">↓</button>
+                                                                        <button
+                                                                            class="order-icon-btn">⋮</button>
+                                                                    </div>
+                                                                </div>
+
+                                                                <table class="order-table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th style=" text-align: center;">Items</th>
+                                                                            <th style=" text-align: center;">Qty</th>
+                                                                            <th style=" text-align: center;">Rate</th>
+                                                                            <th style=" text-align: center;">Amount</th>
+                                                                            <th style=" text-align: center;">History</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody
+                                                                        id="lineItemsTableBody">
+                                                                        <tr>
+                                                                            <td>Widget A
+                                                                            </td>
+                                                                            <td>12</td>
+                                                                            <td>3750</td>
+                                                                            <td>45,000</td>
+                                                                            <td>
+                                                                                <button
+                                                                                    class="order-view-btn"
+                                                                                    onclick="openLineItemDetail('Widget A', '12', '3750', '45,000')">View</button>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Widget C
+                                                                            </td>
+                                                                            <td>2</td>
+                                                                            <td>4500</td>
+                                                                            <td>9,000</td>
+                                                                            <td>
+                                                                                <button
+                                                                                    class="order-view-btn"
+                                                                                    onclick="openLineItemDetail('Widget C', '2', '4500', '9,000')">View</button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                                <div class="order-actions">
+                                                                    <button
+                                                                        class="order-btn-primary">Create
+                                                                        New
+                                                                        Revision</button>
+                                                                    <button
+                                                                        class="order-btn-success">Submit
+                                                                        For
+                                                                        Approval</button>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Revision History Tab -->
+                                                            <div id="orderContentRevision"
+                                                                class="order-tab-content">
+                                                                <p style="color: #666;">
+                                                                    Revision history will be
+                                                                    displayed here...</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- LEVEL 3: Line Item Detail -->
+                                                    <div id="orderDetailLevel3"
+                                                        class="order-page">
+                                                        <div class="order-header">
+                                                            <button class="order-back-btn"
+                                                                onclick="backToOrderDetail()">←</button>
+                                                            <h1 class="order-title">Line
+                                                                Item Detail</h1>
+                                                        </div>
+
+                                                        <div class="order-content">
+                                                            <div
+                                                                class="order-detail-section">
+                                                                <h3
+                                                                    class="order-section-title">
+                                                                    Item History & Details
+                                                                </h3>
+
+                                                                <table class="order-table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th style=" text-align: center;">Revision
+                                                                            </th>
+                                                                            <th style=" text-align: center;">Item Name
+                                                                            </th>
+                                                                            <th style=" text-align: center;">Qty</th>
+                                                                            <th style=" text-align: center;">Rate</th>
+                                                                            <th style=" text-align: center;">Amount</th>
+                                                                            <th style=" text-align: center;">Changed By
+                                                                            </th>
+                                                                            <th>Date</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody
+                                                                        id="lineItemDetailBody">
+                                                                        <tr>
+                                                                            <td>Rev 2</td>
+                                                                            <td
+                                                                                id="lineItemName1">
+                                                                                Widget A
+                                                                            </td>
+                                                                            <td
+                                                                                id="lineItemQty1">
+                                                                                12</td>
+                                                                            <td
+                                                                                id="lineItemRate1">
+                                                                                3750</td>
+                                                                            <td
+                                                                                id="lineItemAmount1">
+                                                                                45,000</td>
+                                                                            <td>John Doe
+                                                                            </td>
+                                                                            <td>2026-03-15
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Rev 1</td>
+                                                                            <td
+                                                                                id="lineItemName2">
+                                                                                Widget A
+                                                                            </td>
+                                                                            <td>10</td>
+                                                                            <td>3500</td>
+                                                                            <td>35,000</td>
+                                                                            <td>Jane Smith
+                                                                            </td>
+                                                                            <td>2026-03-10
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
         </div>
 
         <div class="tab-pane fade" id="sales_bill">
@@ -572,24 +1760,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div>
-                        <div class="card card-box">
-                            <div class="headings-border">
-                                <h4 class="card-heading">Sales Order Trend</h4>
-                                <div class="card-icons">
-                                    <i class="fa-solid fa-sliders icon-btn"></i>
-                                    <i class="fa-solid fa-rotate icon-btn"></i>
-                                    <i class="fa-solid fa-download icon-btn"></i>
-                                    <i class="fa-solid fa-ellipsis-vertical icon-btn"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div id="orders_chart" style="height:350px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                production
             </div>
             <div class="row" style="margin-bottom: 1.5rem;">
                 <div class="col-12">
@@ -703,12 +1874,6 @@
                 },
 
                 columns: [
-                    // {
-                    //     data: null,
-                    //     render: function () {
-                    //         // return '<input type="checkbox">';
-                    //     }
-                    // },
                     { data: "orderDate" },
                     { data: "orderId" },
                     { data: "product" },
@@ -727,32 +1892,32 @@
                         data: null,
                         render: function () {
                             return `
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" fill="white"/>
-                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#5D51E2"/>
-                        <path d="M5.75581 12.3553C5.65181 12.3553 5.54801 12.3156 5.46859 12.2362C5.30995 12.0776 5.30995 11.8204 5.46859 11.6618L11.8171 5.31332C11.9755 5.15468 12.2329 5.15468 12.3915 5.31332C12.5501 5.47196 12.5501 5.72911 12.3915 5.88775L6.04303 12.2362C5.96381 12.3154 5.85981 12.3553 5.75581 12.3553Z" fill="#5D51E2"/>
-                        <path d="M5.12834 15.2812C5.1001 15.2812 5.07146 15.2781 5.04282 15.272C4.82345 15.2249 4.6837 15.009 4.73082 14.7896L5.35848 11.864C5.4056 11.6446 5.62254 11.5053 5.8409 11.552C6.06027 11.5991 6.20002 11.815 6.1529 12.0344L5.52524 14.96C5.48441 15.1508 5.31582 15.2812 5.12834 15.2812Z" fill="#5D51E2"/>
-                        <path d="M8.05366 14.6539C7.94966 14.6539 7.84586 14.6143 7.76644 14.5348C7.6078 14.3762 7.6078 14.1191 7.76644 13.9604L14.1149 7.61214C14.2733 7.4535 14.5307 7.4535 14.6893 7.61214C14.848 7.77079 14.848 8.02794 14.6893 8.18658L8.34108 14.5348C8.26166 14.6143 8.15766 14.6539 8.05366 14.6539Z" fill="#5D51E2"/>
-                        <path d="M5.12767 15.281C4.94018 15.281 4.77179 15.1506 4.73076 14.9598C4.68384 14.7405 4.82338 14.5246 5.04276 14.4774L7.96837 13.8498C8.18795 13.8033 8.40387 13.9426 8.45079 14.1618C8.49771 14.3811 8.35817 14.5971 8.13879 14.6442L5.21318 15.2719C5.18454 15.2781 5.1559 15.281 5.12767 15.281Z" fill="#5D51E2"/>
-                        <path d="M13.253 9.45415C13.149 9.45415 13.045 9.41454 12.9658 9.33512L10.6678 7.03717C10.5092 6.87853 10.5092 6.62137 10.6678 6.46273C10.8262 6.30409 11.0838 6.30409 11.2422 6.46273L13.5402 8.76068C13.6988 8.91932 13.6988 9.17648 13.5402 9.33512C13.461 9.41454 13.357 9.45415 13.253 9.45415Z" fill="#5D51E2"/>
-                        <path d="M14.4023 8.30489C14.2983 8.30489 14.1943 8.26528 14.1149 8.18586C13.9562 8.02722 13.9562 7.77006 14.1149 7.61122C14.341 7.38514 14.4655 7.07903 14.4655 6.74956C14.4655 6.42009 14.341 6.11398 14.1149 5.88791C13.8886 5.66163 13.5825 5.53711 13.253 5.53711C12.9236 5.53711 12.6175 5.66163 12.3914 5.88791C12.2329 6.04655 11.9758 6.04675 11.8167 5.88791C11.6581 5.72927 11.6581 5.47211 11.8167 5.31327C12.1962 4.93362 12.7062 4.72461 13.253 4.72461C13.7996 4.72461 14.3099 4.93362 14.6893 5.31327C15.069 5.6927 15.278 6.20275 15.278 6.74956C15.278 7.29638 15.069 7.80642 14.6893 8.18586C14.6103 8.26508 14.5063 8.30489 14.4023 8.30489Z" fill="#5D51E2"/>
-                        </svg>
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="19" height="19" rx="3.5" fill="white"/>
+<rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#5D51E2"/>
+<path d="M5.75581 12.3553C5.65181 12.3553 5.54801 12.3156 5.46859 12.2362C5.30995 12.0776 5.30995 11.8204 5.46859 11.6618L11.8171 5.31332C11.9755 5.15468 12.2329 5.15468 12.3915 5.31332C12.5501 5.47196 12.5501 5.72911 12.3915 5.88775L6.04303 12.2362C5.96381 12.3154 5.85981 12.3553 5.75581 12.3553Z" fill="#5D51E2"/>
+<path d="M5.12834 15.2812C5.1001 15.2812 5.07146 15.2781 5.04282 15.272C4.82345 15.2249 4.6837 15.009 4.73082 14.7896L5.35848 11.864C5.4056 11.6446 5.62254 11.5053 5.8409 11.552C6.06027 11.5991 6.20002 11.815 6.1529 12.0344L5.52524 14.96C5.48441 15.1508 5.31582 15.2812 5.12834 15.2812Z" fill="#5D51E2"/>
+<path d="M8.05366 14.6539C7.94966 14.6539 7.84586 14.6143 7.76644 14.5348C7.6078 14.3762 7.6078 14.1191 7.76644 13.9604L14.1149 7.61214C14.2733 7.4535 14.5307 7.4535 14.6893 7.61214C14.848 7.77079 14.848 8.02794 14.6893 8.18658L8.34108 14.5348C8.26166 14.6143 8.15766 14.6539 8.05366 14.6539Z" fill="#5D51E2"/>
+<path d="M5.12767 15.281C4.94018 15.281 4.77179 15.1506 4.73076 14.9598C4.68384 14.7405 4.82338 14.5246 5.04276 14.4774L7.96837 13.8498C8.18795 13.8033 8.40387 13.9426 8.45079 14.1618C8.49771 14.3811 8.35817 14.5971 8.13879 14.6442L5.21318 15.2719C5.18454 15.2781 5.1559 15.281 5.12767 15.281Z" fill="#5D51E2"/>
+<path d="M13.253 9.45415C13.149 9.45415 13.045 9.41454 12.9658 9.33512L10.6678 7.03717C10.5092 6.87853 10.5092 6.62137 10.6678 6.46273C10.8262 6.30409 11.0838 6.30409 11.2422 6.46273L13.5402 8.76068C13.6988 8.91932 13.6988 9.17648 13.5402 9.33512C13.461 9.41454 13.357 9.45415 13.253 9.45415Z" fill="#5D51E2"/>
+<path d="M14.4023 8.30489C14.2983 8.30489 14.1943 8.26528 14.1149 8.18586C13.9562 8.02722 13.9562 7.77006 14.1149 7.61122C14.341 7.38514 14.4655 7.07903 14.4655 6.74956C14.4655 6.42009 14.341 6.11398 14.1149 5.88791C13.8886 5.66163 13.5825 5.53711 13.253 5.53711C12.9236 5.53711 12.6175 5.66163 12.3914 5.88791C12.2329 6.04655 11.9758 6.04675 11.8167 5.88791C11.6581 5.72927 11.6581 5.47211 11.8167 5.31327C12.1962 4.93362 12.7062 4.72461 13.253 4.72461C13.7996 4.72461 14.3099 4.93362 14.6893 5.31327C15.069 5.6927 15.278 6.20275 15.278 6.74956C15.278 7.29638 15.069 7.80642 14.6893 8.18586C14.6103 8.26508 14.5063 8.30489 14.4023 8.30489Z" fill="#5D51E2"/>
+</svg>
 
-                        &nbsp&nbsp
-                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" fill="white"/>
-                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#5D51E2"/>
-                        <g clip-path="url(#clip0_321_6488)">
-                        <path d="M13.6832 4.92439H13.2356V4.47147C13.2356 4.2127 13.0258 4.00293 12.767 4.00293C12.5083 4.00293 12.2985 4.2127 12.2985 4.47147V4.92439H7.70148V4.47147C7.70148 4.2127 7.49171 4.00293 7.23293 4.00293C6.97416 4.00293 6.76439 4.2127 6.76439 4.47147V4.92439H6.31682C5.03932 4.92439 4 5.96371 4 7.24118V13.6808C4 14.9583 5.03932 15.9976 6.31682 15.9976H13.6832C14.9607 15.9976 16 14.9583 16 13.6808V7.24118C16 5.96371 14.9607 4.92439 13.6832 4.92439ZM6.31682 5.86147H6.76439V6.77512C6.76439 7.0339 6.97416 7.24367 7.23293 7.24367C7.49171 7.24367 7.70148 7.0339 7.70148 6.77512V5.86147H12.2985V6.77512C12.2985 7.0339 12.5083 7.24367 12.7671 7.24367C13.0258 7.24367 13.2356 7.0339 13.2356 6.77512V5.86147H13.6832C14.444 5.86147 15.0629 6.48041 15.0629 7.24118V7.68878H4.93708V7.24118C4.93708 6.48041 5.55603 5.86147 6.31682 5.86147ZM13.6832 15.0605H6.31682C5.55603 15.0605 4.93708 14.4416 4.93708 13.6808V8.62586H15.0629V13.6808C15.0629 14.4416 14.444 15.0605 13.6832 15.0605ZM8.16222 10.4688C8.16222 10.7276 7.95245 10.9373 7.69368 10.9373H6.77222C6.51344 10.9373 6.30368 10.7276 6.30368 10.4688C6.30368 10.21 6.51344 10.0003 6.77222 10.0003H7.69368C7.95243 10.0003 8.16222 10.21 8.16222 10.4688ZM13.6963 10.4688C13.6963 10.7276 13.4866 10.9373 13.2278 10.9373H12.3063C12.0476 10.9373 11.8378 10.7276 11.8378 10.4688C11.8378 10.21 12.0476 10.0003 12.3063 10.0003H13.2278C13.4866 10.0003 13.6963 10.21 13.6963 10.4688ZM10.9266 10.4688C10.9266 10.7276 10.7168 10.9373 10.4581 10.9373H9.53661C9.27784 10.9373 9.06807 10.7276 9.06807 10.4688C9.06807 10.21 9.27784 10.0003 9.53661 10.0003H10.4581C10.7168 10.0003 10.9266 10.21 10.9266 10.4688ZM8.16222 13.2332C8.16222 13.492 7.95245 13.7017 7.69368 13.7017H6.77222C6.51344 13.7017 6.30368 13.492 6.30368 13.2332C6.30368 12.9744 6.51344 12.7647 6.77222 12.7647H7.69368C7.95243 12.7647 8.16222 12.9744 8.16222 13.2332ZM13.6963 13.2332C13.6963 13.492 13.4866 13.7017 13.2278 13.7017H12.3063C12.0476 13.7017 11.8378 13.492 11.8378 13.2332C11.8378 12.9744 12.0476 12.7647 12.3063 12.7647H13.2278C13.4866 12.7647 13.6963 12.9744 13.6963 13.2332ZM10.9266 13.2332C10.9266 13.492 10.7168 13.7017 10.4581 13.7017H9.53661C9.27784 13.7017 9.06807 13.492 9.06807 13.2332C9.06807 12.9744 9.27784 12.7647 9.53661 12.7647H10.4581C10.7168 12.7647 10.9266 12.9744 10.9266 13.2332Z" fill="#5D51E2"/>
-                        </g>
-                        <defs>
-                        <clipPath id="clip0_321_6488">
-                        <rect width="12" height="12" fill="white" transform="translate(4 4)"/>
-                        </clipPath>
-                        </defs>
-                        </svg>
+&nbsp&nbsp
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="19" height="19" rx="3.5" fill="white"/>
+<rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#5D51E2"/>
+<g clip-path="url(#clip0_321_6488)">
+<path d="M13.6832 4.92439H13.2356V4.47147C13.2356 4.2127 13.0258 4.00293 12.767 4.00293C12.5083 4.00293 12.2985 4.2127 12.2985 4.47147V4.92439H7.70148V4.47147C7.70148 4.2127 7.49171 4.00293 7.23293 4.00293C6.97416 4.00293 6.76439 4.2127 6.76439 4.47147V4.92439H6.31682C5.03932 4.92439 4 5.96371 4 7.24118V13.6808C4 14.9583 5.03932 15.9976 6.31682 15.9976H13.6832C14.9607 15.9976 16 14.9583 16 13.6808V7.24118C16 5.96371 14.9607 4.92439 13.6832 4.92439ZM6.31682 5.86147H6.76439V6.77512C6.76439 7.0339 6.97416 7.24367 7.23293 7.24367C7.49171 7.24367 7.70148 7.0339 7.70148 6.77512V5.86147H12.2985V6.77512C12.2985 7.0339 12.5083 7.24367 12.7671 7.24367C13.0258 7.24367 13.2356 7.0339 13.2356 6.77512V5.86147H13.6832C14.444 5.86147 15.0629 6.48041 15.0629 7.24118V7.68878H4.93708V7.24118C4.93708 6.48041 5.55603 5.86147 6.31682 5.86147ZM13.6832 15.0605H6.31682C5.55603 15.0605 4.93708 14.4416 4.93708 13.6808V8.62586H15.0629V13.6808C15.0629 14.4416 14.444 15.0605 13.6832 15.0605ZM8.16222 10.4688C8.16222 10.7276 7.95245 10.9373 7.69368 10.9373H6.77222C6.51344 10.9373 6.30368 10.7276 6.30368 10.4688C6.30368 10.21 6.51344 10.0003 6.77222 10.0003H7.69368C7.95243 10.0003 8.16222 10.21 8.16222 10.4688ZM13.6963 10.4688C13.6963 10.7276 13.4866 10.9373 13.2278 10.9373H12.3063C12.0476 10.9373 11.8378 10.7276 11.8378 10.4688C11.8378 10.21 12.0476 10.0003 12.3063 10.0003H13.2278C13.4866 10.0003 13.6963 10.21 13.6963 10.4688ZM10.9266 10.4688C10.9266 10.7276 10.7168 10.9373 10.4581 10.9373H9.53661C9.27784 10.9373 9.06807 10.7276 9.06807 10.4688C9.06807 10.21 9.27784 10.0003 9.53661 10.0003H10.4581C10.7168 10.0003 10.9266 10.21 10.9266 10.4688ZM8.16222 13.2332C8.16222 13.492 7.95245 13.7017 7.69368 13.7017H6.77222C6.51344 13.7017 6.30368 13.492 6.30368 13.2332C6.30368 12.9744 6.51344 12.7647 6.77222 12.7647H7.69368C7.95243 12.7647 8.16222 12.9744 8.16222 13.2332ZM13.6963 13.2332C13.6963 13.492 13.4866 13.7017 13.2278 13.7017H12.3063C12.0476 13.7017 11.8378 13.492 11.8378 13.2332C11.8378 12.9744 12.0476 12.7647 12.3063 12.7647H13.2278C13.4866 12.7647 13.6963 12.9744 13.6963 13.2332ZM10.9266 13.2332C10.9266 13.492 10.7168 13.7017 10.4581 13.7017H9.53661C9.27784 13.7017 9.06807 13.492 9.06807 13.2332C9.06807 12.9744 9.27784 12.7647 9.53661 12.7647H10.4581C10.7168 12.7647 10.9266 12.9744 10.9266 13.2332Z" fill="#5D51E2"/>
+</g>
+<defs>
+<clipPath id="clip0_321_6488">
+<rect width="12" height="12" fill="white" transform="translate(4 4)"/>
+</clipPath>
+</defs>
+</svg>
 
-                    `;
+`;
                         }
                     }
                 ]
@@ -892,7 +2057,11 @@
                     field: "value",
                     categoryField: "category",
                     colorField: "color",
-                    holeSize: 70
+                    holeSize: 70,
+                    border: {
+                        width: 3,
+                        color: "#ffffff"
+                    },
                 }],
                 tooltip: {
                     visible: true,
@@ -969,6 +2138,63 @@
         }
         ClientRevenueChart();
 
+        //------------------ Scheduling tab js ----------------------------------------------------
+
+
+        function loadTaskTable() {
+
+            var taskData = [
+                { id: "1", Task: "Door Installation", assign: "Vivek", start: "08-02-2026", end: "08-02-2026", qty: "0", unit: "Nos", rate: "0", amount: "8000", "%": "10%", D: "10", delayedend: "08-02-2026" },
+                { id: "1:1", Task: "Door 600*600", assign: "Vivek", start: "08-02-2026", end: "08-02-2026", qty: "100", unit: "Nos", rate: "0", amount: "5000", "%": "13%", D: "0", delayedend: "08-02-2026" },
+                { id: "1:1:1", Task: "Basement 1", assign: "Vivek", start: "08-02-2026", end: "08-02-2026", qty: "10", unit: "Nos", rate: "2500", amount: "25000", "%": "20%", D: "0", delayedend: "08-02-2026" },
+                { id: "1:1:2", Task: "Basement 2", assign: "Vivek", start: "08-02-2026", end: "08-02-2026", qty: "10", unit: "Nos", rate: "2500", amount: "25000", "%": "5%", D: "0", delayedend: "08-02-2026" },
+                { id: "2", Task: "Door 1200*1200", assign: "Vivek", start: "08-02-2026", end: "08-02-2026", qty: "100", unit: "Nos", rate: "0", amount: "3000", "%": "6%", D: "10", delayedend: "08-02-2026" },
+                { id: "2:1", Task: "Basement 1", assign: "Vivek", start: "08-02-2026", end: "08-02-2026", qty: "10", unit: "Nos", rate: "1500", amount: "15000", "%": "5%", D: "10", delayedend: "08-02-2026" },
+                { id: "2:2", Task: "Basement 2", assign: "Vivek", start: "08-02-2026", end: "08-02-2026", qty: "10", unit: "Nos", rate: "1500", amount: "15000", "%": "6%", D: "0", delayedend: "08-02-2026" }
+            ];
+            if ($.fn.DataTable.isDataTable('#taskTable')) {
+                $('#taskTable').DataTable().clear().destroy();
+            }
+
+            $('#taskTable').DataTable({
+                data: taskData,
+                scrollX: true,
+                pageLength: 7,
+                lengthMenu: [7, 10, 15],
+                searching: false,
+                dom: 't<"bottom d-flex justify-content-between align-items-center mt-2"<"dataTables_info"i><"d-flex gap-2"l p>>',
+                scrollY: "260px",        // tbody height
+                scrollCollapse: true,
+                initComplete: function () {
+                    $('#taskTable_wrapper .dataTables_scrollBody').css({
+                        "min-height": "250px"
+                    });
+                },
+
+                columns: [
+                    { data: "id" },
+                    { data: "Task" },
+                    { data: "assign" },
+                    { data: "start" },
+                    { data: "end" },
+                    { data: "qty" },
+                    { data: "unit" },
+                    { data: "rate" },
+                    { data: "amount" },
+                    { data: "%" },
+                    { data: "D" },
+                    { data: "delayedend" },
+
+                ]
+            });
+        };
+
+
+        function schedulingtab() {
+            loadTaskTable();
+        }
+
+        // loadTaskTable();
 
         //------------------ Sales Bill tab js ----------------------------------------------------
         async function MonthlyRevenueChart(onchangeflag = "") {
@@ -1040,6 +2266,66 @@
             });
         }
         MonthlyRevenueChart();
+        function loadTimeline() {
+
+            // 🔹 Your dynamic data (can come from API)
+            var tasks = [
+                { name: "Door Installation (10%)", start: "2026-02-08", end: "2026-02-15", color: "teal" },
+                { name: "Door Installation (13%)", start: "2026-02-08", end: "2026-02-11", color: "teal" },
+                { name: "Basement 1 (20%)", start: "2026-02-08", end: "2026-02-10", color: "purple" },
+                { name: "Basement 1 (5%)", start: "2026-02-08", end: "2026-02-11", color: "purple" },
+                { name: "Door Installation (10%)", start: "2026-02-08", end: "2026-02-15", color: "teal" },
+                { name: "Basement 1 (5%)", start: "2026-02-08", end: "2026-02-15", color: "purple" },
+                { name: "Basement 1 (5%)", start: "2026-02-08", end: "2026-02-09", color: "purple" }
+            ];
+
+            // 🔹 Get min & max date
+            let minDate = new Date(Math.min(...tasks.map(t => new Date(t.start))));
+            let maxDate = new Date(Math.max(...tasks.map(t => new Date(t.end))));
+
+            // 🔹 Generate header dates
+            let headerHTML = "";
+            let current = new Date(minDate);
+
+            while (current <= maxDate) {
+                let d = String(current.getDate()).padStart(2, '0');
+                let m = String(current.getMonth() + 1).padStart(2, '0');
+                headerHTML += `<div>${m}-${d}</div>`;
+                current.setDate(current.getDate() + 1);
+            }
+
+            document.getElementById("timelineHeader").innerHTML = headerHTML;
+
+            let totalDays = (maxDate - minDate) / (1000 * 60 * 60 * 24) + 1;
+
+            // 🔹 Generate rows
+            let bodyHTML = "";
+
+            tasks.forEach(task => {
+
+                let start = new Date(task.start);
+                let end = new Date(task.end);
+
+                let offsetDays = (start - minDate) / (1000 * 60 * 60 * 24);
+                let durationDays = (end - start) / (1000 * 60 * 60 * 24) + 1;
+
+                let left = (offsetDays / totalDays) * 100;
+                let width = (durationDays / totalDays) * 100;
+
+                bodyHTML += `
+<div class="timeline-row">
+<div class="timeline-bar ${task.color}" 
+style="left:${left}%; width:${width}%;">
+${task.name}
+</div>
+</div>
+`;
+            });
+
+            document.getElementById("timelineBody").innerHTML = bodyHTML;
+        }
+
+        loadTimeline();
 
         // async function OrdersLineChart() {
 
@@ -1313,7 +2599,423 @@
 
 
         loadMap("usa");
-    </script>
+
+        document.querySelectorAll(".toggle").forEach(toggle => {
+
+            toggle.addEventListener("click", function () {
+
+                let row = this.closest("tr")
+                let id = row.dataset.id || row.cells[0].innerText.replace("▶", "").replace("▼", "").trim()
+
+                let children = document.querySelectorAll(`[data-parent='${id}']`)
+
+                children.forEach(child => {
+
+                    if (child.style.display == "table-row") {
+                        child.style.display = "none"
+                    } else {
+                        child.style.display = "table-row"
+                    }
+
+                })
+
+                this.innerText = this.innerText == "▶" ? "▼" : "▶"
+
+            })
+
+        })
+
+
+        // out standing credit filers dropdown-----
+        async function initProjectName() {
+            // let tokenParam = window.token ? &token=${encodeURIComponent(window.token)} : "";
+            // let cloudcode = window.targetcloud ? &cloudcode=${encodeURIComponent(window.targetcloud)} : "";
+            // var url = ${baseurl}SaveFormField.do?actn=retrieveDComboList&extension=&jcodelist=@j@@jj@&jidlist=75188@@75188/;&filtervalue=&ask=COMMAND_NAME_1&random=222&AjaxRequestUniqueId=176009056770044${cloudcode}${tokenParam};
+
+            let finalData = []; // default empty array
+
+            try {
+
+                // let response = await callajaxnew(url);
+                let response = "AAKASH BUILDING CONSTRUCTION PVT LTD;;AAKASH BUILDING CONSTRUCTION PVT LTD 01;;AAKASH ERP PVT LTD;;AAShyamSanket Pvt. Ltd.;;AB Developers;;ABC project PVT LTD (RP);;ABC Realty Pvt. Ltd.;;ABCD;;ABCD PVT LTD;;ABIL;;ABP PVT LTD;;ACC INFRA PVT LTD;;AJANTA PHARMA LIMITED";
+
+
+                if (!response || response === 'null') {
+                    finalData = []; // fallback entry
+                } else {
+                    var splitData = response.split(';;');
+                    finalData = splitData.map(function (item) {
+                        return { text: item.trim(), value: item.trim() };
+                    });
+                }
+
+            } catch (e) {
+                console.error("Error fetching project data:", e);
+                finalData = []; // fallback entry
+            }
+
+            const combo = $("#project_name").kendoComboBox({
+                placeholder: "project Name",
+                dataTextField: "text",
+                dataValueField: "value",
+                filter: "contains",
+                suggest: true,
+                minLength: 1,
+                dataSource: finalData,
+                value: "",
+                autoBind: false,
+                noDataTemplate: "No data",
+                open: function () {
+                    $("#project_name_icon_down").hide();
+                    $("#project_name_icon_up").show();
+                },
+                close: function () {
+                    $("#project_name_icon_up").hide();
+                    $("#project_name_icon_down").show();
+                },
+                change: function () {
+                    const selectedproject = this.value();
+                    console.log("Selected project:", selectedproject);
+                    initBranchName(selectedproject);
+                    initDepartment(selectedproject);
+                    initEmployeeName();
+                }
+            }).data("kendoComboBox");
+
+            $("#project_name").closest(".dropdown").on("click", function () {
+                if (combo.popup.visible()) combo.close();
+                else combo.open();
+            });
+        }
+
+        // out standing credit filers dropdown resource type-----
+        async function initResourceType() {
+            // let tokenParam = window.token ? &token=${encodeURIComponent(window.token)} : "";
+            // let cloudcode = window.targetcloud ? &cloudcode=${encodeURIComponent(window.targetcloud)} : "";
+            // var url = ${baseurl}SaveFormField.do?actn=retrieveDComboList&extension=&jcodelist=@j@@jj@&jidlist=75188@@75188/;&filtervalue=&ask=COMMAND_NAME_1&random=222&AjaxRequestUniqueId=176009056770044${cloudcode}${tokenParam};
+
+            let finalData = []; // default empty array
+
+            try {
+
+                // let response = await callajaxnew(url);
+                let response = "AAKASH BUILDING CONSTRUCTION PVT LTD;;AAKASH BUILDING CONSTRUCTION PVT LTD 01;;AAKASH ERP PVT LTD;;AAShyamSanket Pvt. Ltd.;;AB Developers;;ABC project PVT LTD (RP);;ABC Realty Pvt. Ltd.;;ABCD;;ABCD PVT LTD;;ABIL;;ABP PVT LTD;;ACC INFRA PVT LTD;;AJANTA PHARMA LIMITED";
+
+
+                if (!response || response === 'null') {
+                    finalData = []; // fallback entry
+                } else {
+                    var splitData = response.split(';;');
+                    finalData = splitData.map(function (item) {
+                        return { text: item.trim(), value: item.trim() };
+                    });
+                }
+
+            } catch (e) {
+                console.error("Error fetching resource type data:", e);
+                finalData = []; // fallback entry
+            }
+
+            const combo = $("#resource_type").kendoComboBox({
+                placeholder: "Resource Type",
+                dataTextField: "text",
+                dataValueField: "value",
+                filter: "contains",
+                suggest: true,
+                minLength: 1,
+                dataSource: finalData,
+                value: "",
+                autoBind: false,
+                noDataTemplate: "No data",
+                open: function () {
+                    $("#resource_type_icon_down").hide();
+                    $("#resource_type_icon_up").show();
+                },
+                close: function () {
+                    $("#resource_type_icon_up").hide();
+                    $("#resource_type_icon_down").show();
+                },
+                change: function () {
+                    const selectedResource = this.value();
+                    console.log("Selected resource type:", selectedResource);
+                    initBranchName(selectedResource);
+                    initDepartment(selectedResource);
+                    initEmployeeName();
+                }
+            }).data("kendoComboBox");
+
+            $("#resource_type").closest(".dropdown").on("click", function () {
+                if (combo.popup.visible()) combo.close();
+                else combo.open();
+            });
+        }
+
+        // filers dropdown Supplier-----
+        async function initSupplier() {
+            // let tokenParam = window.token ? &token=${encodeURIComponent(window.token)} : "";
+            // let cloudcode = window.targetcloud ? &cloudcode=${encodeURIComponent(window.targetcloud)} : "";
+            // var url = ${baseurl}SaveFormField.do?actn=retrieveDComboList&extension=&jcodelist=@j@@jj@&jidlist=75188@@75188/;&filtervalue=&ask=COMMAND_NAME_1&random=222&AjaxRequestUniqueId=176009056770044${cloudcode}${tokenParam};
+
+            let finalData = []; // default empty array
+
+            try {
+
+                // let response = await callajaxnew(url);
+                let response = "AAKASH BUILDING CONSTRUCTION PVT LTD;;AAKASH BUILDING CONSTRUCTION PVT LTD 01;;AAKASH ERP PVT LTD;;AAShyamSanket Pvt. Ltd.;;AB Developers;;ABC project PVT LTD (RP);;ABC Realty Pvt. Ltd.;;ABCD;;ABCD PVT LTD;;ABIL;;ABP PVT LTD;;ACC INFRA PVT LTD;;AJANTA PHARMA LIMITED";
+
+
+                if (!response || response === 'null') {
+                    finalData = []; // fallback entry
+                } else {
+                    var splitData = response.split(';;');
+                    finalData = splitData.map(function (item) {
+                        return { text: item.trim(), value: item.trim() };
+                    });
+                }
+
+            } catch (e) {
+                console.error("Error fetching Supplier data:", e);
+                finalData = []; // fallback entry
+            }
+
+            const combo = $("#supplier_name").kendoComboBox({
+                placeholder: "Supplier",
+                dataTextField: "text",
+                dataValueField: "value",
+                filter: "contains",
+                suggest: true,
+                minLength: 1,
+                dataSource: finalData,
+                value: "",
+                autoBind: false,
+                noDataTemplate: "No data",
+                open: function () {
+                    $("#supplier_name_icon_down").hide();
+                    $("#supplier_name_icon_up").show();
+                },
+                close: function () {
+                    $("#supplier_name_icon_up").hide();
+                    $("#supplier_name_icon_down").show();
+                },
+                change: function () {
+                    const selectedResource = this.value();
+                    console.log("Selected Supplier:", selectedResource);
+                    initBranchName(selectedResource);
+                    initDepartment(selectedResource);
+                    initEmployeeName();
+                }
+            }).data("kendoComboBox");
+
+            $("#supplier_name").closest(".dropdown").on("click", function () {
+                if (combo.popup.visible()) combo.close();
+                else combo.open();
+            });
+        }
+        initProjectName();
+        initSupplier();
+        initResourceType();
+
+        function productionStatus(status) {
+
+            if (status === "Running") {
+                return '<span class="stock-alert-badge stock-alert-Running">Running</span>';
+            }
+
+            //     // if (status === "Verification") {
+            //     //     return '<span class="stock-alert-badge stock-alert-Verification">Verification</span>';
+            //     // }
+
+            //     // if (status === "Draft") {
+            //     //     return '<span class="stock-alert-badge stock-alert-Draft">Draft</span>';
+            //     // }
+
+        }
+        function production_table() {
+            var productionData = [
+
+                { PO_Task_ID: "101", FG_Name: "Fire Rated Door FD1", Qty_Planned: "10", Qty_Produced: "4", RM_Requirement: "View RM", status: "Running" },
+                { PO_Task_ID: "102", FG_Name: "Fire Rated Door FD1", Qty_Planned: "10", Qty_Produced: "4", RM_Requirement: "View RM", status: "Running" },
+                { PO_Task_ID: "103", FG_Name: "Fire Rated Door FD1", Qty_Planned: "10", Qty_Produced: "4", RM_Requirement: "View RM", status: "Running" },
+                { PO_Task_ID: "104", FG_Name: "Fire Rated Door FD1", Qty_Planned: "10", Qty_Produced: "4", RM_Requirement: "View RM", status: "Running" },
+                { PO_Task_ID: "105", FG_Name: "Fire Rated Door FD1", Qty_Planned: "10", Qty_Produced: "4", RM_Requirement: "View RM", status: "Running" },
+                // { orderDate: "02/06/2025", orderId: "OD006", product: "Warehouse Construction", customer: "Reliance", RM_Requirement: "Jamnagar Plant", type: "Composite", currency: "INR", status: "Verification" },
+                // { orderDate: "03/06/2025", orderId: "OD007", product: "Bridge Work", customer: "L&T", project: "River Bridge", type: "Rate Contract", currency: "INR", status: "Active" },
+                // { orderDate: "04/06/2025", orderId: "OD008", product: "Pipeline Installation", customer: "ONGC", project: "Oil Field", type: "Product", currency: "INR", status: "Draft" },
+                // { orderDate: "05/06/2025", orderId: "OD009", product: "Solar Plant Setup", customer: "Tata Power", project: "Solar Park", type: "Composite", currency: "INR", status: "Active" },
+                // { orderDate: "06/06/2025", orderId: "OD010", product: "Highway Work", customer: "NHAI", project: "NH48", type: "Rate Contract", currency: "INR", status: "Verification" }
+
+            ];
+
+            if ($.fn.DataTable.isDataTable('#production_orders')) {
+                $('#production_orders').DataTable().clear().destroy();
+            }
+
+            $('#production_orders').DataTable({
+                data: productionData,
+                scrollX: true,
+                pageLength: 7,
+                lengthMenu: [7, 10, 15],
+                searching: false,
+                dom: 't<"bottom d-flex justify-content-between align-items-center mt-2"<"dataTables_info"i><"d-flex gap-2"l p>>',
+                scrollY: "260px",        // tbody height
+                scrollCollapse: true,
+                initComplete: function () {
+                    $('#production_orders_wrapper .dataTables_scrollBody').css({
+                        "min-height": "250px"
+                    });
+                },
+
+                columns: [
+                    { data: "PO_Task_ID" },
+                    { data: "FG_Name" },
+                    { data: "Qty_Planned" },
+                    { data: "Qty_Produced" },
+                    { data: "RM_Requirement" },
+                    {
+                        data: "status",
+                        render: function (data) {
+                            return productionStatus(data);
+                            // return '<span class="status-badge '+data.toLowerCase()+'">'+data+'</span>';
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function () {
+                            return `
+<svg width="50" height="22" viewBox="0 0 50 22" fill="none" xmlns="http://www.w3.org/2000/svg" >
+<rect width="50" height="22" rx="6" fill="#5D51E2"/>
+<path d="M8.666 11.714V7.745H9.692V11.714C9.692 12.188 9.815 12.545 10.061 12.785C10.313 13.025 10.661 13.145 11.105 13.145C11.555 13.145 11.903 13.025 12.149 12.785C12.401 12.545 12.527 12.188 12.527 11.714V7.745H13.553V11.714C13.553 12.47 13.316 13.052 12.842 13.46C12.374 13.862 11.789 14.063 11.087 14.063C10.391 14.063 9.812 13.862 9.35 13.46C8.894 13.058 8.666 12.476 8.666 11.714ZM18.4799 12.731C18.7799 12.419 18.9299 12.008 18.9299 11.498C18.9299 10.988 18.7799 10.586 18.4799 10.292C18.1859 9.998 17.8319 9.851 17.4179 9.851C17.0099 9.851 16.6559 10.001 16.3559 10.301C16.0619 10.601 15.9149 11.006 15.9149 11.516C15.9149 12.026 16.0619 12.434 16.3559 12.74C16.6559 13.04 17.0099 13.19 17.4179 13.19C17.8259 13.19 18.1799 13.037 18.4799 12.731ZM17.6429 8.96C18.3089 8.96 18.8639 9.197 19.3079 9.671C19.7519 10.139 19.9739 10.751 19.9739 11.507C19.9739 12.257 19.7489 12.875 19.2989 13.361C18.8549 13.841 18.3029 14.081 17.6429 14.081C17.2529 14.081 16.9109 13.991 16.6169 13.811C16.3229 13.625 16.0889 13.379 15.9149 13.073V16.358H14.8889V9.041H15.9149V9.923C16.0829 9.635 16.3139 9.404 16.6079 9.23C16.9079 9.05 17.2529 8.96 17.6429 8.96ZM24.2555 12.74C24.5555 12.434 24.7055 12.026 24.7055 11.516C24.7055 11.006 24.5555 10.601 24.2555 10.301C23.9615 10.001 23.6105 9.851 23.2025 9.851C22.7945 9.851 22.4405 9.998 22.1405 10.292C21.8465 10.586 21.6995 10.988 21.6995 11.498C21.6995 12.008 21.8465 12.419 22.1405 12.731C22.4405 13.037 22.7945 13.19 23.2025 13.19C23.6105 13.19 23.9615 13.04 24.2555 12.74ZM22.9865 14.081C22.3265 14.081 21.7715 13.841 21.3215 13.361C20.8715 12.875 20.6465 12.257 20.6465 11.507C20.6465 10.751 20.8685 10.139 21.3125 9.671C21.7625 9.197 22.3205 8.96 22.9865 8.96C23.3765 8.96 23.7185 9.05 24.0125 9.23C24.3125 9.404 24.5435 9.635 24.7055 9.923V7.34H25.7405V14H24.7055V13.073C24.5375 13.379 24.3065 13.625 24.0125 13.811C23.7185 13.991 23.3765 14.081 22.9865 14.081ZM30.3551 12.74C30.6551 12.434 30.8051 12.026 30.8051 11.516C30.8051 11.006 30.6551 10.601 30.3551 10.301C30.0611 10.001 29.7101 9.851 29.3021 9.851C28.8941 9.851 28.5401 9.998 28.2401 10.292C27.9461 10.586 27.7991 10.988 27.7991 11.498C27.7991 12.008 27.9461 12.419 28.2401 12.731C28.5401 13.037 28.8941 13.19 29.3021 13.19C29.7101 13.19 30.0611 13.04 30.3551 12.74ZM29.0861 14.081C28.4261 14.081 27.8711 13.841 27.4211 13.361C26.9711 12.875 26.7461 12.257 26.7461 11.507C26.7461 10.751 26.9681 10.139 27.4121 9.671C27.8621 9.197 28.4201 8.96 29.0861 8.96C29.4761 8.96 29.8181 9.05 30.1121 9.23C30.4121 9.404 30.6431 9.635 30.8051 9.923V9.041H31.8401V14H30.8051V13.073C30.6371 13.379 30.4061 13.625 30.1121 13.811C29.8181 13.991 29.4761 14.081 29.0861 14.081ZM35.5907 9.878H34.3847V12.623C34.3847 12.809 34.4267 12.944 34.5107 13.028C34.6007 13.106 34.7507 13.145 34.9607 13.145H35.5907V14H34.7807C33.8267 14 33.3497 13.541 33.3497 12.623V9.878H32.7647V9.041H33.3497V7.808H34.3847V9.041H35.5907V9.878ZM38.6243 14.081C37.9043 14.081 37.3193 13.847 36.8693 13.379C36.4193 12.911 36.1943 12.29 36.1943 11.516C36.1943 10.742 36.4223 10.124 36.8783 9.662C37.3343 9.194 37.9223 8.96 38.6423 8.96C39.3683 8.96 39.9563 9.185 40.4063 9.635C40.8563 10.079 41.0813 10.661 41.0813 11.381C41.0813 11.555 41.0693 11.717 41.0453 11.867H37.2473C37.2713 12.281 37.4093 12.611 37.6613 12.857C37.9193 13.097 38.2403 13.217 38.6243 13.217C39.1823 13.217 39.5753 12.986 39.8033 12.524H40.9103C40.7603 12.98 40.4873 13.355 40.0913 13.649C39.6953 13.937 39.2063 14.081 38.6243 14.081ZM40.0103 11.165C40.0043 10.757 39.8693 10.433 39.6053 10.193C39.3413 9.947 39.0203 9.824 38.6423 9.824C38.2643 9.824 37.9463 9.947 37.6883 10.193C37.4363 10.433 37.2923 10.757 37.2563 11.165H40.0103Z" fill="white"/>
+</svg>
+
+`;
+                        }
+                    }
+
+                ]
+            });
+        };
+        // order
+        function OrderRevisionStatus(status) {
+
+            if (status === "Approved") {
+                return '<span class="stock-alert-badge stock-alert-Approved">Approved</span>';
+            }
+
+            //     // if (status === "Verification") {
+            //     //     return '<span class="stock-alert-badge stock-alert-Verification">Verification</span>';
+            //     // }
+
+            //     // if (status === "Draft") {
+            //     //     return '<span class="stock-alert-badge stock-alert-Draft">Draft</span>';
+            //     // }
+
+        }
+        function Order_Revision_table() {
+            var OrderRevisionData = [
+
+                { SO_No: "SO1001", Customer: "Adaani", Current_Rev: "Rev 2", Total: "₹ 1,09,265", status: "Approved" },
+                { SO_No: "SO1002", Customer: "NPCL", Current_Rev: "Rev 2", Total: "₹ 5,00,000", status: "Approved" },
+                { SO_No: "SO1003", Customer: "Buid corp", Current_Rev: "Rev 3", Total: "₹ 3,00,000", status: "Approved" },
+                { SO_No: "SO1004", Customer: "RBI", Current_Rev: "Rev 2", Total: "₹ 1,09,265", status: "Approved" },
+                { SO_No: "SO1005", Customer: "NPCL", Current_Rev: "Rev 2", Total: "₹ 5,00,000", status: "Approved" },
+                // { orderDate: "02/06/2025", orderId: "OD006", product: "Warehouse Construction", customer: "Reliance", RM_Requirement: "Jamnagar Plant", type: "Composite", currency: "INR", status: "Verification" },
+                // { orderDate: "03/06/2025", orderId: "OD007", product: "Bridge Work", customer: "L&T", project: "River Bridge", type: "Rate Contract", currency: "INR", status: "Active" },
+                // { orderDate: "04/06/2025", orderId: "OD008", product: "Pipeline Installation", customer: "ONGC", project: "Oil Field", type: "Product", currency: "INR", status: "Draft" },
+                // { orderDate: "05/06/2025", orderId: "OD009", product: "Solar Plant Setup", customer: "Tata Power", project: "Solar Park", type: "Composite", currency: "INR", status: "Active" },
+                // { orderDate: "06/06/2025", orderId: "OD010", product: "Highway Work", customer: "NHAI", project: "NH48", type: "Rate Contract", currency: "INR", status: "Verification" }
+
+            ];
+
+            if ($.fn.DataTable.isDataTable('#Order_Revision_table')) {
+                $('#Order_Revision_table').DataTable().clear().destroy();
+            }
+
+            $('#Order_Revision_table').DataTable({
+                data: OrderRevisionData,
+                scrollX: true,
+                pageLength: 7,
+                lengthMenu: [7, 10, 15],
+                searching: false,
+                dom: 't<"bottom d-flex justify-content-between align-items-center mt-2"<"dataTables_info"i><"d-flex gap-2"l p>>',
+                scrollY: "260px",        // tbody height
+                scrollCollapse: true,
+                initComplete: function () {
+                    $('#Order_Revision_table_wrapper .dataTables_scrollBody').css({
+                        "min-height": "250px"
+                    });
+                },
+
+                columns: [
+                    { data: "SO_No" },
+                    { data: "Customer" },
+                    { data: "Current_Rev" },
+                    { data: "Total" },
+                    // { data: "Status" },
+                    {
+                        data: "status",
+                        render: function (data) {
+                            return OrderRevisionStatus(data);
+                            // return '<span class="status-badge '+data.toLowerCase()+'">'+data+'</span>';
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function () {
+                            return `
+                            <div data-bs-toggle="modal" data-bs-target="#myModal_myperfo1">
+<svg width="38" height="22" viewBox="0 0 38 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="38" height="22" rx="6" fill="#5D51E2"/>
+<path d="M10.529 14L8.171 7.745H9.269L11.114 12.938L12.977 7.745H14.066L11.717 14H10.529ZM16.094 7.727C16.094 7.913 16.031 8.069 15.905 8.195C15.779 8.321 15.623 8.384 15.437 8.384C15.257 8.384 15.104 8.321 14.978 8.195C14.852 8.069 14.789 7.913 14.789 7.727C14.789 7.541 14.852 7.385 14.978 7.259C15.104 7.133 15.257 7.07 15.437 7.07C15.623 7.07 15.779 7.133 15.905 7.259C16.031 7.385 16.094 7.541 16.094 7.727ZM14.924 14V9.041H15.95V14H14.924ZM19.3851 14.081C18.6651 14.081 18.0801 13.847 17.6301 13.379C17.1801 12.911 16.9551 12.29 16.9551 11.516C16.9551 10.742 17.1831 10.124 17.6391 9.662C18.0951 9.194 18.6831 8.96 19.4031 8.96C20.1291 8.96 20.7171 9.185 21.1671 9.635C21.6171 10.079 21.8421 10.661 21.8421 11.381C21.8421 11.555 21.8301 11.717 21.8061 11.867H18.0081C18.0321 12.281 18.1701 12.611 18.4221 12.857C18.6801 13.097 19.0011 13.217 19.3851 13.217C19.9431 13.217 20.3361 12.986 20.5641 12.524H21.6711C21.5211 12.98 21.2481 13.355 20.8521 13.649C20.4561 13.937 19.9671 14.081 19.3851 14.081ZM20.7711 11.165C20.7651 10.757 20.6301 10.433 20.3661 10.193C20.1021 9.947 19.7811 9.824 19.4031 9.824C19.0251 9.824 18.7071 9.947 18.4491 10.193C18.1971 10.433 18.0531 10.757 18.0171 11.165H20.7711ZM28.5038 9.041H29.5118L27.9728 14H26.8928L25.8938 10.337L24.8948 14H23.8148L22.2668 9.041H23.3108L24.3458 13.028L25.3988 9.041H26.4698L27.4778 13.01L28.5038 9.041Z" fill="white"/>
+</svg>
+</div>
+`;
+                        }
+                    }
+
+                ]
+            });
+        };
+        // fisrt popup function   
+        function openModal() {
+            document.getElementById("taskModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("taskModal").style.display = "none";
+        }
+
+        // outside click close
+        window.onclick = function (e) {
+            let modal = document.getElementById("taskModal");
+            if (e.target == modal) {
+                closeModal();
+            }
+        }
+
+        function switchOrderTab(tabName) {
+    var tabBtns = document.querySelectorAll('.order-tab-btn');
+    for (var i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].classList.remove('active');
+    }
+    
+    var tabContents = document.querySelectorAll('.order-tab-content');
+    for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove('active');
+    }
+
+    if (tabName === 'overview') {
+        document.getElementById('orderTabOverview').classList.add('active');
+        document.getElementById('orderContentOverview').classList.add('active');
+    } else if (tabName === 'lineItems') {
+        document.getElementById('orderTabLineItems').classList.add('active');
+        document.getElementById('orderContentLineItems').classList.add('active');
+    } else if (tabName === 'revisionHistory') {
+        document.getElementById('orderTabRevision').classList.add('active');
+        document.getElementById('orderContentRevision').classList.add('active');
+    }
+}
+
+     </script>
 </body>
 
 </html>
